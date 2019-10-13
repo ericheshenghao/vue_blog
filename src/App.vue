@@ -15,10 +15,74 @@
 </template>
 
 <style lang="less">
-:root
-{
-    // background:black;
-    
+section p{
+  line-height: 2;
+}
+h1 {
+  font-family: "Cinzel Decorative", "Noto Serif SC", serif;
+  font-size: 1.8em;
+  font-weight: 600;
+  text-align: center;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+h1, h2, h3, h4, h5, h6{
+  margin: 1.618em 0.1em;
+}
+// 锚点样式
+h2:hover,
+h3:hover,
+h4:hover {
+  .header-anchor {
+    color: #2a6df4;
+    opacity: 1;
+    text-decoration: none;
+    transition: all .5s;
+  }
+}
+.header-anchor{
+  position: absolute;
+  transform: translate(-150%);
+  opacity: 0.2;
+  text-decoration: none;
+  transition: all 1.2s;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    45deg,
+    rgba(247, 149, 51, 0.4) 0px,
+    rgba(202, 135, 121, 0.45) 15%,
+    rgba(239, 78, 123, 0.5) 30%,
+    rgba(161, 102, 171, 0.55) 44%,
+    rgba(80, 115, 184, 0.6) 58%,
+    rgba(16, 152, 173, 0.65) 72%,
+    rgba(7, 179, 155, 0.7) 86%,
+    rgba(109, 186, 130, 0.75) 100%
+  );
+  border-radius: 1em;
+}
+
+//图片缩放
+p img {
+  max-width: 100%;
+  margin: 2em auto;
+  display: block;
+  border: 1px solid #f3f3f3;
+  @media (max-width: 36em) {
+    width: auto;
+  }
+}
+
+
+// 切换白天黑夜功能
+:root {
+  // background:black;
 }
 /* app模块里用的都是宋体,html标签的样式穿透不进来 */
 #app {
@@ -67,14 +131,7 @@ code {
   font-size: 0.85rem;
 }
 
-h1 {
-  font-family: "Cinzel Decorative", "Noto Serif SC", serif;
-  font-size: 1.8em;
-  font-weight: 600;
-  text-align: center;
-  margin-block-start: 0;
-  margin-block-end: 0;
-}
+
 a {
   color: black;
 }
@@ -85,15 +142,10 @@ import myheader from "./components/header.vue";
 import myswitch from "./components/switch.vue";
 import sidebar from "./components/siderbar.vue";
 
-
 export default {
-  mounted() {
-    
-  },
+  mounted() {},
 
-  updated() {
-    
-  },
+  updated() {},
 
   data() {
     return {};
@@ -102,6 +154,6 @@ export default {
     myheader,
     myswitch,
     sidebar
-  },
+  }
 };
 </script>

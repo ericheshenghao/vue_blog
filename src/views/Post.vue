@@ -2,7 +2,7 @@
   <div class="contanier" style="padding-top:0.1em;">
     <div class="main">
       <article class="main-inner">
-        <mymarkdown :is="root"></mymarkdown>
+        <mymarkdown :is="root" style="margin-right:0.4em"></mymarkdown>
         <div style="display: flex;justify-content: space-between;padding-top: 20px;">
           <!-- 左右切换按钮 -->
           <el-button icon="el-icon-caret-left" @click="lastpost" circle></el-button>
@@ -21,7 +21,7 @@
       </article>
     </div>
     <FootInner></FootInner>
-    
+
     <el-backtop type="text"></el-backtop>
   </div>
 </template>
@@ -52,16 +52,16 @@ context.keys().forEach(key => {
   const fileModule = context(key).default;
   moduleStore[fileName] = {
     // 可以将这种传播视为逐个提取所有单个属性并将它们传递给新对象。
-  ...fileModule,
-  namespaced: true
+    ...fileModule,
+    namespaced: true
   };
 });
 export default {
   components: moduleStore,
-  mounted(){
+  mounted() {
     highlightCode();
   },
-  updated(){
+  updated() {
     highlightCode();
   },
   created() {
@@ -87,11 +87,10 @@ export default {
       if (this.index < this.maxlen - 1) {
         ++this.index;
         if (this.index < this.maxlen) {
-          
           this.root = this.activities[this.index].content;
         }
-      }else{
-        this.$message('后面没有了，兄弟');
+      } else {
+        this.$message("后面没有了，兄弟");
       }
     },
     // 下一篇文章
@@ -101,14 +100,10 @@ export default {
           --this.index;
           this.root = this.activities[this.index].content;
         }
-      }else{
-        this.$message('前面没有了，兄弟');
+      } else {
+        this.$message("前面没有了，兄弟");
       }
-    },
-    
-        
-
-    
+    }
   },
   data() {
     return {
@@ -127,8 +122,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+
+
 .main {
-  padding: 4em 1em;
+  padding: 2em 1em;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -139,16 +136,13 @@ export default {
   margin: 0 auto;
   font-size: 16px;
   line-height: 1.618;
-}
-
-@media (max-width: 38em) {
-  .main-inner {
+  @media (max-width: 38em) {
     width: auto;
   }
+  
 }
-section p {
-  text-align: justify;
-}
+
+
 
 .el-button {
   border: 0px solid white;
