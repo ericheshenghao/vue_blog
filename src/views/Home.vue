@@ -1,43 +1,48 @@
 <template>
   <div class="home">
-
+    <myheadlink></myheadlink>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <h3>"Then wear the gold hat, if that will move her<br>
-      If you can bounce high, bounce for her too<br>
-      Till she cry "Lover, gold-hatted, high-bouncing lover<br>
-      I must have you!"</h3>
+    <h3>
+      "Then wear the gold hat, if that will move her
+      <br />If you can bounce high, bounce for her too
+      <br />Till she cry "Lover, gold-hatted, high-bouncing lover
+      <br />I must have you!"
+    </h3>
     <h6>--THOMAS PARKE D'INVILLIERS</h6>
 
-    
-    
-    <myfooter style="margin-top:8em"></myfooter>
-
+    <HomeLink style="margin-top:8em" ></HomeLink>
+    <FootInner></FootInner>
   </div>
 </template>
 
 <style scoped>
-  h3 {
-    line-height: 50px;
-    font-weight: normal;
-  }
+h3 {
+  line-height: 50px;
+  font-weight: normal;
+}
 
-  h6 {
-    display: flex;
-    justify-content: center;
-    padding-left: 20em;
-    margin-top: 4em;
-
-  }
+h6 {
+  display: flex;
+  justify-content: center;
+  padding-left: 20em;
+  margin-top: 4em;
+}
+.home{
+  padding-top:0.1em;
+}
 </style>
 
 <script>
-  // @ is an alias to /src
-  import myfooter from '@/components/myfooter.vue'
-
-  export default {
-    name: 'home',
-    components: {
-      myfooter
-    }
+// @ is an alias to /src
+import HomeLink from "@/components/HomeLink.vue";
+import FootInner from "@/components/FootInner.vue";
+import myheadlink from "@/components/HeadLink.vue";
+export default {
+  
+  components: {
+    myheadlink,
+    HomeLink,
+    FootInner
   }
+};
 </script>

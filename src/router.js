@@ -22,17 +22,22 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/tech',
-      name: 'tech',
+      path: '/post/:name',
+      name: 'post',
 
-      component: () => import(/* webpackChunkName: "about" */ './views/Tech.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/Post.vue')
     },
     {
-      path: '/life',
-      name: 'life',
+      path: '/techlist',
+      name: 'techlist',
 
-      component: () => import(/* webpackChunkName: "about" */ './views/Life.vue')
-    }
+      component: () => import(/* webpackChunkName: "about" */ './views/BlogListTech.vue')
+    },
+    {
+      path: '/lifelist',
+      name: 'lifelist',
 
+      component: () => import(/* webpackChunkName: "about" */ './views/BlogListLife.vue')
+    },
   ]
 })
