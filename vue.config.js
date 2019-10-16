@@ -25,7 +25,9 @@ devServer: {
           permalinkSymbol: "#",
           permalinkSpace: true,
         }
-      ]]
+      ],
+      [require("markdown-it-footnote")]
+    ]
    })
  }
 }

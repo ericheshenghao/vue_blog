@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" class="app" v-bind:class="{ 'active': theme}">
     <myheader></myheader>
     <div id="content" style="display:flow-root;min-height:85vh;">
       <!-- 按钮 -->
-      <myswitch></myswitch>
+      <myswitch @getMsg="getMsg"></myswitch>
       <!-- 导航栏 -->
 
       <sidebar></sidebar>
@@ -14,8 +14,68 @@
   </div>
 </template>
 
+
+<script>
+import myheader from "./components/header.vue";
+import myswitch from "./components/switch.vue";
+import sidebar from "./components/siderbar.vue";
+import { bloglist } from "@/bloglist";
+
+export default {
+  watch: {
+  },
+  mounted() {},
+
+  updated() {},
+
+  methods: {
+    getMsg(data) {
+      this.theme = data;
+    }
+  },
+
+  data() {
+    return {
+      bloglist,
+      theme: ""
+    };
+  },
+  components: {
+    myheader,
+    myswitch,
+    sidebar
+  }
+};
+</script>
+
+
 <style lang="less">
-section p{
+
+@color-bg:#1A1A1A;
+@color-contrast-high:rgb(229, 229, 229);
+
+
+
+a {
+    color:@color-bg
+  }
+
+.app.active {
+  background-color: @color-bg;
+  color: rgb(229, 229, 229);
+  a {
+    color:@color-contrast-high
+  }
+  ul li{
+    border-bottom-color: @color-contrast-high
+  }
+}
+
+
+.el-notification .el-icon-info {
+  color: #409eff !important;
+}
+section p {
   line-height: 2;
 }
 h1 {
@@ -26,7 +86,12 @@ h1 {
   margin-block-start: 0;
   margin-block-end: 0;
 }
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 1.618em 0.1em;
 }
 // 锚点样式
@@ -37,15 +102,16 @@ h4:hover {
     color: #2a6df4;
     opacity: 1;
     text-decoration: none;
-    transition: all .5s;
+    transition: all 0.5s;
   }
 }
-.header-anchor{
+.header-anchor {
   position: absolute;
   transform: translate(-150%);
   opacity: 0.2;
   text-decoration: none;
   transition: all 1.2s;
+  line-height: 1.4;
 }
 
 ::-webkit-scrollbar {
@@ -74,16 +140,14 @@ p img {
   margin: 2em auto;
   display: block;
   border: 1px solid #f3f3f3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   @media (max-width: 36em) {
     width: auto;
   }
 }
 
-
 // 切换白天黑夜功能
-:root {
-  // background:black;
-}
+
 /* app模块里用的都是宋体,html标签的样式穿透不进来 */
 #app {
   font-family: "EB Garamond", "Noto Serif SC", "Helvetica Neue", Helvetica,
@@ -92,8 +156,7 @@ p img {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: black;
-
+  transition: 0.5s;
   margin-right: calc(100% - 100vw);
 }
 
@@ -125,35 +188,29 @@ code {
 
 .hljs {
   border-radius: 5px;
-  line-height: 1.4;
-  padding: 10px;
-  padding-left: 30px;
-  font-size: 0.85rem;
+  font-size: 12.8px;
+  display: block;
+  margin-right: 0;
+  width: 100%;
+  font-weight: 200;
+  color: #333;
+  white-space: pre-wrap;
+  padding: 0.5em 0em 0.5em 0.1em !important;
+  ul {
+    margin: 0px 0 0 23px !important;
+    padding: 0px;
+    li {
+      list-style: decimal-leading-zero;
+      border-left: 1px solid #111 !important;
+      padding: 5px !important;
+      line-height: 14px;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+  }
 }
 
-
-a {
-  color: black;
+.hljs ul li:nth-of-type(2n) {
+  background-color: rgba(255, 255, 255, 0.015);
 }
 </style>
-
-<script>
-import myheader from "./components/header.vue";
-import myswitch from "./components/switch.vue";
-import sidebar from "./components/siderbar.vue";
-
-export default {
-  mounted() {},
-
-  updated() {},
-
-  data() {
-    return {};
-  },
-  components: {
-    myheader,
-    myswitch,
-    sidebar
-  }
-};
-</script>

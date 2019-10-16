@@ -2,7 +2,7 @@
   <div class="contanier" style="padding-top:0.1em;">
     <div class="main">
       <article class="main-inner">
-        <mymarkdown :is="root" style="margin-right:0.4em"></mymarkdown>
+        <mymarkdown :is="root" ></mymarkdown>
         <div style="display: flex;justify-content: space-between;padding-top: 20px;">
           <!-- 左右切换按钮 -->
           <el-button icon="el-icon-caret-left" @click="lastpost" circle></el-button>
@@ -27,28 +27,30 @@
 </template>
 <script>
 import FootInner from "@/components/FootInner.vue";
-
+import {bloglist} from "@/bloglist"
+import mediumZoom from 'medium-zoom'
 // 代码高亮
 import hljs from "highlight.js";
+import jquery from "jquery";
 import "highlight.js/styles/tomorrow-night-eighties.css";
 const highlightCode = () => {
-  const preEl = document.querySelectorAll("pre");
+  const preEl = document.querySelectorAll("pre code");
 
   preEl.forEach(el => {
     hljs.highlightBlock(el);
   });
 };
-// 代码高亮
 
+
+
+// 代码高亮
+//批量注册
 const context = require.context("@/assets/tech/", true, /\.md$/);
 const moduleStore = {
   FootInner
 };
-
-context.keys().forEach(key => {
-  // 这个是没有后缀的
+  context.keys().forEach(key => {
   const fileName = key.split(".")[1].split("/")[1];
-  // 这个是有后缀的
   const fileModule = context(key).default;
   moduleStore[fileName] = {
     // 可以将这种传播视为逐个提取所有单个属性并将它们传递给新对象。
@@ -56,28 +58,33 @@ context.keys().forEach(key => {
     namespaced: true
   };
 });
+//批量注册
 export default {
   components: moduleStore,
+
   mounted() {
     highlightCode();
+    mediumZoom(document.querySelectorAll('img'))
+    jquery("pre code").each(function(){
+    jquery(this).html("<ul><li>" + jquery(this).html().replace(/\n/g,"</li><li>") +"\n</li></ul>");
+});
+
   },
   updated() {
     highlightCode();
+    mediumZoom(document.querySelectorAll('img'))
+    jquery("pre code").each(function(){
+    jquery(this).html("<ul><li>" + jquery(this).html().replace(/\n/g,"</li><li>") +"\n</li></ul>");
+});
   },
   created() {
-    var i = 0;
-    const context = require.context("@/assets/tech/", true, /\.md$/);
-    context.keys().forEach(key => {
-      const fileName = key.split(".")[1].split("/")[1];
-      // 当前文章的序列号
-      if (fileName == this.root) {
+    //遍历对象
+    for(var i in bloglist){
+      if (bloglist[i].content == this.root) {
         this.index = i;
       }
-      // 新生成一个json数据
-      this.activities[i] = {};
-      this.activities[i].content = fileName;
-      ++i;
-    });
+      ++i
+    }
     // 最大
     this.maxlen = i;
   },
@@ -87,10 +94,16 @@ export default {
       if (this.index < this.maxlen - 1) {
         ++this.index;
         if (this.index < this.maxlen) {
-          this.root = this.activities[this.index].content;
+          this.root = bloglist[this.index].content;
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
         }
       } else {
-        this.$message("后面没有了，兄弟");
+        this.$notify.info({
+          title: '贴心提示',
+          message: '再点也没有了🍭'
+        });
+
       }
     },
     // 下一篇文章
@@ -98,10 +111,16 @@ export default {
       if (this.index > 0) {
         if (this.index > 0) {
           --this.index;
-          this.root = this.activities[this.index].content;
+          this.root = bloglist[this.index].content;
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
         }
       } else {
-        this.$message("前面没有了，兄弟");
+        this.$notify.info({
+          title: '贴心提示',
+          message: '前面没有了🍬'
+        });
+
       }
     }
   },
@@ -113,7 +132,7 @@ export default {
       index: "",
       // 最大文章的序列号
       maxlen: "",
-      activities: {},
+      bloglist,
       //   打分小星星的数据
       value: 0,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"] // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
@@ -141,10 +160,9 @@ export default {
   }
   
 }
-
-
-
 .el-button {
   border: 0px solid white;
 }
+
+
 </style>
