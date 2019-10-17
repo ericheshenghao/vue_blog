@@ -60,7 +60,9 @@ export default {
   width: 36em;
   display: inline-table;
   padding-top: 4em;
-  
+    @media (max-width: 38em) {
+      width: auto;
+    }
   .vwrap{
     border: 0px solid white;
     transition: all .5s linear;
