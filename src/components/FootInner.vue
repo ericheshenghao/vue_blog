@@ -2,7 +2,7 @@
 <div style="padding-top:30px;margin-bottom: 3px;">
     <div>
       © 2017–2019
-      <i class="el-icon-star-on" id="heart"></i>
+      <i class="el-icon-star-on" id="heart" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.12), 0px 0px 6px rgba(0,0,0,0.04);"></i>
       <span style="padding-left: 1px;">Mosaic</span>
     </div>
     <div>Powered by Vue | Theme is Mosaic</div>

@@ -6,7 +6,7 @@
     <router-link to="/" style="text-decoration-line: none">
       <div class="brand">Mosaic</div>
     </router-link>
-    <i class="el-icon-loading" style="color:white;"></i>
+    <i class="el-icon-chat-dot-round" style="color:white;"></i>
   </div>
 </template>
 <style lang="less" scoped>

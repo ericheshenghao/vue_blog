@@ -19,7 +19,7 @@
 import myheader from "./components/header.vue";
 import myswitch from "./components/switch.vue";
 import sidebar from "./components/siderbar.vue";
-import { bloglist } from "@/bloglist";
+
 
 export default {
   watch: {
@@ -36,7 +36,7 @@ export default {
 
   data() {
     return {
-      bloglist,
+      
       theme: ""
     };
   },
@@ -71,6 +71,10 @@ a {
   }
 }
 
+sup{
+  right:-3px!important;
+  height: 17px!important;
+}
 
 .el-notification .el-icon-info {
   color: #409eff !important;
@@ -146,7 +150,7 @@ p img {
   }
 }
 
-// 切换白天黑夜功能
+
 
 /* app模块里用的都是宋体,html标签的样式穿透不进来 */
 #app {

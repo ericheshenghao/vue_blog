@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div >
     <el-tooltip class="item" effect="light" content="Send me your message📧" placement="bottom-start">
       <el-button @click="drawer = true" type="text" icon="el-icon-message"
         style="position:absolute;margin-left: 16px;float: left;left:0;"></el-button>
     </el-tooltip>
-    <el-drawer title="Myblog" :show-close="false" :visible.sync="drawer" :direction="direction" size="15em"
-      style="text-align:center;font-family:Dancing Script, serif;">
+    <el-drawer title="" :show-close="false" :visible.sync="drawer" :direction="direction" size="15em"
+      style="text-align:center;font-family:Noto Serif SC,serif,Dancing Script, EB Garamond;">
       <span v-on="{mouseover:mouseover,mouseout:mouseout}">
         <el-avatar id="avatar"
           src="http://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/13/d343e86c57ffdf6fad37aabc4b707579.jpg">

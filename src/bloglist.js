@@ -1,13 +1,28 @@
 import Vue from 'vue'
 var i = 0;
-var store={}
+var storetech={}
 const context = require.context("@/assets/tech/", true, /\.md$/);
 context.keys().forEach(key => {
 const fileName = key.split(".")[1].split("/")[1];
 // 新生成一个json数据
-store[i] = {};
-store[i].content = fileName;
+storetech[i] = {};
+storetech[i].content = fileName;
 ++i;
 });
-// 最大
-export const bloglist =Vue.observable(store)
+
+export const bloglist =Vue.observable(storetech)
+export const techlen =Vue.observable(i)
+
+var j = 0;
+var storelife={}
+const life = require.context("@/assets/life/", true, /\.md$/);
+life.keys().forEach(key => {
+const fileName = key.split(".")[1].split("/")[1];
+// 新生成一个json数据
+storelife[j] = {};
+storelife[j].content = fileName;
+++j;
+});
+export const lifelist =Vue.observable(storelife)
+export const lifelen =Vue.observable(j)
+

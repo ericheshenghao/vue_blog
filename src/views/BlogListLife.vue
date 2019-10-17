@@ -1,48 +1,41 @@
 <template>
-  <div class="mainlist">
-    <h1 style="padding-top:2em">Life</h1>
+  <div class="main">
+    <h1 >Life</h1>
     <h2 style="font-family:Cinzel Decorative;padding-left:7px;">2019</h2>
     <ul class="list-ul">
-      <li v-for="(activity) in activities" :key="activity.timestamp" class="list-item">
+      <li v-for="(blog) in lifelist" :key="blog.timestamp" class="list-item">
         <router-link
-          :to="{name:'post',params:{name:activity.content}}"
+          :to="{name:'post',params:{name:blog.content,list:life}}"
           class="list-item-title"
-        >{{activity.content}}</router-link>
+        >{{blog.content}}</router-link>
       </li>
     </ul>
   </div>
 </template>
 
-
-
 <script>
+import {lifelist} from "@/bloglist";
+
 export default {
   created() {
-    var i = 0;
-    const context = require.context("@/assets/life/", true, /\.md$/);
-    context.keys().forEach(key => {
-      const fileName = key.split(".")[1].split("/")[1];
-      this.activities[i] = {};
-      this.activities[i].content = fileName;
-      ++i;
-    });
   },
   data() {
     return {
-      activities: {}
+      lifelist,
+      life:"life"
     };
   }
 };
 </script>
    
 <style lang="less" scoped>
-.mainlist {
+.main {
   text-align: justify;
   width: 36em;
   margin: 0 auto;
   font-size: 16px;
   line-height: 1.618;
-  padding:0 1em;
+  padding:2em 1em;
   @media (max-width: 36em) {
       
       width: auto;
@@ -58,6 +51,7 @@ export default {
   position: relative;
   transition: border 0.5s;
   border-bottom: 1px dashed;
+  border-bottom-color:rgba(0, 0, 0, 0.4);
   margin-top: 1em;
   padding-bottom: 0.5em;
   display: flex;
@@ -75,6 +69,7 @@ export default {
   border: 1px solid var(--color-bg);
   transition: background 0.5s;
   font-size: 16px;
+  background-color: #b4b4b4;
 }
 .list-item:hover ::before {
   background: #409eff;

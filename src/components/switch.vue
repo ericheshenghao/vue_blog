@@ -2,7 +2,7 @@
   <main>
     <section style="padding-top:0.6em;padding-right:1em;float: right;">
       <div class="toggle-btn" id="_1st-toggle-btn">
-        <input type="checkbox" v-on:click="sendmsg"  v-model="theme"  />
+        <input type="checkbox" v-on:click="sendmsg"/>
         <span></span>
       </div>
     </section>
@@ -13,12 +13,14 @@
 export default {
   methods: {
     sendmsg(){
+      this.theme=!this.theme
         this.$emit('getMsg',this.theme)
+        
     }
   },
   data() {
     return {
-      theme: true
+      theme: false
     };
   }
 };
@@ -67,7 +69,7 @@ input[type="checkbox"] {
 #_1st-toggle-btn span:after {
   content: "";
   position: absolute;
-  top: 3px;
+  top: 2.5px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -77,7 +79,7 @@ input[type="checkbox"] {
 
 #_1st-toggle-btn span:before {
   background-color: #fff;
-  transform: translate(-13px, -4px);
+  transform: translate(-6px, -4px);
   z-index: 1;
 }
 
@@ -97,11 +99,11 @@ input[type="checkbox"] {
 
 #_1st-toggle-btn input[type="checkbox"]:checked + span:before {
   background-color: #000;
-  transform: translate(-14px, -4px);
+  transform: translate(-6px, -3px);
 }
 
 #_1st-toggle-btn input[type="checkbox"]:checked + span:after {
   background-color: #fff;
-  transform: translate(0px, 0px);
+  transform: translate(-2px, 0px);
 }
 </style>

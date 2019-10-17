@@ -5,7 +5,7 @@
     <ul class="list-ul">
       <li v-for="(blog) in bloglist" :key="blog.timestamp" class="list-item">
         <router-link
-          :to="{name:'post',params:{name:blog.content}}"
+          :to="{name:'post',params:{name:blog.content,list:tech}}"
           class="list-item-title"
         >{{blog.content}}</router-link>
       </li>
@@ -21,7 +21,8 @@ export default {
   },
   data() {
     return {
-      bloglist
+      bloglist,
+      tech:"tech"
       
     };
   }
