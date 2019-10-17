@@ -9,7 +9,9 @@
       <sidebar></sidebar>
       <!-- 这部分为路由，切换页面会变化 -->
       <router-view />
+      
       <!-- 这部分为路由，切换页面会变化 -->
+       
     </div>
   </div>
 </template>
@@ -22,8 +24,7 @@ import sidebar from "./components/siderbar.vue";
 
 
 export default {
-  watch: {
-  },
+
   mounted() {},
 
   updated() {},
@@ -55,6 +56,22 @@ export default {
 @color-contrast-high:rgb(229, 229, 229);
 
 
+#vcomments{
+  width: 36em;
+  display: inline-table;
+  padding-top: 4em;
+  
+  .vwrap{
+    border: 0px solid white;
+    transition: all .5s linear;
+  }
+  .vwrap:hover{
+   box-shadow:  0 2px 4px #005cbc, 0 0 6px #ff4949;
+   transition: all 0.5s ease;
+   transform: translate(1px, 2px);
+  }
+
+}
 
 a {
     color:@color-bg

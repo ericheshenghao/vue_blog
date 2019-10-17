@@ -5,203 +5,259 @@
         <mymarkdown :is="root"></mymarkdown>
         <div style="display: flex;justify-content: space-between;padding-top: 20px;">
           <!-- 左右切换按钮 -->
-          <el-button icon="el-icon-caret-left" @click="lastpost" circle></el-button>
-          <el-button icon="el-icon-caret-right" @click="nextpost" circle></el-button>
+          <el-button  type="text" icon="el-icon-arrow-left" @click="lastpost" circle>Last</el-button>
+          
+          <el-button type="text" icon="el-icon-arrow-right" @click="nextpost" circle>Next</el-button>
           <!-- 左右切换按钮 -->
         </div>
       </article>
-    </div>
-    <FootInner></FootInner>
+      
+      <div id="vcomments">
 
-    <el-backtop type="text"></el-backtop>
+      </div>
+      <FootInner></FootInner>
+      <el-backtop type="text"></el-backtop>
+    </div>
+
   </div>
+
 </template>
 <script>
-import FootInner from "@/components/FootInner.vue";
-import { bloglist, techlen, lifelist, lifelen } from "@/bloglist";
-import mediumZoom from "medium-zoom";
-
-// 代码高亮
-import hljs from "highlight.js";
-import $ from "jquery";
-import "highlight.js/styles/tomorrow-night-eighties.css";
-const highlightCode = () => {
-  const preEl = document.querySelectorAll("pre code");
-
-  preEl.forEach(el => {
-    hljs.highlightBlock(el);
-  });
-};
+  import FootInner from "@/components/FootInner.vue";
+  import { bloglist, techlen, lifelist, lifelen } from "@/bloglist";
+  import mediumZoom from "medium-zoom";
+  window.AV = require('leancloud-storage');
+  // Use import
+  import Valine from 'valine';
 
 
-//批量注册
+  // 代码高亮
+  import hljs from "highlight.js";
+  import $ from "jquery";
+  import "highlight.js/styles/tomorrow-night-eighties.css";
+  const highlightCode = () => {
+    const preEl = document.querySelectorAll("pre code");
+
+    preEl.forEach(el => {
+      hljs.highlightBlock(el);
+    });
+  };
+
+
+  //批量注册
 
   const context = require.context("@/assets/tech", true, /\.md$/);
-const lifetext = require.context("@/assets/life", true, /\.md$/);
-const moduleStore = {
-  FootInner
-};
-context.keys().forEach(key => {
-  const fileName = key.split(".")[1].split("/")[1];
-  const fileModule = context(key).default;
-  moduleStore[fileName] = {
-    ...fileModule,
-    namespaced: true
+  const lifetext = require.context("@/assets/life", true, /\.md$/);
+  const moduleStore = {
+    FootInner,
   };
-});
-lifetext.keys().forEach(key => {
-  const fileName = key.split(".")[1].split("/")[1];
-  const fileModule = lifetext(key).default;
-  moduleStore[fileName] = {
-    ...fileModule,
-    namespaced: true
-  };
-});
+  context.keys().forEach(key => {
+    const fileName = key.split(".")[1].split("/")[1];
+    const fileModule = context(key).default;
+    moduleStore[fileName] = {
+      ...fileModule,
+      namespaced: true
+    };
+  });
+  lifetext.keys().forEach(key => {
+    const fileName = key.split(".")[1].split("/")[1];
+    const fileModule = lifetext(key).default;
+    moduleStore[fileName] = {
+      ...fileModule,
+      namespaced: true
+    };
+  });
 
 
 
-export default {
-  
-  components: moduleStore,
+  export default {
+
+    components: moduleStore,
 
 
-  mounted() {
-    highlightCode();
-    mediumZoom(document.querySelectorAll("p img"));
-    $("pre code").each(function() {
-      $(this).html(
-        "<ul><li>" +
+    mounted() {
+      highlightCode();
+      mediumZoom(document.querySelectorAll("p img"));
+      $("pre code").each(function () {
+        $(this).html(
+          "<ul><li>" +
           $(this)
             .html()
             .replace(/\n/g, "</li><li>") +
           "\n</li></ul>"
-      );
-    });
-  },
-  updated() {
-    highlightCode();
-    mediumZoom(document.querySelectorAll("p img"));
-    $("pre code").each(function() {
-      $(this).html(
-        "<ul><li>" +
+        );
+      });
+      this.createValine()
+    },
+
+
+    updated() {
+      highlightCode();
+      mediumZoom(document.querySelectorAll("p img"));
+      $("pre code").each(function () {
+        $(this).html(
+          "<ul><li>" +
           $(this)
             .html()
             .replace(/\n/g, "</li><li>") +
           "\n</li></ul>"
-      );
-    });
-  },
-  created() {
-    if (this.list == "tech") {
-      for(var i in bloglist){
-        if (bloglist[i].content==this.root){
-          this.index=i
-        }
-      }
-    }else{ for( i in lifelist){
-        if (lifelist[i].content==this.root){
-          this.index=i
-        }
-      }}
+        );
+      });
+      this.createValine()
 
-  },
-  methods: {
-    // 上一篇文章
-    nextpost() {
+    },
+
+    created() {
+
+
       if (this.list == "tech") {
-        if (this.index < this.techlen - 1) {
-          ++this.index;
-          if (this.index < this.techlen) {
-            this.root = bloglist[this.index].content;
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+        for (var i in bloglist) {
+          if (bloglist[i].content == this.root) {
+            this.index = i
           }
-        } else {
-          this.$notify.info({
-            title: "贴心提示",
-            message: "再点也没有了🍭"
-          });
         }
       } else {
-        if (this.index < this.lifelen - 1) {
-          ++this.index;
-          if (this.index < this.lifelen) {
-            this.root = lifelist[this.index].content;
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+        for (var j in lifelist) {
+          if (lifelist[j].content == this.root) {
+            this.index = j
           }
-        } else {
-          this.$notify.info({
-            title: "贴心提示",
-            message: "再点也没有了🍭"
-          });
         }
       }
+
+      // 保证刷新后也知道在什么类目下
+      for (var k in bloglist) {
+        if (bloglist[k].content == this.root) {
+          this.list = "tech"
+          break
+        } else { this.list = "life" }
+      }
+
     },
-    // 下一篇文章
-    lastpost() {
-      if (this.list == "tech"){
-        if (this.index > 0) {
-          --this.index;
-          this.root = bloglist[this.index].content;
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        } else {
-        this.$notify.info({
-          title: "贴心提示",
-          message: "前面没有了🍬"
-        });
+    methods: {
+      // 上一篇文章
+      nextpost() {
+        if (this.list == "tech") {
+          if (this.index < this.techlen - 1) {
+            ++this.index;
+            if (this.index < this.techlen) {
+              this.root = bloglist[this.index].content;
+              this.path= "/post/"+bloglist[this.index].content
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+            }
+          } else {
+            this.$notify.info({
+              title: "贴心提示",
+              message: "再点也没有了🍭"
+            });
+          }
+        }
+
+        if (this.list == "life") {
+          if (this.index < this.lifelen - 1) {
+            ++this.index;
+            if (this.index < this.lifelen) {
+              this.root = lifelist[this.index].content;
+              this.path= "/post/"+lifelist[this.index].content
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+            }
+          } else {
+            this.$notify.info({
+              title: "贴心提示",
+              message: "再点也没有了🍭"
+            });
+          }
+        }
+      },
+      // 下一篇文章
+      lastpost() {
+        if (this.list == "tech") {
+          if (this.index > 0) {
+            --this.index;
+            this.root = bloglist[this.index].content;
+            this.path= "/post/"+bloglist[this.index].content
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+
+          } else {
+            this.$notify.info({
+              title: "贴心提示",
+              message: "前面没有了🍬"
+            });
+          }
+
+        }
+
+        if (this.list == "life") {
+          if (this.index > 0) {
+            --this.index;
+            this.root = lifelist[this.index].content;
+            this.path= "/post/"+lifelist[this.index].content
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+          } else {
+            this.$notify.info({
+              title: "贴心提示",
+              message: "前面没有了🍬"
+            });
+          }
+        }
+      },
+      createValine() {
+        new Valine({
+          el: '#vcomments',
+          appId: 'wpHpwFpwArdiE7U4B55lsffv-gzGzoHsz',
+          appKey: 'j1IynKzfj5rsmmzap7ro2aKd',
+          notify: true,
+          verify: false,
+          region: 'cn',
+          avatar: 'retro',
+          path: this.path,
+          placeholder: '留下邮箱才可以收到回复哦'
+        })
       }
-      }else{
-        if (this.index > 0) {
-          --this.index;
-          this.root = lifelist[this.index].content;
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }else {
-        this.$notify.info({
-          title: "贴心提示",
-          message: "前面没有了🍬"
-        });
-      }
-      }
-      
+    },
+    watch: {
+    },
+
+    data() {
+      return {
+        // 用来切换组件的数据
+        root: this.$route.params.name,
+        list: this.$route.params.list,
+        // 文章的序列号
+        index: "",
+        // 最大文章的序列号
+        bloglist,
+        lifelist,
+        lifelen,
+        techlen,
+        path:""
+      };
     }
-  },
-  data() {
-    return {
-      // 用来切换组件的数据
-      root: this.$route.params.name,
-      list: this.$route.params.list,
-      // 文章的序列号
-      index: "",
-      // 最大文章的序列号
-      bloglist,
-      lifelist,
-      lifelen,
-      techlen
-    };
-  }
-};
+  };
 </script>
 <style lang="less" scoped>
-.main {
-  padding: 2em 1em;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-
-.main-inner {
-  text-align: justify;
-  width: 36em;
-  margin: 0 auto;
-  font-size: 16px;
-  line-height: 1.618;
-  @media (max-width: 38em) {
-    width: auto;
+  .main {
+    padding: 2em 1em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
-}
-.el-button {
-  border: 0px solid white;
-}
+
+  .main-inner {
+    text-align: justify;
+    width: 36em;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.618;
+
+    @media (max-width: 38em) {
+      width: auto;
+    }
+  }
+
+  .el-button {
+    border: 0px solid white;
+  }
 </style>
