@@ -15,7 +15,7 @@ export default {
     sendmsg(){
       this.theme=!this.theme
         this.$emit('getMsg',this.theme)
-        
+       
     }
   },
   data() {

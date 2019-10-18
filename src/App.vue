@@ -55,11 +55,19 @@ export default {
 @color-bg:#1A1A1A;
 @color-contrast-high:rgb(229, 229, 229);
 
-
+// 尾链的对齐方式
+ol li p{
+    text-align: left;
+  }
+// 评论模块样式
+input:-internal-autofill-selected{
+  background-color: rgba(255, 255, 255,1) !important;
+}
 #vcomments{
   width: 36em;
   display: inline-table;
   padding-top: 4em;
+  margin-bottom: 4em;
     @media (max-width: 38em) {
       width: auto;
     }
@@ -87,6 +95,14 @@ a {
   }
   ul li{
     border-bottom-color: @color-contrast-high
+  }
+  
+  // 评论样式的切换
+  .v *{
+    color:rgb(229, 229, 229);
+  }
+  .v .vbtn{
+    background-color: #1A1A1A;
   }
 }
 
@@ -130,7 +146,7 @@ h4:hover {
 }
 .header-anchor {
   position: absolute;
-  transform: translate(-150%);
+  transform: translate(-125%);
   opacity: 0.2;
   text-decoration: none;
   transition: all 1.2s;

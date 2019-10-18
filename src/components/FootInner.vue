@@ -1,5 +1,5 @@
 <template>
-<div style="padding-top:30px;margin-bottom: 3px;">
+<div class="footinner">
     <div>
       © 2017–2019
       <i class="el-icon-star-on" id="heart" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.12), 0px 0px 6px rgba(0,0,0,0.04);"></i>
@@ -9,7 +9,12 @@
     <div >CC BY-NC-SA 4.0</div>
     </div>
 </template>
-<style>
+<style lang="less" scoped>
+
+.footinner{
+    padding-top:30px;
+    margin-bottom: 3px;
+}
 @keyframes heartAnimate {
     0%,100%{transform:scale(1);}
     10%,30%{transform:scale(0.9);}
@@ -22,7 +27,4 @@
 .el-icon-star-on {
     color: rgb(255, 113, 168);
 }
-
-
-
 </style>
