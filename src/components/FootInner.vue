@@ -14,6 +14,7 @@
 .footinner{
     padding-top:30px;
     margin-bottom: 3px;
+    color:rgb(145, 143, 143);
 }
 @keyframes heartAnimate {
     0%,100%{transform:scale(1);}

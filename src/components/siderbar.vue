@@ -12,8 +12,14 @@
         </el-avatar>
       </span>
       <br />
-      <div style="display:flex;justify-content:center;padding-top:2em;">
+      <div style="display:flex;justify-content:center;padding-top:2em;padding-left:10px;">
         <div>保持清醒，保持愚钝。</div>
+      </div>
+      <div class="iconlist">
+        <a href="#"><i class="fa fa-weixin"></i></a>
+        <a href="https://github.com/ericheshenghao?tab=repositories"><i class="fa fa-github-alt"></i></a>
+        <a href="https://wpa.qq.com/msgrd?v=3&uin=943452349&site=qq&menu=yes"><i class="fa fa-qq"></i></a>
+        <a href="https://weibo.com/yourname"><i class="fa fa-weibo"></i></a>
       </div>
     </el-drawer>
   </div>
@@ -57,9 +63,23 @@
     background-color: white;
     border-color: white;
   }
-
   .el-avatar {
     width: 80px;
     height: 80px;
+    box-shadow: 0 2px 4px #005cbc, 0 0 6px #ff4949;
+  }
+  .iconlist{
+    padding-top:0.618em;
+    font-size: 17px;
+      >a:hover{
+      color: white;
+      text-shadow: 0 2px 4px #005cbc, 0 0 6px #ff4949;
+    }
+    >a{
+      margin-left: 10px;
+      margin-right: 10px;
+      padding-bottom: 5px;
+      transition: all .5s ease;
+    }
   }
 </style>

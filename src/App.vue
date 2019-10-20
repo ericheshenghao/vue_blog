@@ -55,10 +55,27 @@ export default {
 @color-bg:#1A1A1A;
 @color-contrast-high:rgb(229, 229, 229);
 
-// 尾链的对齐方式
+.el-progress{
+    position: fixed!important;
+    width: 100vw;
+    top: 0px;
+  }
+  .el-progress-bar__outer{
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+// 脚注的对齐方式
 ol li p{
     text-align: left;
   }
+
+.footnote-backref{
+    text-decoration: none;
+    padding: 0px 0 0 3px;
+    margin-top: 28px;
+    top: 7px;
+    position: relative;
+    font-size: 120%;
+}
 // 评论模块样式
 input:-internal-autofill-selected{
   background-color: rgba(255, 255, 255,1) !important;
@@ -84,15 +101,19 @@ input:-internal-autofill-selected{
 }
 
 a {
-    color:@color-bg
+    color:@color-bg;
   }
 
+@color-hover:#2a6df4;
+
 .app.active {
-  background-color: @color-bg;
-  color: rgb(229, 229, 229);
+  @color-hover:red!important;
+  background-color: @color-bg!important;
+  color: rgb(229, 229, 229)!important;
   a {
-    color:@color-contrast-high
+    color:@color-contrast-high;
   }
+  
   ul li{
     border-bottom-color: @color-contrast-high
   }
@@ -103,6 +124,15 @@ a {
   }
   .v .vbtn{
     background-color: #1A1A1A;
+  }
+  .post-nav {
+    border-top: 1px dashed rgb(229, 229, 229,0);
+  }
+  .iname{
+    color:white;
+  }
+  p code{
+    background-color:#4b4b4b;
   }
 }
 
@@ -138,7 +168,7 @@ h2:hover,
 h3:hover,
 h4:hover {
   .header-anchor {
-    color: #2a6df4;
+    color: @color-hover;
     opacity: 1;
     text-decoration: none;
     transition: all 0.5s;
@@ -149,7 +179,7 @@ h4:hover {
   transform: translate(-125%);
   opacity: 0.2;
   text-decoration: none;
-  transition: all 1.2s;
+  transition: all 1s;
   line-height: 1.4;
 }
 
@@ -176,7 +206,7 @@ h4:hover {
 //图片缩放
 p img {
   max-width: 100%;
-  margin: 2em auto;
+  margin: 2em 0 0.5em auto;
   display: block;
   border: 1px solid #f3f3f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
@@ -184,7 +214,18 @@ p img {
     width: auto;
   }
 }
-
+// 图名及标签
+.iname{
+  text-align: center;
+  font-size:85%;
+  color:#5a5a5a;
+}
+.itag{
+  font-size: 80%;
+    position: relative;
+    top: -0.5px;
+    left: -4px;
+}
 
 
 /* app模块里用的都是宋体,html标签的样式穿透不进来 */
@@ -224,20 +265,47 @@ blockquote {
 code {
   font-family: "EB Garamond";
 }
+//行内代码块
+p code {
+  font-family: "EB Garamond";
+  background-color: #eeeeee;
+  border-radius: 5px;
+  padding: 0 5px 3px 5px;
+  margin:0 3px;
+  color:rgb(255, 85, 0);
+}
+.selected{
+background-color: #000000!important;
+z-index: 10;
+&:hover{
+  animation: faded infinite 1s linear;
+}
+@keyframes faded{
 
+  0%{
+    box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
+  }
+  50%{
+    box-shadow: 0 0px 0.2px #005cbc, 0 0 0px #ff4949;
+  }
+ 
+  100%{
+    box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
+  }
+}
+}
 .hljs {
   border-radius: 5px;
-  font-size: 12.8px;
+  font-size: 13.8px;
   display: block;
   margin-right: 0;
-  width: 100%;
   font-weight: 200;
-  color: #333;
+  color:#ffffff!important;
   white-space: pre-wrap;
-  padding: 0.5em 0em 0.5em 0.1em !important;
+  padding: 0.5em 0 !important;
   ul {
-    margin: 0px 0 0 23px !important;
-    padding: 0px;
+    margin: 0;
+    padding-left: 29px;
     li {
       list-style: decimal-leading-zero;
       border-left: 1px solid #111 !important;
