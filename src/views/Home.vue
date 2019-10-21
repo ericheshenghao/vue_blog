@@ -10,8 +10,8 @@
     </h3>
     <h6>--THOMAS PARKE D'INVILLIERS</h6>
 
-    <HomeLink style="margin-top:8em" ></HomeLink>
-    <FootInner></FootInner>
+    <HomeLink style="margin-top:5em" ></HomeLink>
+    
   </div>
 </template>
 
@@ -38,14 +38,12 @@ h6 {
 <script>
 // @ is an alias to /src
 import HomeLink from "@/components/HomeLink.vue";
-import FootInner from "@/components/FootInner.vue";
 import myheadlink from "@/components/HeadLink.vue";
 export default {
   
   components: {
     myheadlink,
     HomeLink,
-    FootInner
   }
 };
 </script>

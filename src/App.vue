@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app" v-bind:class="{ 'active': theme}">
     <myheader></myheader>
-    <div id="content" style="display:flow-root;min-height:85vh;">
+    <div id="content" style="display:flow-root;min-height:85.8vh;">
       <!-- 按钮 -->
       <myswitch @getMsg="getMsg"></myswitch>
       <!-- 导航栏 -->
@@ -55,6 +55,8 @@ export default {
 @color-bg:#1A1A1A;
 @color-contrast-high:rgb(229, 229, 229);
 
+
+// 进度条样式
 .el-progress{
     position: fixed!important;
     width: 100vw;
@@ -134,6 +136,12 @@ a {
   p code{
     background-color:#4b4b4b;
   }
+  mark{
+   color:white;
+  }
+  blockquote{
+    color:#7892ff;
+  }
 }
 
 sup{
@@ -146,6 +154,10 @@ sup{
 }
 section p {
   line-height: 2;
+  text-justify:distribute;
+}
+section p:nth-child(2) {
+  margin-top: 4em;
 }
 h1 {
   font-family: "Cinzel Decorative", "Noto Serif SC", serif;
@@ -161,7 +173,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 1.618em 0.1em;
+  margin: 1.618em 0 1em;
 }
 // 锚点样式
 h2:hover,
@@ -205,15 +217,17 @@ h4:hover {
 
 //图片缩放
 p img {
-  max-width: 100%;
-  margin: 2em 0 0.5em auto;
+  max-width: 80%;
+  margin: 0em auto 1em auto;
   display: block;
-  border: 1px solid #f3f3f3;
+  border: 2px solid #f3f3f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  height: auto;
   @media (max-width: 36em) {
     width: auto;
   }
 }
+
 // 图名及标签
 .iname{
   text-align: center;
@@ -227,6 +241,14 @@ p img {
     left: -4px;
 }
 
+mark{
+  background-color: rgba(0, 0, 0, 0);
+  text-emphasis-style: dot;
+  text-emphasis-position: under left;
+  -webkit-text-emphasis-style: dot;
+  -webkit-text-emphasis-position: under left;
+  color:#1A1A1A;
+}
 
 /* app模块里用的都是宋体,html标签的样式穿透不进来 */
 #app {
@@ -241,25 +263,10 @@ p img {
 }
 
 blockquote {
-  background-image: linear-gradient(
-    90deg,
-    rgba(247, 149, 51, 0.4) 0px,
-    rgba(202, 135, 121, 0.45) 15%,
-    rgba(239, 78, 123, 0.5) 30%,
-    rgba(161, 102, 171, 0.55) 44%,
-    rgba(80, 115, 184, 0.6) 58%,
-    rgba(16, 152, 173, 0.65) 72%,
-    rgba(7, 179, 155, 0.7) 86%,
-    rgba(109, 186, 130, 0.75) 100%
-  );
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-left: 20px;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  font-weight: 500;
-  margin-left: 0;
-  margin-right: 0;
+  margin: 1em 0;
+    padding: 0 1em;
+    color: #646464;
+    border-left: 3px solid #CCCCCC;
 }
 
 code {

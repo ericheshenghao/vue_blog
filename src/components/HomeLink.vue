@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="padding-top:50px;">
+    <div style="padding-top:0px;">
       <router-link to="/lifelist">
       
           <el-badge :value='lifelen' class="item1" type="primary">

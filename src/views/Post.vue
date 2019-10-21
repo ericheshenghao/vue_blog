@@ -92,7 +92,7 @@
   };
 
   const anchormove = () => {
-    $('a').click(function () {
+    $('h2>a,h3>a,h4>a').click(function () {
       //根据a标签的href转换为id选择器，获取id元素所处的位置
       try { $('html,body').animate({ scrollTop: ($($(this).attr('href')).offset().top) }, 1000); }
       catch (err) {
@@ -168,13 +168,6 @@
         for (var i in bloglist) {
           if (bloglist[i].content == this.root) {
             this.index = i;
-            // if (i==0){
-            // this.lastname = "creeper"
-            // this.nextname = bloglist[++i].content
-            // }else{
-            // this.lastname = bloglist[i-1].content
-            // this.nextname = bloglist[++i].content
-            // }
             break;
           }
         }
@@ -308,12 +301,12 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
   }
-
+ 
   .main-inner {
     text-align: justify;
     width: 36em;
     margin: 0 auto;
-    font-size: 16px;
+    /* font-size: 16px; */
     line-height: 1.618;
 
     @media (max-width: 38em) {

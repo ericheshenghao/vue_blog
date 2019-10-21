@@ -1,8 +1,11 @@
-# 如何优雅的自定义博客的主题样式(Vue向)
+# 优雅的自定义博客的主题样式(Vue向)
 
 
-## 引子
+
 初次看到😮[reuixiy的博客](https://io-oi.me/tech/redesign-this-blog-under-minimalism/)的布局，就被它的极简风格深深吸引，不管是页面的细节处理，还是博文的内容，都给人一种赏心悦目的感受，于是下定决心将博客美化进行到底，在此记录一下自己简陋的博客的美化过程，共勉。
+> So we beat on, boats against the current, borne back ceaselessly into the past.  
+> —《The great Gatsby 》[^5]
+
 
 ## 代码高亮
 cnpm安装`hljs`包[^1]
@@ -207,8 +210,8 @@ use: [
 ``` javascript
 const anchormove = () => {
     $(function () {
-      $('a').click(function () {
-        //根据a标签的href转换为id选择器，获取id元素所处的位置
+      $('h2>a,h3>a,h4>a').click(function () {
+        //根据段落下的a标签的href转换为id选择器，获取id元素所处的位置
         $('html,body').animate({ scrollTop: ($($(this).attr('href')).offset().top) }, 1000);
       });
     });
@@ -241,3 +244,4 @@ use: [
 [^2]: 来源：[https://www.npmjs.com/package/markdown-it-anchor](https://www.npmjs.com/package/markdown-it-anchor)
 [^3]: 参考：[https://graphemica.com/🔗](https://graphemica.com/🔗)
 [^4]: 来源： [https://www.npmjs.com/package/markdown-it-footnote](https://www.npmjs.com/package/markdown-it-footnote)
+[^5]: 来源： [https://book.douban.com/subject/1008988/](https://book.douban.com/subject/1008988/)

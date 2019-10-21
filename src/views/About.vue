@@ -1,6 +1,7 @@
 <template>
-  <div class="about" style="padding-top:0.1em;">
-    <myheadlink></myheadlink>
+  <div class="about" style="padding:2em 0 0 0;">
+    <!-- <myheadlink></myheadlink> -->
+    <h1>About</h1>
     <div>
       <video
         controls
@@ -14,13 +15,13 @@
         />
       </video>
     </div>
+    
   </div>
 </template>
 <script>
-import myheadlink from "@/components/HeadLink.vue";
+
 export default {
   components: {
-    myheadlink
   }
 };
 </script>
@@ -39,4 +40,5 @@ video {
     outline: none;
   }
 }
+
 </style>
