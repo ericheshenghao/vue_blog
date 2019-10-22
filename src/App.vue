@@ -337,9 +337,9 @@ blockquote {
 mark {
   background-color: rgba(0, 0, 0, 0);
   -webkit-text-emphasis: filled;
-  -webkit-text-emphasis-position: under;
+  -webkit-text-emphasis-position: under left;
   text-emphasis: filled;
-  text-emphasis-position: under;
+  text-emphasis-position: under left;
 }
 code {
   font-family: "EB Garamond";
