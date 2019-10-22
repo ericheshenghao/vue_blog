@@ -179,7 +179,7 @@ export default {
 }
 ```
 效果如图，具体的样式可以根据个人需要进行更改。
-![图片添加标题](http://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/19/998831e2461a88207eec61fe38492bd8.png)
+![图片添加标题](https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/19/998831e2461a88207eec61fe38492bd8.png)
 
 ## 锚点设置
 cnpm安装`markdown-it-anchor`插件。

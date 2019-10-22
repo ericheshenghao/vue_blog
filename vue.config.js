@@ -1,17 +1,17 @@
 const slugify = require("transliteration").slugify;
 module.exports = {
   pwa: {
-    name: 'My App',
-    themeColor: '#4DBA87',
-    msTileColor: '#000000',
+    name: 'Mosaic',
+    themeColor: '#FFFFFF',
+    msTileColor: '#FFFFFF',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
+    appleMobileWebAppStatusBarStyle: '#FFFFFF',
 
     // configure the workbox plugin
-    workboxPluginMode: 'InjectManifest',
+    workboxPluginMode: 'GenerateSW',
     workboxOptions: {
       // swSrc is required in InjectManifest mode.
-      swSrc: 'dev/sw.js',
+      // swSrc: 'dev/service-worker.js',
       // ...other Workbox options...
     }
   },

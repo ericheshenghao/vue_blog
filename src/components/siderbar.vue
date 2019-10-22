@@ -24,7 +24,7 @@
       <span v-on="{mouseover:mouseover,mouseout:mouseout}">
         <el-avatar
           id="avatar"
-          src="http://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/13/d343e86c57ffdf6fad37aabc4b707579.jpg"
+          src="https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/13/d343e86c57ffdf6fad37aabc4b707579.jpg"
         ></el-avatar>
       </span>
       <br />

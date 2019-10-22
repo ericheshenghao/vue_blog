@@ -39,11 +39,5 @@ export default new Router({
 
       component: () => import('./views/BlogListLife.vue')
     },
-    {
-      path: '/button',
-      name: 'button',
-
-      component: () => import('./components/button.vue')
-    },
   ]
 })

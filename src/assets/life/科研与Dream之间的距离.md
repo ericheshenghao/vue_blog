@@ -1,5 +1,5 @@
 # 科研与 Dream 之间的距离
-![攝影師： Jeremy Bishop  ](http://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/20/de177367f81ecadca51b3b2b42de38a6.jpg)
+![攝影師： Jeremy Bishop  ](https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/20/de177367f81ecadca51b3b2b42de38a6.jpg)
 
 ## 生活不易，且行且珍惜
 习惯了凌晨两三点睡觉💤的生活，习惯了每天早晨的打卡，习惯了迟睡迟起的习惯。在科研与代码之间徘徊的[我]()，也会有累的那一天的吧。
@@ -8,7 +8,7 @@
 人的欲望是无穷的，特别是在这个时代环境的熏陶下，人性中最掠根的部分轻易的被激发。不管我们多想拒绝这个事实，不可否认或多或少的我们都已经受到了影响。追逐<mark>名</mark>和<mark>利</mark>，梦想一夜暴富，是这个时代的烙印，随波逐流的我们，真的可以守住自己的本心，痛痛快快的走完这一条坎坷的人生之路吗？那些曾经让我们快乐的东西，依稀间都已经不记得模样，而留在当下的，除了烦恼与痛苦以外，已经不剩下什么了。不知足，不快乐，心有戚戚，<mark>难于上青天</mark>！
 ## 谨记
 
-![攝影師： Vitaly Vlasov  ](http://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/20/17fa5b11f0cbb9a24b569d1fce30fd51.jpg)
+![攝影師： Vitaly Vlasov  ](https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/20/17fa5b11f0cbb9a24b569d1fce30fd51.jpg)
 
 
 吐槽完毕，开始认真的敲<mark>代码</mark>，好好搞<mark>科研</mark>，珍惜值得珍惜的东西，最终回头一看，捡了芝麻丢了🍉，好吧这可能会是后话了。总之，一入此行深似海，从此头发是路人，此生无悔敲代码，再见已是陌路人。

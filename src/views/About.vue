@@ -10,7 +10,7 @@
         width="935"
       >
         <source
-          src="http://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/19/0ca3d57a28295abadab4c79387634bb7.mp4"
+          src="https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/19/0ca3d57a28295abadab4c79387634bb7.mp4"
           type="video/mp4"
         />
       </video>
