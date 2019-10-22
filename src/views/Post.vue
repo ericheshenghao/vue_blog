@@ -38,7 +38,6 @@
   import mediumZoom from "medium-zoom";
   window.AV = require("leancloud-storage");
   import Valine from "valine";
-  import $ from "jquery";
   import hljs from "highlight.js";
   import "highlight.js/styles/tomorrow-night.css";
   // 代码高亮
@@ -60,7 +59,7 @@
       let title = $(this).attr("alt");
       $(this).after(
         '<div class="iname">' +
-        '<span class="itag">🚫</span>' +
+        '<span class="itag">⭗</span>' +
         title.split(".")[0] +
         "</div>"
       );

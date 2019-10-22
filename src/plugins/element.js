@@ -5,11 +5,11 @@ import {
     Icon,
     Progress,
     Badge,
-    Image,
+    // Image,
     Backtop,
     Notification,
-    avatar,
-    drawer,
+    Avatar,
+    Drawer,
     Divider,
   } from 'element-ui';
 
@@ -19,10 +19,10 @@ import {
   Vue.use(Icon);
   Vue.use(Progress);
   Vue.use(Badge);
-  Vue.use(Image);
+  // Vue.use(Image);
   Vue.use(Backtop);
-  Vue.use(avatar);
-  Vue.use(drawer);
+  Vue.use(Avatar);
+  Vue.use(Drawer);
   
   Vue.prototype.$notify = Notification;
 

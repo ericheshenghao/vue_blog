@@ -194,6 +194,7 @@ sup {
 
 section p {
   line-height: 2;
+  text-justify: distribute;
 }
 
 h1 {
@@ -276,7 +277,7 @@ h4:hover {
 p img {
   max-width: 80%;
 
-  margin: 0em auto 1em auto;
+  margin: 1em auto 1em auto;
 
   display: block;
 
@@ -300,11 +301,9 @@ p img {
 }
 
 .itag {
-  font-size: 80%;
+  font-size: 100%;
 
   position: relative;
-
-  top: -0.5px;
 
   left: -4px;
 }
