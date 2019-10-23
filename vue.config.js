@@ -49,7 +49,6 @@ module.exports = {
             }
           ],
           [require("markdown-it-footnote")],
-          [require('markdown-it-mark')],
         ]
       })
   }

@@ -35,7 +35,7 @@ export default {
   }
 }
 ```
-常用的一些代码高亮风格
+常用的一些代码高亮风格，也可以参考[官网](https://highlightjs.org/static/demo/)的。
 ```
 a11y-dark.css                  googlecode.css
 atom-one-dark.css              rainbow.css
@@ -55,7 +55,6 @@ far.css                        vs.css
 foundation.css                 vs2015.css
 github.css                     xcode.css
 github-gist.css                xt256.css
-gml.css                        zenburn.css
 ```
 
 ## 代码行前添加数字
@@ -150,7 +149,7 @@ export default {
 }
 ```
 ### 给图片添加图名
-再尝试一下给图片添加一下图名，具体代码如下，需要导入`jquery`。
+再尝试一下给图片添加一下图名，具体代码如下，需要引入`jquery`。
 ```
 // 图片添加图名
 const addname = () => {
@@ -217,7 +216,7 @@ const anchormove = () => {
     });
   }
 ```
-在edge中锚点过渡之前会闪动一下，暂时还没有找到解决的办法。
+在edge中锚点过渡之前会闪动一下，且中英文混合的时候锚点会失效，暂时还没有找到解决的办法。
 ## 注脚设置
 cnpm安装`markdown-it-footnote`插件
 ``` bash

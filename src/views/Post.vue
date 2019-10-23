@@ -59,7 +59,7 @@
       let title = $(this).attr("alt");
       $(this).after(
         '<div class="iname">' +
-        '<span class="itag">⭗</span>' +
+        '<span class="itag"><i class="fa fa-twitch  "></i></span>' +
         title.split(".")[0] +
         "</div>"
       );

@@ -6,7 +6,7 @@ PWA(Progress Web App)，即<mark>渐进式WEB应用</mark>[^1]。在第一次生
 vue add @vue/cli-plugin-babel
 ```
 安装完成后，在根目录下会默认生成一个public/img文件夹，里面是用于不同设备上显示的icon，我们可以通过网站快捷生成[^2]，然后替换掉其中的图片就可以了。
-### 配置vue.config.js
+### 配置vue config js
 在vue.config.js中添加如下的代码，我采用的是GenerateSW方式，GenerateSW与InjectManifest的区别暂时还不是很清楚。
 ``` javascript{9}
 pwa: {

@@ -89,7 +89,7 @@ ol li p {
 
   margin-top: 28px;
 
-  top: 7px;
+  top: 3px;
 
   position: relative;
 
@@ -132,6 +132,7 @@ input:-internal-autofill-selected {
 
 a {
   color: @color-bg;
+  text-underline-position: under!important;
 }
 
 @color-hover: #2a6df4;
@@ -253,29 +254,19 @@ h4:hover {
 ::-webkit-scrollbar {
   width: 6px;
 
-  height: 6px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(
-    45deg,
-    rgba(247, 149, 51, 0.4) 0px,
-    rgba(202, 135, 121, 0.45) 15%,
-    rgba(239, 78, 123, 0.5) 30%,
-    rgba(161, 102, 171, 0.55) 44%,
-    rgba(80, 115, 184, 0.6) 58%,
-    rgba(16, 152, 173, 0.65) 72%,
-    rgba(7, 179, 155, 0.7) 86%,
-    rgba(109, 186, 130, 0.75) 100%
-  );
-
+  
+  background-color: #d5d5d5;
   border-radius: 1em;
 }
 
 //图片缩放
 
 p img {
-  max-width: 80%;
+  max-width: 100%;
 
   margin: 1em auto 1em auto;
 
@@ -301,11 +292,11 @@ p img {
 }
 
 .itag {
-  font-size: 100%;
-
+  font-size: 86%;
+  top: -1.5px;
   position: relative;
 
-  left: -4px;
+  left: -6px;
 }
 
 /* app模块里用的都是宋体,html标签的样式穿透不进来 */
@@ -392,7 +383,7 @@ p code {
 
   font-size: 13.8px;
 
-  display: block;
+ 
 
   margin-right: 0;
 
@@ -400,14 +391,19 @@ p code {
 
   color: #ffffff !important;
 
-  white-space: pre-wrap;
 
   padding: 0.5em 0 !important;
 
   ul {
     margin: 0;
-
     padding-left: 29px;
+    display: inline-table;
+    overflow-x: scroll;
+    width: -webkit-fill-available;
+    width:fit-content;
+    float: left;
+
+    overflow-y: hidden;
 
     li {
       list-style: decimal-leading-zero;
@@ -415,17 +411,16 @@ p code {
       border-left: 1px solid #111 !important;
 
       padding: 5px !important;
+      
 
       line-height: 14px;
 
-      word-break: break-all;
-
-      word-wrap: break-word;
     }
   }
 }
 
 .hljs ul li:nth-of-type(2n) {
   background-color: rgba(255, 255, 255, 0.015);
+ 
 }
 </style>
