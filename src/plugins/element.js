@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import {
     Button,
     Tooltip,
@@ -7,7 +7,7 @@ import {
     Badge,
     // Image,
     Backtop,
-    Notification,
+    // Notification,
     Avatar,
     Drawer,
     Divider,
@@ -24,5 +24,5 @@ import {
   Vue.use(Avatar);
   Vue.use(Drawer);
   
-  Vue.prototype.$notify = Notification;
+  // Vue.prototype.$notify = Notification;
 

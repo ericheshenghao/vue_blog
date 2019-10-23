@@ -2,7 +2,7 @@
   <div id="app" class="app" v-bind:class="{ 'active': theme}">
     <myheader></myheader>
 
-    <div id="content" style="display:flow-root;min-height:85vh;">
+    <div id="content" style="display:flow-root;min-height:85.8vh;">
       <!-- 按钮 -->
 
       <myswitch @getMsg="getMsg"></myswitch>

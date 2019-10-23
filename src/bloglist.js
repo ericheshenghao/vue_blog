@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 var i = 0;
 var storetech={}
 const context = require.context("@/assets/tech/", true, /\.md$/);

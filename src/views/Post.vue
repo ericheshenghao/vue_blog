@@ -38,8 +38,8 @@
   import mediumZoom from "medium-zoom";
   window.AV = require("leancloud-storage");
   import Valine from "valine";
-  import hljs from "highlight.js";
-  import "highlight.js/styles/tomorrow-night.css";
+  // import hljs from "highlight.js";
+  // import "highlight.js/styles/tomorrow-night.css";
   // 代码高亮
   const highlightCode = () => {
     const preEl = document.querySelectorAll("pre code");
@@ -201,12 +201,7 @@
               document.body.scrollTop = 0;
               document.documentElement.scrollTop = 0;
             }
-          } else {
-            this.$notify.info({
-              title: "owwwwwww",
-              message: "man🍭"
-            });
-          }
+          } 
         }
 
         if (this.list == "life") {
@@ -218,12 +213,7 @@
               document.body.scrollTop = 0;
               document.documentElement.scrollTop = 0;
             }
-          } else {
-            this.$notify.info({
-              title: "owwwwwww",
-              message: "man🍭"
-            });
-          }
+          } 
         }
       },
       // 下一篇文章
@@ -235,12 +225,7 @@
             this.path = "/post/" + bloglist[this.index].content;
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
-          } else {
-            this.$notify.info({
-              title: "owwwwwww",
-              message: "man🍭"
-            });
-          }
+          } 
         }
 
         if (this.list == "life") {
@@ -250,12 +235,7 @@
             this.path = "/post/" + lifelist[this.index].content;
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
-          } else {
-            this.$notify.info({
-              title: "owwwwwww",
-              message: "man🍭"
-            });
-          }
+          } 
         }
       },
       createValine() {
