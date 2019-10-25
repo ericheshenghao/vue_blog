@@ -6,7 +6,6 @@ import {
     Progress,
     Badge,
     // Image,
-    Backtop,
     // Notification,
     Avatar,
     Drawer,
@@ -20,7 +19,6 @@ import {
   Vue.use(Progress);
   Vue.use(Badge);
   // Vue.use(Image);
-  Vue.use(Backtop);
   Vue.use(Avatar);
   Vue.use(Drawer);
   

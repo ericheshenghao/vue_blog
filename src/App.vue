@@ -181,6 +181,9 @@ a {
   mark{
     color:white;
   }
+  .backtop{
+    color:white;
+  }
 }
 
 sup {
@@ -254,7 +257,7 @@ h4:hover {
 ::-webkit-scrollbar {
   width: 6px;
 
-  height: 3px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -381,7 +384,7 @@ p code {
 .hljs {
   border-radius: 5px;
 
-  font-size: 13.8px;
+  font-size: 15px;
 
  
 
@@ -397,14 +400,7 @@ p code {
   ul {
     margin: 0;
     padding-left: 29px;
-    display: inline-table;
-    overflow-x: scroll;
-    width: -webkit-fill-available;
-    width:fit-content;
-    float: left;
-
-    overflow-y: hidden;
-
+     
     li {
       list-style: decimal-leading-zero;
 

@@ -28,7 +28,10 @@
 
       <div id="vcomments"></div>
       <FootInner></FootInner>
-      <el-backtop type="text"></el-backtop>
+      <!-- <el-backtop type="text"></el-backtop> -->
+      <button id="backbt"  class="backtop" v-on:click="btnTop">
+      <i class="fa fa-angle-double-up"></i>
+    </button>
     </div>
   </div>
 </template>
@@ -124,10 +127,19 @@
     };
   });
 
+
+    
+
+
   // 滚动条监听
   $(document).ready(function () {
     $(document).scroll(function () {//开始监听滚动条
       //获取当前滚动条高度
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        $("#backbt").show()
+    } else {
+         $("#backbt").hide()
+    }
       var max = $(document).height();
       var top = $(document).scrollTop();
       var viewH = $(window).height();
@@ -191,6 +203,9 @@
     },
     methods: {
       // 上一篇文章
+      btnTop(){
+        $('html,body').animate({scrollTop: '0px'}, 1000);
+      },
       nextpost() {
         if (this.list == "tech") {
           if (this.index < this.techlen - 1) {
@@ -275,6 +290,30 @@
   };
 </script>
 <style lang="less" scoped>
+  .backtop{
+    display: none;
+    position: fixed;
+    top: 95%;
+    right:2%;
+    font-size: 20px;
+    /* height: 50px;
+    width: 50px;
+    border-radius: 50px;*/
+    background-color: rgba(0, 0, 0, 0); 
+     border: none;
+    transition: all .5s ease;
+    &:hover{
+      cursor:pointer;
+      color: white;
+      text-shadow: 0 2px 4px #005cbc, 0 0 6px #ff4949;
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+
+
+
   .main {
     padding: 2em 1em 0em 1em;
     overflow-wrap: break-word;
