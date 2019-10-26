@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <h1 >Life</h1>
+    <div style="display:flex;flex-direction:row;justify-content: space-between;align-items: center;">
     <h2 style="font-family:Cinzel Decorative;padding-left:7px;">2019</h2>
+    <i class="fa fa-quote-right" style="padding: 15px 7px 0 0;"></i>
+    </div> 
     <ul class="list-ul">
       <li v-for="(blog) in lifelist" :key="blog.timestamp" class="list-item">
         <router-link

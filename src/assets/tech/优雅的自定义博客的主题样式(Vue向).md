@@ -153,16 +153,16 @@ export default {
 ```
 // 图片添加图名
 const addname = () => {
-  $("p img").each(function() {
-    let title = $(this).attr("alt");
-    $(this).after(
-      '<div class="iname">' +
-        '<span class="itag">🚫</span>' +
-        title.split(".")[0] +
+    $("p img").each(function () {
+      var title = $(this).attr("alt");
+      $(this).after(
+        '<div class="iname">' +
+        '<span class="itag"><i class="fa fa-twitch  "></i></span>' +
+        title +
         "</div>"
-    );
-  });
-};
+      );
+    });
+  };
 ```
 生命周期调用。
 ``` javascript

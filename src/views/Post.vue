@@ -59,11 +59,11 @@
   // 图片添加图名
   const addname = () => {
     $("p img").each(function () {
-      let title = $(this).attr("alt");
+      var title = $(this).attr("alt");
       $(this).after(
         '<div class="iname">' +
         '<span class="itag"><i class="fa fa-twitch  "></i></span>' +
-        title.split(".")[0] +
+        title +
         "</div>"
       );
     });
@@ -80,14 +80,14 @@
         "\n</li></ul>"
       );
       // 给指定行增加样式
-      try {
-        var line = $(this).attr("class").match(/\d+/g)
-        for (let i in line) {
-          $(this).children().children().eq(line[i] - 1).addClass("selected")
-        }
-      } catch (err) {
-        throw err
-      }
+      // try {
+      //   var line = $(this).attr("class").match(/\d+/g)
+      //   for (let i in line) {
+      //     $(this).children().children().eq(line[i] - 1).addClass("selected")
+      //   }
+      // } catch (err) {
+      //   throw err
+      // }
     });
     // 去掉最后一行的空行
     $("ul li:last-child").remove();
@@ -111,7 +111,13 @@
     FootInner
   };
   context.keys().forEach(key => {
-    const fileName = key.split(".")[1].split("/")[1];
+    
+    // const fileName = key.split('.+(?=\.)');
+    var index = key .lastIndexOf(".");
+    const fileName = key.substring(0, index).split("/")[1]
+
+
+
     const fileModule = context(key).default;
     moduleStore[fileName] = {
       ...fileModule,
@@ -119,7 +125,8 @@
     };
   });
   lifetext.keys().forEach(key => {
-    const fileName = key.split(".")[1].split("/")[1];
+    var index = key.lastIndexOf(".");
+    const fileName = key.substring(0, index).split("/")[1]
     const fileModule = lifetext(key).default;
     moduleStore[fileName] = {
       ...fileModule,

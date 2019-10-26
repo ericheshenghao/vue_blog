@@ -13,6 +13,7 @@ configureWebpack: {
   开源CDN链接[^1]
   ## 修改main js
   将引入外部资源的组件都注释掉，否则可能会出错。
+  >tips:引用cdn时，如果vue引用的是min.js版本，会导致vue devtool失效，换成vue.js后缀的就可以了。
   ``` javascript
   // import Vue from 'vue'
   import App from './App.vue'
@@ -53,7 +54,6 @@ configureWebpack: {
 ```
 用audit测试一下网页的性能，
 ![测试结果](https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191023171640.png)
-  ## 存在的问题
-  自己的博客想通过<mark>百度站长</mark>的https认证，奈何设置了前端路由之后，再去服务端nginx设置301重定向的时候，总是会出现重定向次数过多的问题，暂时只能先把这个问题放一放了。
+
 
   [^1]: 来源： [https://www.bootcdn.cn/](https://www.bootcdn.cn/)

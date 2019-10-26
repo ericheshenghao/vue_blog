@@ -357,36 +357,36 @@ p code {
   color: rgb(255, 85, 0);
 }
 
-.selected {
-  background-color: #000000 !important;
+// .selected {
+//   background-color: #000000 !important;
 
-  z-index: 10;
+//   z-index: 10;
 
-  &:hover {
-    animation: faded infinite 1s linear;
-  }
+//   &:hover {
+//     animation: faded infinite 1s linear;
+//   }
 
-  @keyframes faded {
-    0% {
-      box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
-    }
+//   @keyframes faded {
+//     0% {
+//       box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
+//     }
 
-    50% {
-      box-shadow: 0 0px 0.2px #005cbc, 0 0 0px #ff4949;
-    }
+//     50% {
+//       box-shadow: 0 0px 0.2px #005cbc, 0 0 0px #ff4949;
+//     }
 
-    100% {
-      box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
-    }
-  }
-}
+//     100% {
+//       box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
+//     }
+//   }
+// }
 
 .hljs {
   border-radius: 5px;
 
   font-size: 15px;
 
- 
+ overflow-x: auto;
 
   margin-right: 0;
 
@@ -402,9 +402,9 @@ p code {
     padding-left: 29px;
      
     li {
-      list-style: decimal-leading-zero;
+      list-style: decimal;
 
-      border-left: 1px solid #111 !important;
+      // border-left: 1px solid #111 !important;
 
       padding: 5px !important;
       
@@ -415,8 +415,8 @@ p code {
   }
 }
 
-.hljs ul li:nth-of-type(2n) {
-  background-color: rgba(255, 255, 255, 0.015);
+// .hljs ul li:nth-of-type(2n) {
+//   background-color: rgba(255, 255, 255, 0.015);
  
-}
+// }
 </style>

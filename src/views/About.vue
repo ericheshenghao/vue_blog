@@ -1,8 +1,8 @@
 <template>
   <div class="about" style="padding:2em 0 0 0;">
-    <!-- <myheadlink></myheadlink> -->
+
     <h1>About</h1>
-    <div>
+    <!-- <div>
       <video
         controls
         name="media"
@@ -14,15 +14,12 @@
           type="video/mp4"
         />
       </video>
-    </div>
-    
+    </div>-->
+  <h2>Nothing</h2>
   </div>
 </template>
 <script>
-
 export default {
-  components: {
-  }
 };
 </script>
 <style lang="less" scoped>
@@ -40,5 +37,4 @@ video {
     outline: none;
   }
 }
-
 </style>

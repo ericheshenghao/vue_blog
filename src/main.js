@@ -8,7 +8,6 @@ import './registerServiceWorker'
 import './plugins/element.js'
 
 
-
 Vue.config.productionTip = false
 // Vue.use(ElementUI);
 
