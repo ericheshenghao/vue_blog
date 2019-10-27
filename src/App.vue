@@ -355,6 +355,7 @@ p code {
   margin: 0 3px;
 
   color: rgb(255, 85, 0);
+  font-size: 16px;
 }
 
 .selected {
@@ -384,7 +385,7 @@ p code {
   display: grid!important;
   border-radius: 5px;
 
-  font-size: 0.8em;
+  font-size: 0.9em;
 
   margin-right: 0;
 
@@ -397,7 +398,7 @@ p code {
 
   ul {
     margin: 0;
-    padding-left: 32px;
+    padding-left: 38px;
      
     li {
       list-style: decimal;
