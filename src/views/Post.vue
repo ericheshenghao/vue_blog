@@ -80,14 +80,14 @@
         "\n</li></ul>"
       );
       // 给指定行增加样式
-      // try {
-      //   var line = $(this).attr("class").match(/\d+/g)
-      //   for (let i in line) {
-      //     $(this).children().children().eq(line[i] - 1).addClass("selected")
-      //   }
-      // } catch (err) {
-      //   throw err
-      // }
+      try {
+        var line = $(this).attr("class").match(/\d+/g)
+        for (let i in line) {
+          $(this).children().children().eq(line[i] - 1).addClass("selected")
+        }
+      } catch (err) {
+        throw err
+      }
     });
     // 去掉最后一行的空行
     $("ul li:last-child").remove();
@@ -323,8 +323,8 @@
 
   .main {
     padding: 2em 1em 0em 1em;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+     /* overflow-wrap: break-word;  */
+     /* word-wrap: break-word;  */
   }
  
   .main-inner {
