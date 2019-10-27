@@ -323,15 +323,12 @@
 
   .main {
     padding: 2em 1em 0em 1em;
-     /* overflow-wrap: break-word;  */
-     /* word-wrap: break-word;  */
   }
  
   .main-inner {
     text-align: justify;
     width: 36em;
     margin: 0 auto;
-    /* font-size: 16px; */
     line-height: 1.618;
 
     @media (max-width: 38em) {

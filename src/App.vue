@@ -335,7 +335,7 @@ mark {
   text-emphasis-position: under left;
 }
 code {
-  font-family: "EB Garamond";
+  font-family: Consolas;
 }
 
 //行内代码块
@@ -384,9 +384,7 @@ p code {
   display: grid!important;
   border-radius: 5px;
 
-  font-size: 15px;
-
- overflow-x: auto;
+  font-size: 0.8em;
 
   margin-right: 0;
 
@@ -399,7 +397,7 @@ p code {
 
   ul {
     margin: 0;
-    padding-left: 29px;
+    padding-left: 32px;
      
     li {
       list-style: decimal;

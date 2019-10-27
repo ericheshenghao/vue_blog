@@ -1,0 +1,165 @@
+# ES6常见语法
+## let、const用法
+`let`是一个块作用域，和`var`一样,试试下面的代码。
+``` js
+if(true){
+    let a = 123;
+}
+console.log(a) //访问不到
+```
+`const`用来定义常量。
+``` js
+const PI = 3.14159;
+PI = 3
+console.log(PI) 
+```
+## 模板语法的写法
+``` js
+var name = "张三";
+var age = 20;
+// 以前的写法
+console.log(name + "的年龄是" + age);
+// 模板字符串的写法
+console.log('${name}的年龄是${age}');
+```
+## 对象、属性的简写
+对象的简写。
+``` js
+var name = "zhangsan";
+var app ={
+    name
+}
+console.log(name);
+```
+属性的简写。
+``` js
+var name = "zhangsan";
+var app ={
+    name,
+    run:function(){
+        console.log('${this.name}在跑步');
+    }
+}
+app.run(); //执行得到zhangsan在跑步
+```
+## 箭头函数
+this指向上下文
+``` js
+//以前的写法
+serTimeout(function(){
+    console.log('执行');
+},1000)
+//箭头函数
+serTimeout(() => {
+    console.log('执行');
+},1000)
+```
+回调函数，获取异步方法里的数据。
+``` js
+function getData(callback){  //第一步
+    serTimeout(() => {  //第二步
+    var name = '张三';
+    callback(name);
+    // return name;
+    },1000)
+    // return name;
+}//第三步
+// 外部获取异步方法的数据
+// console.log(getData()); //not define
+getData((data) => {
+    console.log(data);  //可以拿到数据
+})
+```
+Promise法处理异步
+``` js
+//resolves成功回调，reject失败回调
+var p = new Promise(function(resolves,reject){
+    //ajax
+    serTimeout(() => {  
+    var name = '张三';
+    resolves(name)
+    },1000)
+}
+p.then(()=>{
+    console.log(data);
+})
+//另一种方式
+function getData(resolves,reject){
+    //ajax
+    serTimeout(() => {  
+    var name = '张三';
+    resolves(name)
+    },1000)
+}
+var p = new Promise(getData)
+p.then((data)=>{
+    console.log(data);
+})
+```
+## async await使用方法
+async可以让普通函数变成异步
+``` js
+async function getData(){
+    return '这是一个数据';
+}
+console.log(getData()); //promise{'这是一个数据'}
+```
+如何获取async异步方法里的数据
+``` js
+//第一种
+async function getData(){
+    return '这是一个数据';
+}
+var p = getData();
+p.then((data)=>{
+    console.log(data);
+}) //返回这是一个数据
+```
+await是等待异步方法执行完成，可以获取异步方法里面的数据，但是必须得用在异步方法里面。
+``` js
+//错误写法
+async function getData(){
+    return '这是一个数据';
+}
+var d = await getData();
+console.log(d) //await is only valid in async function 
+//正确写法
+async function getData(){
+    return '这是一个数据';
+}
+async function test(){
+    var d= await getData();
+    console.log(d);
+}
+test() //这是一个数据
+```
+await 阻塞的功能，把异步改成同步
+``` js
+async function getData(){
+    console.log(2)
+    return '这是一个数据';
+}
+async function test(){
+    console.log(1);
+    var d= await getData();
+    console.log(d);
+    console.log(3);
+}
+test() //这是一个数据
+//结果打印顺序  1 2 这是一个数据 3
+```
+async 定义的方法返回的是Promise对象。
+``` js
+function getData(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            var username = '张三';
+            resolve(username);
+        },5000)
+    })
+}
+var p = getData();
+p.then(function(d){
+    console.log(d) //张三
+})
+```
