@@ -261,7 +261,6 @@ h4:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  
   background-color: #d5d5d5;
   border-radius: 1em;
 }
@@ -360,25 +359,6 @@ p code {
 
 .selected {
   background-color: #000000 !important;
-
-
-  // &:hover {
-  //   animation: faded infinite 1s linear;
-  // }
-
-  // @keyframes faded {
-  //   0% {
-  //     box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
-  //   }
-
-  //   50% {
-  //     box-shadow: 0 0px 0.2px #005cbc, 0 0 0px #ff4949;
-  //   }
-
-  //   100% {
-  //     box-shadow: 0 0px 4px #005cbc, 0 0 6px #ff4949;
-  //   }
-  // }
 }
 
 .hljs {
@@ -402,8 +382,6 @@ p code {
      
     li {
       list-style: decimal;
-
-      // border-left: 1px solid #111 !important;
 
       padding: 5px !important;
       
