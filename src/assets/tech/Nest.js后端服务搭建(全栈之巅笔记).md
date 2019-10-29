@@ -55,6 +55,9 @@ npm add nestjs-mongoose-crud
 ```
 npm add @nestjs/swagger swagger-ui-express
 ```
+在main.ts中引入swaggger
+[https://docs.nestjs.com/recipes/swagger](https://docs.nestjs.com/recipes/swagger)
+
 在main.ts中加入下面的代码可以看到Promise没有catch()处理err的具体位置
 ```
 process.on('unhandledRejection', (reason, p) => {
@@ -64,3 +67,34 @@ process.on('unhandledRejection', (reason, p) => {
 ```
 全局验证包
 npm add class-validator class-transformer
+
+## 后端界面
+### vue子路由写法
+在`router/index.ts`中，可以这样写子路由
+``` js{10,11,12}
+const routes: RouteConfig[] = [
+  {
+    path: '/',
+    name: 'main',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../views/main.vue'),
+    children:[
+      {name:"home",path:"/",component: () => import('../views/Home.vue')}
+    ]
+  }
+```
+这样home页面就作为main页面的子路由。
+### ts的script写法
+```
+<script lang="ts">
+// 属性装饰器
+import {Vue,Component} from "vue-property-decorator";
+
+@Component({})
+export default class Main extends Vue{
+
+}
+</script>
+```
