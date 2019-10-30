@@ -375,6 +375,7 @@ p code {
 
 
   padding: 0.5em 0 !important;
+ box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.7);
 
   ul {
     margin: 0;

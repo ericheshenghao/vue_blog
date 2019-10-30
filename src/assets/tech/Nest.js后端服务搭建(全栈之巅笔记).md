@@ -1,4 +1,5 @@
 # Nest.js后端服务搭建(全栈之巅笔记)
+记录一下自己全栈实现的一些重要过程。
 ``` bash
 $ npm i -g @nestjs/cli
 $ nest new server
@@ -55,9 +56,10 @@ npm add nestjs-mongoose-crud
 ```
 npm add @nestjs/swagger swagger-ui-express
 ```
-在main.ts中引入swaggger
+在main.ts中引入swagger  
 [https://docs.nestjs.com/recipes/swagger](https://docs.nestjs.com/recipes/swagger)
 
+### 注意
 在main.ts中加入下面的代码可以看到Promise没有catch()处理err的具体位置
 ```
 process.on('unhandledRejection', (reason, p) => {
@@ -71,7 +73,7 @@ npm add class-validator class-transformer
 ## 后端界面
 ### vue子路由写法
 在`router/index.ts`中，可以这样写子路由
-``` js{10,11,12}
+``` js{10}
 const routes: RouteConfig[] = [
   {
     path: '/',
