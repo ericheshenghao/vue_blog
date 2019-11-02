@@ -80,6 +80,7 @@ export default {
 
 ol li p {
   text-align: left;
+  word-break: break-word;
 }
 
 .footnote-backref {

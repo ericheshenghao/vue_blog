@@ -156,10 +156,82 @@ render: h => h(App)
 </template>
 ```
 锵锵👐，可以看到引入的组件了，引入方式也和`element-ui`一样。
-![按钮](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/10/31/5f1307462b27a88f5d343d4f6a1be00c.jpg) 
-当然，这只是开始，由简入繁，野蛮生长。
+![按钮](https://eric-he.oss-cn-beijing.aliyuncs.com/xia2019/10/31/5f1307462b27a88f5d343d4f6a1be00c.jpg) 
+
 ## 多个组件的情况
-站长很懒，什么都没有留下。
+在单个组件的基础下，重新再修改一下目录，现在大概长这个样子，添加了一个`alert`组件，并在他们的外层新建了一个`index.js`。
+![项目目录](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/10/31/dcd7b10ace66ad7c33df6354db6d6301.jpg) 
+在`/packages/alert/main.vue`写入下面的代码,别忘了给组件的name赋值。
+```{9}
+<template>
+  <div>
+   <h1>测试</h1>
+  </div>
+</template>
+
+<script >
+export default {
+  name: 'alert',
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>
+
+```
+在`/packages/alert/index.js`，同样将组件暴露出去。
+```
+import alert from './main';
+
+alert.install = function (Vue) {
+    Vue.component(alert.name, alert);//注册组件
+}
+export default alert;
+```
+在外层的`/packages/index.js`中这样写入,其实就是将组件批量的install一下，然后暴露出去。
+```
+import alert from '../packages/alert/index';
+import sharebutton from '../packages/sharebutton/index';
+
+const components = [
+    alert,
+    sharebutton,
+]
+
+const install = function(Vue, opts = {}){
+    components.forEach(component => {
+        Vue.component(component.name, component);
+      });
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+export default {
+    install, 
+    alert,
+    sharebutton
+ }
+```
+现在我们只要相应的修改一下`webpack.config.js`的入口就行了
+```
+entry: NODE_ENV == 'development' ? './src/main.js' : './src/packages/index.js',
+```
+我的大概就是这样，然后打包上传，在新项目里下载并引用。
+```{4}
+<template>
+	<div class="home">
+		<share-button></share-button>
+		<alert></alert>
+	</div>
+</template>
+```
+结果当然也是非常的美丽，两个组件都引用成功了。
+![多个组件](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/10/31/89529295c35721d0b771741450cd1750.jpg) 
+
+当然，这只是开始，由简入繁，野蛮生长。
 
 
 
