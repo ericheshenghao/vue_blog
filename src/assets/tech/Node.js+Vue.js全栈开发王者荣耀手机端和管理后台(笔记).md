@@ -2,7 +2,7 @@
 本项目基于 Bilibili 全栈之巅相关教程  
 源地址：[https://www.bilibili.com/video/av51931842](https://www.bilibili.com/video/av51931842)
 
-## 准备工作
+## 管理端
 >工具安装及环境搭建：(node.js、npm、mongodb)
 ```
 $ npm i -g nodeman
@@ -14,7 +14,7 @@ package.json的script中添加一个自定义的指令
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 ```
-## 整体步骤
+### 整体步骤
 1. 基于ELEMENT UI
 2. 创建分类
 3. 分类列表
@@ -37,11 +37,11 @@ package.json的script中添加一个自定义的指令
 20. 服务端登陆验证
 21. 客户端路由限制
 
-## 基于ELEMENT UI
+### 基于ELEMENT UI
 ``` bash
 vue add element 
 ```
-## 管理后台搭建
+### 管理后台搭建
 
 ```
 // 需要注意的地方
@@ -59,7 +59,7 @@ npm i express@next
 npm i mongoose
 npm i cors
 ```
-### 数据请求
+#### 数据请求
 前端的`baseURL`要与后端的相对应
 ```
 import axios from "axios"
@@ -115,7 +115,7 @@ app.listen(3000,()=>{
     console.log("http://localhost:3000");
 });
 ```
-### 新建并连接数据库
+#### 新建并连接数据库
 ```
 module.exports = app => {
     const mongoose = require("mongoose")
@@ -127,9 +127,9 @@ module.exports = app => {
 }
 ```
 
-## 一些知识点
+### 一些知识点
 
-### eslint报错
+#### eslint报错
 解决eslint未使用变量报错的情况[^1],在rule里修改成下面的代码，其中的数字1表示警告，如果改成0表示忽略，2表示error。
 
 ```
@@ -137,13 +137,13 @@ module.exports = app => {
       "no-unused-vars": [1, {"vars": "all", "args": "after-used"}]
     },
 ```
-### 中间件
+#### 中间件
 用来处理图片上传和将复数变为单数的中间件
 ```
 npm i multer inflection
 ```
 用法：xxx
-### 加密
+#### 加密
 让后端密码密文保存的方法，在model中的password字段里`setvalue`对前端传回来进行加密。需要`npm i bcrypt`。
 ```{4}
  password: {
@@ -153,19 +153,124 @@ npm i multer inflection
         }
     },
 ```
-### token处理
+#### token处理
 用来处理token验证的npm包
 ``` 
 npm i jsonwebtoken
 ```
-### 判断条件是否满足
+#### 判断条件是否满足
 
 ``` 
 npm i http-assert
 ```
-### 错误代码
+#### 错误代码
 500：服务端  
 402：自定义的err返回码
+
+## 移动端
+- "工具样式"概念和sass(scss)
+- 样式重置
+- 网站色彩和定义
+- 通用flex布局样式定义
+- 常用边距定义
+- 首页顶部轮播图片
+- 使用字体图标
+- 使用精灵图标
+- 卡片组件
+- 列表卡片组建
+- 首页新闻资讯
+- 首页英雄列表
+- 新闻详情页
+- 英雄详情页
+
+### "工具样式"概念和sass(scss)(复用)
+```
+npm i -d sass sass-loader
+```
+### 样式重置
+新建`style.scs`s,在`main.js`中引用
+```
+import "./style.scss"
+```
+写入下面的代码(样式重置)
+```
+// reset
+// 防止自己撑大
+*{
+    box-sizing:border-box;
+	outline: none; //去掉表单元素的高亮
+}
+
+html {
+    font-size: 13px; //基础字体大小
+}
+
+body{
+    padding:0;
+    margin:0;
+	font-family: Arial, Helvetica, sans-serif; //sans-serif代表非称线字体
+	line-height: 1.2em;
+	background: #f1f1f1;
+}
+
+a{
+    color:#999;
+}
+```
+### 网站色彩和定义
+vs中可以安装一个插件px to rem    
+用法：alt+z
+```
+// colors
+$colors:(
+    "primary":#db933f,
+    "white":#fff,
+    "light": #f9f9f9,
+    "black":#333,
+    "dark":#222,
+    "gray":#999,
+    "dark-1":#343440,
+);
+//循环生成工具类
+//第一个参数为键值及键名 第二个为对象
+@each $colorkey, $color in $colors {
+  .text-#{$colorkey} {
+    color: $color;
+  }
+  .bg-#{$colorkey}{
+    background-color: $color;
+  }
+}
+
+// text align
+//第一个参数为变量 第二个为集合
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var;
+  }
+}
+
+// font size 的工具类
+$base-font-size: 1rem;
+$font-sizes: (
+  xs: 0.7692, //10px  插件设置里将基础的字体改为上面html中设置的13px，这样就保证了整个页面只有一个基础的px大小
+  sm: 0.9231, //12px 
+  md: 1,      //13px
+  lg: 1.0769, // 14px
+  xl: 1.2308,// 16px
+);
+
+@each $sizekey,$size in $font-sizes {
+    .fs-#{$sizekey}{
+        font-size:$size * $base-font-size
+    }
+}
+```
+
+
+## 发布和部署
+
+
 
 
 [^1]:https://blog.csdn.net/qq_33712668/article/details/97244254
