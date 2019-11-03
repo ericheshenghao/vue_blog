@@ -1,12 +1,11 @@
 # Node.js+Vue.js全栈开发王者荣耀手机端和管理后台(笔记)
-本项目基于 Bilibili 全栈之巅相关教程
+本项目基于 Bilibili 全栈之巅相关教程  
 源地址：[https://www.bilibili.com/video/av51931842](https://www.bilibili.com/video/av51931842)
 
 ## 准备工作
-1. 工具安装及环境搭建(node.js、npm、mongodb)
+>工具安装及环境搭建：(node.js、npm、mongodb)
 ```
 $ npm i -g nodeman
-
 ```
 package.json的script中添加一个自定义的指令
 ```
@@ -15,18 +14,9 @@ package.json的script中添加一个自定义的指令
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 ```
-## 管理后台
+## 整体步骤
 1. 基于ELEMENT UI
 2. 创建分类
-```
-// 需要注意的地方
-<el-menu-item index="/categories/create">新建分类</el-menu-item>
-<el-menu-item index="/categories/list">分类列表</el-menu-item>
----
-children:[
-      {path:"/categories/create",name: 'create',component:()=> import("../views/CategoryEdit")}
-    ]
-```
 3. 分类列表
 4. 修改分类
 5. 删除分类
@@ -46,6 +36,23 @@ children:[
 19. 登录接口
 20. 服务端登陆验证
 21. 客户端路由限制
+
+## 基于ELEMENT UI
+``` bash
+vue add element 
+```
+## 管理后台搭建
+
+```
+// 需要注意的地方
+<el-menu-item index="/categories/create">新建分类</el-menu-item>
+<el-menu-item index="/categories/list">分类列表</el-menu-item>
+---
+children:[
+      {path:"/categories/create",name: 'create',component:()=> import("../views/CategoryEdit")}
+    ]
+```
+
 ```
 cd server
 npm i express@next
@@ -121,18 +128,44 @@ module.exports = app => {
 ```
 
 ## 一些知识点
-解决eslint未使用变量报错的情况[^1]
 
-在rule里修改成下面的代码，其中的数字1表示警告，如果改成0表示忽略，2表示error。
+### eslint报错
+解决eslint未使用变量报错的情况[^1],在rule里修改成下面的代码，其中的数字1表示警告，如果改成0表示忽略，2表示error。
+
+```
 "rules": {
       "no-unused-vars": [1, {"vars": "all", "args": "after-used"}]
     },
 ```
-// 用来处理图片上传和将复数变为单数的中间件
+### 中间件
+用来处理图片上传和将复数变为单数的中间件
+```
 npm i multer inflection
 ```
+用法：xxx
+### 加密
+让后端密码密文保存的方法，在model中的password字段里`setvalue`对前端传回来进行加密。需要`npm i bcrypt`。
+```{4}
+ password: {
+        type: String,
+        set(value) {
+            return require('bcrypt').hashSync(val,10)
+        }
+    },
+```
+### token处理
+用来处理token验证的npm包
+``` 
+npm i jsonwebtoken
+```
+### 判断条件是否满足
+
+``` 
+npm i http-assert
+```
 ### 错误代码
-500：服务端
+500：服务端  
+402：自定义的err返回码
 
 
 [^1]:https://blog.csdn.net/qq_33712668/article/details/97244254
