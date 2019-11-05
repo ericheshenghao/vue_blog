@@ -49,6 +49,9 @@ module.exports = {
             }
           ],
           [require("markdown-it-footnote")],
+          [require("markdown-it-table-of-contents"),{
+            slugify:slugify
+          }],
         ]
       })
   }

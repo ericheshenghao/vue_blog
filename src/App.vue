@@ -133,7 +133,7 @@ input:-internal-autofill-selected {
 
 a {
   color: @color-bg;
-  text-underline-position: under!important;
+  text-underline-position: under !important;
 }
 
 @color-hover: #2a6df4;
@@ -179,11 +179,11 @@ a {
     color: white;
   }
 
-  mark{
-    color:white;
+  mark {
+    color: white;
   }
-  .backtop{
-    color:white;
+  .backtop {
+    color: white;
   }
 }
 
@@ -363,7 +363,7 @@ p code {
 }
 
 .hljs {
-  display: grid!important;
+  display: grid !important;
   border-radius: 5px;
 
   font-size: 0.9em;
@@ -374,28 +374,26 @@ p code {
 
   color: #ffffff !important;
 
+  
 
   padding: 0.5em 0 !important;
- box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.7);
 
   ul {
     margin: 0;
     padding-left: 38px;
-     
+
     li {
       list-style: decimal;
 
       padding: 5px !important;
-      
 
       line-height: 14px;
-
     }
   }
 }
 
 .hljs ul li:nth-of-type(2n) {
   background-color: rgba(255, 255, 255, 0.015);
- 
 }
 </style>

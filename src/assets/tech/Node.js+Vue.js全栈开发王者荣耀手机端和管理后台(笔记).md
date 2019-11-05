@@ -1,9 +1,17 @@
+
 # Node.js+Vue.js全栈开发王者荣耀手机端和管理后台(笔记)
+
+
+
+
 本项目基于 Bilibili 全栈之巅相关教程  
-源地址：[https://www.bilibili.com/video/av51931842](https://www.bilibili.com/video/av51931842)
+源地址：[https://www.bilibili.com/video/av51931842](https://www.bilibili.com/video/av51931842)  
+
+[[toc]]
 
 ## 管理端
 >工具安装及环境搭建：(node.js、npm、mongodb)
+
 ```
 $ npm i -g nodeman
 ```
@@ -14,6 +22,8 @@ package.json的script中添加一个自定义的指令
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 ```
+
+
 ### 整体步骤
 1. 基于ELEMENT UI
 2. 创建分类
@@ -130,13 +140,15 @@ module.exports = app => {
 ### 一些知识点
 
 #### eslint报错
-解决eslint未使用变量报错的情况[^1],在rule里修改成下面的代码，其中的数字1表示警告，如果改成0表示忽略，2表示error。
-
+解决`eslint`未使用变量报错的情况[^1],在`package.json`的`eslintConfig`中的`rule`里添加下面的代码，其中的数字1表示警告，如果改成0表示忽略，2表示error。  
+常见规则[列表](https://blog.csdn.net/qq_34645412/article/details/78974413)。
 ```
 "rules": {
-      "no-unused-vars": [1, {"vars": "all", "args": "after-used"}]
+      "no-unused-vars": [1, {"vars": "all", "args": "after-used"}],
+      "no-console": 1,  
     },
 ```
+修改完后要重新`npm run serve`一下
 #### 中间件
 用来处理图片上传和将复数变为单数的中间件
 ```
@@ -163,6 +175,12 @@ npm i jsonwebtoken
 ``` 
 npm i http-assert
 ```
+
+#### 富文本编辑器
+```
+npm i vue2-editor
+```
+在后台传入数据之后，在前端以`v-html="model.body"`的方式引入就可以了
 #### 错误代码
 500：服务端  
 402：自定义的err返回码
@@ -265,12 +283,358 @@ $font-sizes: (
         font-size:$size * $base-font-size
     }
 }
+
+// flex 布局
+.d-flex {
+  display: flex;
+}
+.flex-column{
+  flex-direction: column;
+}
+
+// justify-content
+$flex-jc: (
+  start: flex-end,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around
+);
+
+@each $key, $value in $flex-jc {
+  .js-#{$key} {
+    justify-content: $value;
+  }
+}
+
+// align-items
+$flex-ai: (
+  start: flex-end,
+  end: flex-end,
+  center: center,
+  stretch:stretch,
+);
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+
+.flex-1{
+  flex:1;
+}
+// 占满整个盒子
+.flex-1{
+  flex-grow:1;
+}
+
+// 常用边距
+// 0-5六个等级
+// .mt-1 => margin top .pb-2 => pading-bottom
+$spacing-types: (
+  m: margin,
+  p: padding
+);
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left
+);
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 3
+);
+
+// 三层循环嵌套
+// m-0 ,mx-0
+@each $typeKey, $type in $spacing-types {
+  // .m-1{ margin:0.25rem}
+  @each $sizekey,$size in $spacing-sizes {
+    // .mt-1{ margin-top:0.25rem}
+    .#{$typeKey}-#{$sizekey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+  // .mx-1
+  @each $sizekey,$size in $spacing-sizes {
+    // .mt-1{ margin-top:0.25rem}
+    .#{$typeKey}x-#{$sizekey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+  }
+  // .my-1
+  @each $sizekey,$size in $spacing-sizes {
+    // .mt-1{ margin-top:0.25rem}
+    .#{$typeKey}y-#{$sizekey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+
+  @each $directionKey ,$direction in $spacing-directions {
+    @each $sizekey,$size in $spacing-sizes {
+      // .mt-1{ margin-top:0.25rem}
+      .#{$typeKey}#{$directionKey}-#{$sizekey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+  
+}
+
+
+```
+### 首页顶部轮播图片
+安装插件
+```
+$ npm i vue-awesome-swiper --save
+```
+参考swiper的api文档[^2],要实现图片的轮播，只需要再加上👇这一行代码就可以了。
+```{6}
+  return {
+      swiperOption: {
+        pagination: {
+          el: ".pagination-home"
+        },
+         autoplay:true,
+      },
+      swiperSlides: [1, 2, 3]
+    };
+```
+### 使用精灵图标
+参考:sprite cow
+优点:多色 缺陷:更换复杂
+```
+// sprite
+.sprite{
+  background:url(../imgs/index.png) no-repeat 0 0 ;
+  background-size: 28.8462rem; //图片的一半 375px
+  display:inline-block;
+  &.sprite-news{
+    // background: url('imgs/index.png') no-repeat -64px -7px;
+    background-position: 63.546% 15.517%;
+    width: 1.7692rem;
+	height: 1.5385rem;
+  }
+
+  &.sprite-arrow{
+    background-position: 38.577% 52.076%;
+    width: 0.7692rem;
+	height: 0.7692rem;
+  }
+}
+```
+### 使用字体图标
+在iconfont网站上添加需要的图标并以代码形式下载并添加到项目中，然后在文件夹中打开`.html`后缀的文件会给出具体的使用方法，大概就是用👇这种方式来引入，方便异常。
+```
+<i class="iconfont icon-big-hero"></i>
+```
+可以随便改变样式和大小，推荐使用字体图标。
+
+### 卡片布局
+#### 组件传参
+给组件内部传参，首先定义一个组件，像这样
+```
+<i class="iconfont" :class="`icon-${icon}`"></i>
+<div class="fs-xl flex-1 px-2">{{title}}</div>
+```
+可以看到上面留了两个坑位，然后我们在`script`标签里暴露一个prop，大概这样
+```
+export default {
+    props:{
+        title:{type:String,require:true},
+        icon:{type:String,require:true},
+    }
+}
+```
+然后我们在`main.js`里全局引用一下这个组件，姿势👇
+```
+import Card from "./components/Card.vue"
+Vue.use("m-card",Card) //重新命名
+```
+现在我们在其他页面去引用它,并将数据传进去，这样就能动态的修改了
+```
+<m-card icon="big-hero" title="新闻资讯"></m-card>
+```
+#### 插槽slot
+首先，我们已经写好了组件`m-card`，
+```
+<m-card icon="big-hero" title="新闻资讯">12121</m-card>
+```
+但是我们突然想在这个容器里面写一些内容👆，按html的套路很正常我们想到的就是直接在两个标签内些内容，比如121211，然鹅，这是不行滴，因为这样写，组件根本不知道要将这部分内容放在什么位置，因此插槽就诞生了，只要我们这样，在子组件想要插入内容的地方写上slot标签，👇
+```
+<div class="card-body">
+    <slot></slot>
+</div>
+```
+让后再去写内容，就可以正常的显示出来了
+#### 具名插槽
+![多层的嵌套](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/11/04/8112f86919657ff6c1e4c3e00bd04856.jpg) 
+像这种多层级的嵌套的数据，当我们想要将它循环展示出来的时候，只用slot插槽可能满足不了我们的要求，所以我们可以这样
+```
+<swiper>
+        <swiper-slide v-for="(category,i) in categories" :key="i">
+          <slot name="items" :category="category"></slot>
+        </swiper-slide>
+</swiper>
+```
+首先categories是父组件传过来的props属性，含有多级数据，我们对他进行for循环得到一个category，之后我们将这个category赋值给slot插槽的category属性，将它命名为items，然后我们在父组件中，采用👇这种方式来获得传过来的cateogory属性，并在标签内引用。
+```
+<template #items="{category}">
+        <div class="py-2" v-for="(news,i) in category.newsList" :key="i">
+          <span>[{{news.categories}}]</span>
+          <span>|</span>
+          <span>{{news.title}}</span>
+          <span>{{news.data}}</span>
+        </div>
+      </template>
+```
+#### 吸顶效果
+```
+.topbar{
+  //实现吸顶效果
+  position:sticky;
+  top:0;
+  z-index: 10;
+}
 ```
 
+### 首页新闻资讯
+头皮发麻的操作：在chorme的console界面输入下面的命令，其中替换掉类名就可以获得一些标签内的文本内容。
+```
+$$('.news_list .title').map(el=>el.innerHTML)
+```
+介绍一个后端插件`require-all`，主要作用是将某个文件下所有内容引用一遍。
+```
+npm i require-all
+```
+#### 点击跳转到某个子分类
+```
+@click="$refs.list.swiper.slideTo(i)"
+//下面的swiper要给一个ref
+<swiper ref="list">
+...
+<swiper>
+```
+### server中的前端路由(懵逼)
+```
+//前端路由
+module.exports = app => {
+    const router = require("express").Router()
+    const mongoose = require("mongoose")
+    const Category = mongoose.model("Category")
+    const Article = mongoose.model("Article")
+    router.get("/news/init", async (req, res) => {
+        // 找到上级分类为新闻分类的子分类
+        const parent = await Category.findOne({
+            name: "新闻分类"
+        })
+        // 筛选出子分类
+        const cats = await Category.find().where({
+            parent: parent
+        }).lean()
+        const newsTitles = ["假装有很多内容"]
+        const newsList = newsTitles.map(title => {
+            //对子分类排序
+            const randomCats = cats.slice(0).sort((a, b) => Math.random() - 0.5)
+            return {
+                categories: randomCats.slice(0, 2), //拿到前两个分类设置给模型的属性
+                title: title,
+                //    randomCats:randomCats
+            }
+        })
+        await Article.deleteMany({}) //清除所有
+        await Article.insertMany(newsList) //插入
+        res.send(newsList)
+    })
 
+
+    // 第二个接口，用于前端调用
+    router.get("/news/list", async (req, res) => {
+        // const parent = await Category.findOne({
+        //     name:"新闻分类"
+        // }).populate({
+        //     path:"children",
+        //     populate:{
+        //         path:'newsList'
+        //     }
+        // }).lean()
+        //最终得到新闻分类的子分类的新闻
+        const parent = await Category.findOne({
+            name: "新闻分类"
+        })
+        // 聚合查询 同时执行好几次查询 聚合管道
+        const cats = await Category.aggregate([
+            //过滤数据
+            { $match: { parent: parent._id } },
+            //关联查询
+            {
+                $lookup: {
+                    from: "articles",
+                    localField: "_id",
+                    foreignField: "categories",
+                    as: "newsList"
+                }
+            },
+            // 修改获取到的数量
+            {
+                $addFields: {
+                    newsList: { $slice: ["$newsList", 5] }
+                }
+            }
+        ])
+        const subCats = cats.map(v => v._id)
+        cats.unshift({
+            name: "热门分类",
+            newsList: await Article.find().where({
+                categories: { $in: subCats }
+            }).populate("categories").limit(5).lean()
+        })
+
+        cats.map(cat => {
+            cat.newsList.map(news => {
+                news.categoryName = (cat.name === "热门分类") ? news.categories[0].name : cat.name
+                return news
+            })
+            return cat
+        })
+        res.send(cats)
+
+    })
+
+    app.use("/web/api", router)
+}
+```
+### 日期数据处理
+```
+npm i dayjs
+```
+console界面获取英雄数据，类似于jquery
+```
+$$(".hero-nav >li").map((li,i)=>{
+	return {
+		name:li.innerText,
+		heros:$$("li",$$(".hero-list")[i]).map(el=>{
+	return {
+		name:$$("h3",el)[0].innerHTML,
+		avator:$$("img",el)[0].src		
+}	
+})
+    }
+})
+```
+将上面的代码放入`json.stringify(...)`可以将数据转化为json格式
 ## 发布和部署
 
 
 
 
 [^1]:https://blog.csdn.net/qq_33712668/article/details/97244254
+[^2]:https://www.swiper.com.cn/api/autoplay/16.html
