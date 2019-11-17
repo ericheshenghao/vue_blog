@@ -1,19 +1,20 @@
 
-# Node.js+Vue.js全栈开发王者荣耀手机端和管理后台(笔记)
+# Node.js+Vue.js全栈开发手机端和管理后台(笔记)
 
 
-
+[[toc]]
 
 本项目基于 Bilibili 全栈之巅相关教程  
 源地址：[https://www.bilibili.com/video/av51931842](https://www.bilibili.com/video/av51931842)  
 
-[[toc]]
 
 ## 管理端
->工具安装及环境搭建：(node.js、npm、mongodb)
-
+>工具安装及环境搭建：(node.js、npm、mongodb、vue-cli)
+vue-cli只安装router+bable+eslint，其他自行按需安装.
 ```
+$ mkdir server
 $ npm i -g nodeman
+$ npm i init 
 ```
 package.json的script中添加一个自定义的指令
 ```
@@ -46,11 +47,18 @@ package.json的script中添加一个自定义的指令
 19. 登录接口
 20. 服务端登陆验证
 21. 客户端路由限制
+### 更新vue-cli
 
+```
+$ npm uninstall -g vue-cli
+$ npm install -g @vue/cli
+```
 ### 基于ELEMENT UI
 ``` bash
-vue add element 
+$ vue add element 
 ```
+初始项目尽量简洁。  
+>tips：重写scss设置为No。
 ### 管理后台搭建
 
 ```
@@ -64,10 +72,11 @@ children:[
 ```
 
 ```
-cd server
-npm i express@next
-npm i mongoose
-npm i cors
+$ cd server
+$ npm i express@next
+$ npm i mongoose
+// 跨域请求
+$ npm i cors
 ```
 #### 数据请求
 前端的`baseURL`要与后端的相对应
@@ -117,7 +126,9 @@ module.exports = app => {
 const express = require("express")
 
 const app = express()
+// 允许跨域请求
 app.use(require('cors')())
+// 允许处理json格式的数据
 app.use(express.json())
 require("./plugins/db")(app)
 require("./routes/admin")(app)
@@ -137,7 +148,97 @@ module.exports = app => {
 }
 ```
 
+### 登陆验证
+客户端通过login拿到token
+```
+async login() {
+      const res = await this.$http.post("user/login", this.model);
+
+      // 将返回的token赋值给localStorage，并跳转回首页
+       localStorage.token = res.data.token;
+        
+      this.$message({
+        type: "success",
+        message: "登陆成功"
+      });
+      this.$router.push("/");
+    },
+```
+服务端路由
+```
+  router.post("/user/login", async (req, res) => {
+        //拿到用户名和密码
+         const { username, password } = req.body
+         const user = await User.findOne({
+            username: username
+        }).select("+password")
+
+        // 查询用户是否存在
+        assert(user, 422, "用户不存在")
+
+        // 密匙对比
+        const isValid = require("bcrypt").compareSync(password, user.password)
+        
+        assert(isValid, 422, '密码错误')
+
+        // token签名
+        const token = jwt.sign({
+            id:user._id,
+
+        },app.get("secret"))
+
+        res.send({token})
+    })
+```
+
+
 ### 一些知识点
+#### 聚合查询
+```
+router.get("/category/:id",async(req,res)=>{
+           
+          const model = await Category.aggregate([
+            // 匹配Category中name字段
+            {$match:{name:req.params.id}},
+            {
+            // 从website集合中查询，category是wensite中的外键，通过category把website查询出来
+                $lookup: {
+                    from: "website",
+                    localField: "_id",
+                    foreignField: "category",
+                    as: "websitelist"
+                }
+            }
+        ])  
+            res.send(model)
+    })
+```
+#### 模板字符串
+
+```
+//地址拼接
+<template slot-scope="scope">
+          <a :href="`https:\\`+scope.row.link" target="blank">https://{{scope.row.link}}</a>
+        </template>
+```
+
+#### 图片的上传与获取
+
+管理端写法
+
+```
+//图片上传
+    const multer = require("multer")
+    const upload = multer({ dest: __dirname + "/../../uploads" })
+    router.post("/upload", upload.single("file"), async (req, res) => {
+        // 拿到上传的file文件后，给file添加一个属性，url，在返回给客户端展示出来
+        const file = req.file
+        file.url = `http://localhost:3000/admin/api/uploads/${file.filename}`
+        res.send(file)
+    })
+
+
+```
 
 #### eslint报错
 解决`eslint`未使用变量报错的情况[^1],在`package.json`的`eslintConfig`中的`rule`里添加下面的代码，其中的数字1表示警告，如果改成0表示忽略，2表示error。  
@@ -170,7 +271,7 @@ npm i multer inflection
 ``` 
 npm i jsonwebtoken
 ```
-#### 判断条件是否满足
+#### 断言
 
 ``` 
 npm i http-assert
@@ -515,6 +616,10 @@ $$('.news_list .title').map(el=>el.innerHTML)
 ```
 npm i require-all
 ```
+用法
+``` bash 
+require("require-all")(__dirname+"/../models")
+```
 #### 点击跳转到某个子分类
 ```
 @click="$refs.list.swiper.slideTo(i)"
@@ -523,7 +628,7 @@ npm i require-all
 ...
 <swiper>
 ```
-### server中的前端路由(懵逼)
+### server中的前端路由
 ```
 //前端路由
 module.exports = app => {
@@ -631,10 +736,81 @@ $$(".hero-nav >li").map((li,i)=>{
 })
 ```
 将上面的代码放入`json.stringify(...)`可以将数据转化为json格式
+当我们`npm i`的时候，可能会出现`Unexpected end of JSON input while parsing near`的错误，解决办法：
+- 清除缓存
+```
+npm cache clean --force 
+```
+- 重新安装
+```
+npm i
+```
+
+
 ## 发布和部署
+### 准备工作
+
+```
+$ npm i -g serve
+$ serve dist
+```
+需要更改baseURL地址
+```
+ baseURL: process.env.VUE_APP_API_URL || "/admin/api"
+```
+修改输出的目录，参考[https://cli.vuejs.org/config/#publicpath](https://cli.vuejs.org/config/#publicpath)
+在vue.config.js中添加下列代码。
+```
+module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/production-sub-path/'
+    : '/'
+}
+```
+### 服务器环境搭建
+以ubunto服务器为例
+```
+ # apt update
+ # apt install -y nginx
+ # apt install -y mongodb-server
+ # apt install -y git
+ # apt install -y node.js
+ # apt install -y npm
+ // 设置淘宝镜像源
+ # npm config set registry https://registry.npm.taobao.org
+ // 镜像管理器
+ # npm install -y -g nrm 
+ # nrm use taobao
+// 升级node的包
+ # npm install -y -g n
+ # n lts // 安装长期支持版本
+ # ssh-keygen
+ # cat /root/.ssh/id_rsa.pub
+ # {
+ # git init 
+ # git add 
+ # git commit -am "首次提交"
+ # }
+ # cd ~
+ # mkdir /data
+ # git clone
+ # cd server
+ # npm i 
+ # npm i pm2
+ # pm2 start index.js
+ # pm2 delete all 
+ # curl http://localhost:3000
+ # service nginx reload
+```
+
+ ### 配置nginx反向代理
+插件 remote-ssh配置[^3]
+[https://nginxconfig.io/](https://nginxconfig.io/)
+
 
 
 
 
 [^1]:https://blog.csdn.net/qq_33712668/article/details/97244254
 [^2]:https://www.swiper.com.cn/api/autoplay/16.html
+[^3]:https://blog.csdn.net/sixdaycoder/article/details/89850064

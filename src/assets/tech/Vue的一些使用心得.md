@@ -138,5 +138,17 @@ configureWebpack: {
 用audit测试一下网页的性能，
 ![测试结果](https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191023171640.png)
 
+### router.beforeEach
+简单实现一个页面的重定向
+```
+//强制到homepage页面
+router.beforeEach((to,from,next)=>{
+ 
+  if(to.path==="/" && localStorage.token){
+    return next("/homepage")
+  }
+  next()
+})
+```
 
   [^1]: 来源： [https://www.bootcdn.cn/](https://www.bootcdn.cn/)

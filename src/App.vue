@@ -60,6 +60,13 @@ export default {
 
 
 <style lang="less">
+li>a{
+  text-decoration: none;
+  &:hover{
+      color:blue;
+  }
+}
+
 @color-bg: #1a1a1a;
 
 @color-contrast-high: rgb(229, 229, 229);

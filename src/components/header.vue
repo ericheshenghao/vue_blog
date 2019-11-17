@@ -4,7 +4,7 @@
     class="box11 shadow"
   >
     <router-link to="/" style="text-decoration-line: none">
-      <div class="brand">Mosaic</div>
+      <div class="brand ">Mosaic</div>
       <!-- <span style="color:white;font-family: Dancing Script, serif;font-size:10px;letter-spacing: 2px;">Valar Morghulis</span> -->
     </router-link>
     <i class="el-icon-chat-dot-round" style="color:white;"></i>

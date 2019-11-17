@@ -48,10 +48,14 @@ module.exports = {
               permalinkSpace: true,
             }
           ],
-          [require("markdown-it-footnote")],
-          [require("markdown-it-table-of-contents"),{
+          [require("markdown-it-table-of-contents"),
+          {
+            includeLevel:[2, 3],
+            forceFullToc:true,
             slugify:slugify
-          }],
+          }
+        ],
+          [require("markdown-it-footnote")],
         ]
       })
   }
