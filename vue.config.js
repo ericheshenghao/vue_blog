@@ -7,21 +7,21 @@ module.exports = {
       'highlight':'highlight',
     }
   },
-  pwa: {
-    name: 'Mosaic',
-    themeColor: '#FFFFFF',
-    msTileColor: '#FFFFFF',
-    appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: '#FFFFFF',
+  // pwa: {
+  //   name: 'Mosaic',
+  //   themeColor: '#FFFFFF',
+  //   msTileColor: '#FFFFFF',
+  //   appleMobileWebAppCapable: 'yes',
+  //   appleMobileWebAppStatusBarStyle: '#FFFFFF',
 
-    // configure the workbox plugin
-    workboxPluginMode: 'GenerateSW',
-    workboxOptions: {
-      // swSrc is required in InjectManifest mode.
-      // swSrc: 'dev/service-worker.js',
-      // ...other Workbox options...
-    }
-  },
+  //   // configure the workbox plugin
+  //   workboxPluginMode: 'GenerateSW',
+  //   workboxOptions: {
+  //     // swSrc is required in InjectManifest mode.
+  //     // swSrc: 'dev/service-worker.js',
+  //     // ...other Workbox options...
+  //   }
+  // },
   devServer: {
     disableHostCheck: true
   },

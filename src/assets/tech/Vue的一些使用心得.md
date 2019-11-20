@@ -59,29 +59,40 @@ library.add(fas,fab)
 // brand的标签引入
 <font-awesome-icon :icon="['fab', 'qq']" class="share__icon share__icon--facebook" />
 ```
-## vue解决跨域问题
-在vue.config.js中写入代理网址。
-``` javascript{4,7}
- devServer: {
-    proxy: { // 配置如下代码
-      '/api': {
-        target:'https://api.jisuapi.com/jieqi/query?appkey=4867c88bc726b526&year=', // 你请求的第三方接口
-        changeOrigin:true, // 在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
-        pathRewrite:{  // 路径重写，
-          '^/api': ''  // 替换target中的请求地址，也就是说以后你在请求https://xxxxxx/dictionary/data_dictionary_front.json这个地址的时候直接写成/api即可。
-        }
-      }
-},
+## router-link传参(敲黑板)
+通过to来传递
 ```
-在页面中去请求数据，例如
-``` javascript
-fuction() {
-      axios.get("/api").then(res => {
-        this.name = res.data.result.now.name; 
-      });
-    }
+<router-link :to="{name:'bloglist',params:{name:'life'}}">
 ```
+// 前面的`name`对应的是`router`中的`name`的值,后面是自己定义的传递的参数，这样我们就可以给同一个页面传递不同的参数了。
 
+这种方式导致后面又遇到页面刷新`this.$route.params.xxx`刷新丢失的情况，解决方法也很简单，将路由修改成下面这样，就是让路径也带上参数。
+```
+{
+      path: '/bloglist/:name',
+      name: 'bloglist',
+
+      component: () => import('./views/BlogListTech.vue')
+    },
+```
+动态的修改一些数据
+```
+  data() {
+    return {
+      lifelist,
+      bloglist,
+      //切换分类
+      list:this.cat()? bloglist:lifelist,
+      tech:"tech",
+
+    };
+  },
+  methods:{
+    cat(){
+       return this.$route.params.name=="tech"?true:false 
+     },
+  }
+```
 ## Vue引入CDN优化首页访问速度
 
 ### 配置vue config js

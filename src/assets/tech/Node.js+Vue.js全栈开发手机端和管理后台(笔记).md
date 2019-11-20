@@ -331,7 +331,14 @@ body{
 	line-height: 1.2em;
 	background: #f1f1f1;
 }
-
+// 按钮样式重置
+button{
+border: 0;
+ 
+background-color: transparent;
+ 
+outline: none;
+}
 a{
     color:#999;
 }

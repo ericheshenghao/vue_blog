@@ -2,13 +2,14 @@
 import App from './App.vue'
 import router from './router'
 // import ElementUI from 'element-ui';
+import LikeButton from "./components/LikeButton"
 
-// import 'element-ui/lib/theme-chalk/index.css';
 // import './registerServiceWorker'
 import './plugins/element.js'
 
 import "./shake.scss"
 Vue.config.productionTip = false
+Vue.component("like-button",LikeButton)
 // Vue.use(ElementUI);
 
 

@@ -22,19 +22,14 @@ export default new Router({
       path: '/post/:name',
       name: 'post',
 
-      component: () => import('./views/Post.vue')
+      component: () => import('./views/Post.vue'),props:true
     },
     {
-      path: '/techlist',
-      name: 'techlist',
+      path: '/bloglist/:name',
+      name: 'bloglist',
 
       component: () => import('./views/BlogListTech.vue')
     },
-    {
-      path: '/lifelist',
-      name: 'lifelist',
-
-      component: () => import('./views/BlogListLife.vue')
-    },
+  
   ]
 })

@@ -1,12 +1,12 @@
 <template>
   <div class="main">
-    <h1 >Tech</h1>
+    <h1 >{{cat()?"Tech":"Life"}}</h1>
     <div style="display:flex;flex-direction:row;justify-content: space-between;align-items: center;">
     <h2 style="font-family:Cinzel Decorative;padding-left:7px;">2019</h2>
     <i class="fa fa-bath" style="padding: 15px 7px 0 0;"></i>
     </div> 
     <ul class="list-ul">
-      <li v-for="(blog) in bloglist" :key="blog.timestamp" class="list-item">
+      <li v-for="(blog) in list" :key="blog.timestamp" class="list-item">
         <router-link
           :to="{name:'post',params:{name:blog.content,list:tech}}"
           class="list-item-title"
@@ -18,15 +18,30 @@
 
 <script>
 import {bloglist} from "@/bloglist";
+import {lifelist} from "@/bloglist";
 
 export default {
+  computed:{
+     
+     
+  },
   created() {
+
+    
   },
   data() {
     return {
+      lifelist,
       bloglist,
-      tech:"tech" 
+      list:this.cat()? bloglist:lifelist,
+      tech:"tech",
+
     };
+  },
+  methods:{
+    cat(){
+       return this.$route.params.name=="tech"?true:false 
+     },
   }
 };
 </script>

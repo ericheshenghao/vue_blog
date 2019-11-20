@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="padding-top:0px;">
-      <router-link to="/lifelist">
+      <router-link :to="{name:'bloglist',params:{name:'life'}}">
       
           <el-badge :value='lifelen' class="item1" type="primary">
             <el-button size="small" type="text" style="font-size:15px;font-family:Dancing Script, serif">Life</el-button>
@@ -9,7 +9,7 @@
 
       </router-link>
 
-      <router-link to="/techlist">
+      <router-link :to="{name:'bloglist',params:{name:'tech'}}">
        
         <el-badge :value='techlen' class="item2">
           <el-button size="small" type="text" style="margin-top:2px;font-size:15px;font-family:Dancing Script, serif">Tech</el-button>
