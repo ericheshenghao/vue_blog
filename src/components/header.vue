@@ -5,7 +5,7 @@
     <div class="inner-header flex">
       <!--Just the logo.. Don't mind this-->
       
-      <router-link to="/" style="text-decoration-line: none">
+      <router-link tag="div" to="/" style="text-decoration-line: none">
       <h1 style="color:white;">Mosaic</h1>
         </router-link>
     <i class="el-icon-chat-dot-round" style="color:white;"></i>

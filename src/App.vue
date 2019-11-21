@@ -63,7 +63,7 @@ export default {
 li>a{
   text-decoration: none;
   &:hover{
-      color:blue;
+      color:#409eff;
   }
 }
 

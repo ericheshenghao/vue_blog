@@ -11,13 +11,14 @@
       <!-- <div class="num">{{percentage}}</div> -->
       <article class="main-inner">
         <mymarkdown :is="root"></mymarkdown>
+        <div >
+            <like-button :path="this.path"></like-button>
+          </div>
         <div class="footer" style="display: flex;justify-content: space-between;">
           <div>
             #
           </div>
-          <div>
-            <like-button :path="this.path"></like-button>
-          </div>
+          
           <div>
             <router-link :to="{name:'bloglist',params:{name:'tech'}}">Tech</router-link>|
             <span>

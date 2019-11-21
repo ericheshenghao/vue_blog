@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div style="text-align:center;padding-top:3.5em">
     <button
       style="border: 0;background-color: transparent;outline: none;"
       v-on:click="btclick"
@@ -216,7 +216,7 @@ export default {
 
 <style>
 .paw-button {
-  --background: #fff;
+  --background:transparent;
   /* --background-active: #fee8f4; */
   /* --border: #f1eceb; */
   /* --border-active: #eec2db; */
