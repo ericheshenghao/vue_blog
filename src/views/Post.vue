@@ -11,7 +11,9 @@
       <!-- <div class="num">{{percentage}}</div> -->
       <article class="main-inner">
         <mymarkdown :is="root"></mymarkdown>
+          
         <div >
+        
             <like-button :path="this.path"></like-button>
           </div>
         <div class="footer" style="display: flex;justify-content: space-between;">
@@ -131,17 +133,19 @@ $(document).ready(function() {
   $(document).scroll(function() {
     //开始监听滚动条
     //获取当前滚动条高度
+    
+    var max = $(document).height();
+    var top = $(document).scrollTop();
+    var viewH = $(window).height();
+
     if (
-      document.body.scrollTop > 100 ||
-      document.documentElement.scrollTop > 100
+      document.body.scrollTop > (max-viewH)-400 ||
+      document.documentElement.scrollTop > (max-viewH)-400
     ) {
       $("#backbt").show();
     } else {
       $("#backbt").hide();
     }
-    var max = $(document).height();
-    var top = $(document).scrollTop();
-    var viewH = $(window).height();
     //用于调试 弹出当前滚动条高度
     var percentage = (top / (max - viewH)) * 100 + "%";
     $(".el-progress-bar__inner").css("width", percentage);
@@ -291,12 +295,17 @@ export default {
 .backtop {
   display: none;
   position: fixed;
-  top: 95%;
-  right: 2%;
+  width: 42px;
+  height: 42px;
+  top: 92%;
+  right: 4%;
   font-size: 20px;
   background-color: rgba(0, 0, 0, 0);
-  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  border:transparent;
   transition: all 0.5s ease;
+  background-color: white;
 
   &:hover {
     cursor: pointer;

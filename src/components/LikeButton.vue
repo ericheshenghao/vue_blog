@@ -1,5 +1,8 @@
 <template>
   <div style="text-align:center;padding-top:3.5em">
+    <div>
+    若有收获，就点个👍吧
+    </div>
     <button
       style="border: 0;background-color: transparent;outline: none;"
       v-on:click="btclick"
