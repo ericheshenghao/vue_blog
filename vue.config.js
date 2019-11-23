@@ -1,31 +1,19 @@
 const slugify = require("transliteration").slugify;
 module.exports = {
-  configureWebpack: {
+  configureWebpack:
+  {
     externals: {
       'vue': 'Vue',
       'vue-router': 'VueRouter',
-      'highlight':'highlight',
-    }
+      'highlight': 'highlight',
+    },
   },
-  // pwa: {
-  //   name: 'Mosaic',
-  //   themeColor: '#FFFFFF',
-  //   msTileColor: '#FFFFFF',
-  //   appleMobileWebAppCapable: 'yes',
-  //   appleMobileWebAppStatusBarStyle: '#FFFFFF',
-
-  //   // configure the workbox plugin
-  //   workboxPluginMode: 'GenerateSW',
-  //   workboxOptions: {
-  //     // swSrc is required in InjectManifest mode.
-  //     // swSrc: 'dev/service-worker.js',
-  //     // ...other Workbox options...
-  //   }
-  // },
   devServer: {
     disableHostCheck: true
   },
+
   chainWebpack: config => {
+
     config.module.rule('md')
       .test(/\.md/)
       .use('vue-loader')
@@ -50,13 +38,13 @@ module.exports = {
           ],
           [require("markdown-it-table-of-contents"),
           {
-            includeLevel:[2, 3],
-            forceFullToc:true,
-            slugify:slugify
+            includeLevel: [2, 3],
+            forceFullToc: true,
+            slugify: slugify
           }
-        ],
+          ],
           [require("markdown-it-footnote")],
         ]
       })
-  }
+  },
 }

@@ -11,16 +11,13 @@
       <!-- <div class="num">{{percentage}}</div> -->
       <article class="main-inner">
         <mymarkdown :is="root"></mymarkdown>
-          
-        <div >
-        
-            <like-button :path="this.path"></like-button>
-          </div>
+
+        <div>
+          <like-button :path="this.path"></like-button>
+        </div>
         <div class="footer" style="display: flex;justify-content: space-between;">
-          <div>
-            #
-          </div>
-          
+          <div>#</div>
+
           <div>
             <router-link :to="{name:'bloglist',params:{name:'tech'}}">Tech</router-link>|
             <span>
@@ -50,6 +47,7 @@
   </div>
 </template>
 <script>
+
 import FootInner from "@/components/FootInner.vue";
 import { bloglist, techlen, lifelist, lifelen } from "@/bloglist";
 import moduleStore from "@/bloglist";
@@ -133,14 +131,14 @@ $(document).ready(function() {
   $(document).scroll(function() {
     //开始监听滚动条
     //获取当前滚动条高度
-    
+
     var max = $(document).height();
     var top = $(document).scrollTop();
     var viewH = $(window).height();
 
     if (
-      document.body.scrollTop > (max-viewH)-400 ||
-      document.documentElement.scrollTop > (max-viewH)-400
+      document.body.scrollTop > max - viewH - 400 ||
+      document.documentElement.scrollTop > max - viewH - 400
     ) {
       $("#backbt").show();
     } else {
@@ -153,6 +151,21 @@ $(document).ready(function() {
 });
 
 export default {
+  // 添加title 写到方法里面
+  metaInfo() {
+    return {
+      title: this.$route.params.name?this.$route.params.name:"Mosaic",
+      titleTemplate: "%s - Yay!",
+      meta:[{
+        name:"keyWords",
+        content: this.$route.params.name
+      }],
+      htmlAttrs: {
+        lang: "en",
+        amp: true
+      }
+    };
+  },
   components: moduleStore,
   watch: {},
 
@@ -176,6 +189,7 @@ export default {
   },
 
   created() {
+
     this.createValine();
     if (this.list == "tech") {
       for (var i in bloglist) {
@@ -302,8 +316,8 @@ export default {
   font-size: 20px;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,.15);
-  border:transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: transparent;
   transition: all 0.5s ease;
   background-color: white;
 

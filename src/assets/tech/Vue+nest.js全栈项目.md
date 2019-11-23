@@ -53,3 +53,21 @@ $ npm i @nestjs/swagger swagger-ui-express
 npm i @types/axios
 ```
 ## 使用Crud装饰器快速实现增删查改接口
+query查询参数
+{"limit":1,"page":2}
+倒序查询
+{"sort":{"_id":-1}}
+只查询名称为1112的数据
+{"where":{"name":"1112"}}
+模糊查询，正则表达式查询
+{"where":{"name":{"$regex":"f"}}}
+前端query限制查到的数据为2条，并且将total总数量返回
+async fetch() {
+    const res = await this.$http.get(`${this.resource}`,{
+      params:{
+        query:this.query
+      }
+    });
+    this.page.total=res.data.total
+    this.data = res.data;
+  }
