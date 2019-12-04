@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app" v-bind:class="{ 'active': theme}">
-    <myheader></myheader>
+    <myheader :theme="theme"></myheader>
 
     <div id="content" style="display:flow-root;min-height:85.8vh;">
       <!-- 按钮 -->
@@ -12,7 +12,7 @@
       <sidebar></sidebar>
 
       <!-- 这部分为路由，切换页面会变化 -->
-
+      <nav-button></nav-button>
       <router-view :key="$router.path"/>
 
       <!-- 这部分为路由，切换页面会变化 -->

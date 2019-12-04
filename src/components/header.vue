@@ -3,13 +3,13 @@
     <!--Content before waves-->
     <div class="inner-header flex">
       <!--Just the logo.. Don't mind this-->
-      <el-tooltip class="item" effect="dark" content="Take me HOME" placement="bottom">
+      <!-- <el-tooltip class="item" effect="light" content="Take me HOME"  placement="bottom"> -->
         <router-link tag="div" to="/" style="text-decoration-line: none">
         
           <h1 style="color:white;padding-left:30px;">Mosaic</h1>
          
         </router-link>
-     </el-tooltip>
+     <!-- </el-tooltip> -->
       <i class="el-icon-chat-dot-round" style="color:white;"></i>
     </div>
 
@@ -29,18 +29,28 @@
             d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
           />
         </defs>
-        <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+        <g  v-if="!theme" class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
           <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
           <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
           <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+        </g>
+        <g v-if="theme" class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(0,0,0,0.7)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(0,0,0,0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(0,0,0,0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#1a1a1a" />
         </g>
       </svg>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props:{
+    theme:""
+  }
+};
 </script>
 <style lang="less" scoped>
 h1 {

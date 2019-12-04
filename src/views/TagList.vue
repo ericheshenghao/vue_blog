@@ -1,32 +1,32 @@
 <template>
-  <div class="about" style="margin-top:5em">
+  <div class="about" style="padding:2em 0 0 0">
     <div > 
       <h1>Tag</h1>
       
-    <block v-for="(item,index) in taglist" :key="index">
-      <el-badge :value="2" class="item" type="message" style="margin-left:12px;margin-right:12px;">
+    <span v-for="(item,index) in taglist" :key="index">
+      <el-badge :value="taglen(item)" class="item" type="primary" style="margin-left:12px;margin-right:12px;">
         <el-button size="small" @click="tolist(item.type)">{{item.type==""?"review":item.type}}</el-button>
       </el-badge>
-    </block>
+    </span>
     </div>
   </div>
 </template>
 <script>
 import { taglist } from "../bloglist";
 export default {
-  data() {
+  data(){
     return {
       taglist: taglist
     };
   },
-  computed(){
-    length:{
-
-    }
+  computed:{
   },
   methods: {
     tolist(type) {
       this.$router.push(`bloglist/${type}`)
+    },
+    taglen(item){
+      return item.title.length
     }
   }
 };
