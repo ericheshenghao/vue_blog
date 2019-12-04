@@ -28,8 +28,16 @@ export default new Router({
       path: '/bloglist/:name',
       name: 'bloglist',
 
-      component: () => import('./views/BlogListTech.vue')
+      component: () => import('./views/BlogList.vue'),
+      props:true
+    },
+    {
+      path: '/taglist',
+      name: 'taglist',
+      component: () => import('./views/TagList.vue'),
+      
     },
   
-  ]
+  ],
+ 
 })

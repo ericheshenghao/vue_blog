@@ -1,9 +1,16 @@
-# Vue+Leancloud快速搭建点赞模块
+---
+title: Vue+Leancloud快速搭建点赞组件
+date: '2019-10-25'
+type: tech
+tags: vue|leancloud
+note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
+---
+
 静态博客想拥有后端服务器提供的功能，但是又不想自己再重新搭建一个服务器。因为不管是<mark>时间</mark>还是<mark>金钱</mark>成本相对来说都太高了，而且大多数时候自己想要的也只是一些简单的功能而已，所以在这里记录一下利用`leancloud`来储存博客点赞数的实现方法。
 
 ## 点击事件
 首先当然我们要有一个按钮啦，然后写一个非常简单的点击事件，大概就是长这样
-```{3}
+```html{3}
 <button
       style="border: 0;background-color: transparent;outline: none;"
       v-on:click="btclick"
@@ -13,9 +20,9 @@
     </button>
 ```
 所以对应的下面有一个`btclick`的方法👇
-```
+``` js
 btclick() {
-    ..
+    ...
 }
 ```
 
@@ -25,10 +32,10 @@ btclick() {
 
 ### 新建类
 这里是我自己之前已经创建好的一个系统，在最后面我添加了一个名为`Like`的类
-![创建类](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/11/20/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191120004518.png)
+![创建类](https://eric-he.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191120004518.png)
 
 在`Like`类里，我分别添加了`url`以及`count`字段用来储存必要的信息
-![字段信息](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/11/20/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191120005129.png)
+![字段信息](https://eric-he.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191120005129.png)
 
 ### 请求代码
 如果web端没有安装leancloud的话，需要先npm安装一下
@@ -83,8 +90,8 @@ AV.init({
           }
         });
 ```
-```
-//监听path的变化，然后更新
+``` js
+// 监听path的变化，然后更新
 watch: {
     path: "fetchcount"
   },

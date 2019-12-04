@@ -1,4 +1,6 @@
 const slugify = require("transliteration").slugify;
+const Mode = require('frontmatter-markdown-loader/mode')
+const markdownIt = require('markdown-it');
 module.exports = {
   configureWebpack:
   {
@@ -14,37 +16,30 @@ module.exports = {
 
   chainWebpack: config => {
 
-    config.module.rule('md')
+    config.module.rule('markdown')
       .test(/\.md/)
-      .use('vue-loader')
-      .loader('vue-loader')
-      .end()
-      .use('vue-markdown-loader')
-      .loader('vue-markdown-loader/lib/markdown-compiler')
-      .options({
-        raw: true,
-        use: [
-          // 标题锚点
-          [
-            require("markdown-it-anchor"),
-            {
-              level: 2, // 添加超链接锚点的最小标题级别, 如: #标题 不会添加锚点
-              slugify: slugify, // 自定义slugify, 我们使用的是将中文转为汉语拼音,最终生成为标题id属性
-              permalink: true, // 开启标题锚点功能
-              permalinkBefore: true, // 在标题前创建锚点
-              permalinkSymbol: "#",
-              permalinkSpace: true,
-            }
-          ],
-          [require("markdown-it-table-of-contents"),
-          {
-            includeLevel: [2, 3],
-            forceFullToc: true,
-            slugify: slugify
-          }
-          ],
-          [require("markdown-it-footnote")],
-        ]
+      
+      .use('frontmatter-markdown-loader')
+      .loader('frontmatter-markdown-loader').tap(options => {
+       
+        return {
+          markdownIt: markdownIt({ html: true }).use(require("markdown-it-anchor"),
+                {
+                  level: 2, // 添加超链接锚点的最小标题级别, 如: #标题 不会添加锚点
+                  slugify: slugify, // 自定义slugify, 我们使用的是将中文转为汉语拼音,最终生成为标题id属性
+                  permalink: true, // 开启标题锚点功能
+                  permalinkBefore: true, // 在标题前创建锚点
+                  permalinkSymbol: "#",
+                  permalinkSpace: true,
+                }).use(require("markdown-it-table-of-contents"),
+                    {
+                      includeLevel: [2, 3],
+                      forceFullToc: true,
+                      slugify: slugify
+                    }).use(require("markdown-it-footnote")),
+          mode: [Mode.VUE_COMPONENT]
+        }
       })
+
   },
 }

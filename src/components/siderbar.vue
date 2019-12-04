@@ -30,11 +30,15 @@
       </span>
       <br />
 
+      
+
       <div
         style="line-height:2em;display:flex;justify-content:center;padding-top:0.5em;flex-direction:column;"
       >
-        <!-- <div>何先森</div> -->
-        <div class="motto">保持清醒，保持愚钝</div>
+        
+        <div>何先森</div>
+        <div class="motto" style="padding-bottom:10px">保持清醒，保持愚钝</div>
+        <i class="el-icon-location" style="color:gray"> China</i>
         
       </div>
       <div class="iconlist">

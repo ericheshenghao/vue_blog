@@ -13,7 +13,7 @@
 
       <!-- 这部分为路由，切换页面会变化 -->
 
-      <router-view />
+      <router-view :key="$router.path"/>
 
       <!-- 这部分为路由，切换页面会变化 -->
     </div>
@@ -60,6 +60,9 @@ export default {
 
 
 <style lang="less">
+table {
+  background-color: snow;
+}
 li>a{
   text-decoration: none;
   &:hover{
@@ -266,6 +269,10 @@ h4:hover {
   width: 6px;
 
   height: 5px;
+  @media (max-width:36em) {
+     width: 6px;
+     height: 0px;
+  }
 }
 
 ::-webkit-scrollbar-thumb {
@@ -342,7 +349,7 @@ mark {
   text-emphasis-position: under left;
 }
 code {
-  font-family: Consolas;
+  font-family: Source Code Pro;
 }
 
 //行内代码块
@@ -381,7 +388,6 @@ p code {
 
   color: #ffffff !important;
 
-  
 
   padding: 0.5em 0 !important;
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.7);
@@ -400,9 +406,25 @@ p code {
   }
 }
 
+
+
+.hljs-comment, .hljs-quote{
+  color:#9ea2aa!important;
+}
+
 .hljs ul li:nth-of-type(2n) {
   background-color: rgba(255, 255, 255, 0.015);
 }
+
+table{
+word-break: break-all; 
+word-wrap:break-word;
+width: 100%;
+  @media (max-width: 36em) {
+    width: auto;
+  }
+}
+
 .table-of-contents{
   // position:sticky;
   // top:0;

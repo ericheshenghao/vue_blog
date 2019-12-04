@@ -1,4 +1,11 @@
-# 科研与 Dream 之间的距离
+---
+title: 科研与 Dream 之间的距离
+date: '2019-9-22'
+type: life
+tags: research
+note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
+---
+
 ![攝影師： Jeremy Bishop  ](https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/20/de177367f81ecadca51b3b2b42de38a6.jpg)
 
 ## 生活不易，且行且珍惜

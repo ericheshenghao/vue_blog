@@ -1,5 +1,10 @@
-# 优雅的自定义博客的主题样式(Vue向)
-
+---
+title: 优雅的自定义博客的主题样式(Vue向)
+date: '2019-11-01'
+type: tech
+tags: js|vue
+note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
+---
 
 
 初次看到😮[reuixiy的博客](https://io-oi.me/tech/redesign-this-blog-under-minimalism/)的布局，就被它的极简风格深深吸引，不管是页面的细节处理，还是博文的内容，都给人一种赏心悦目的感受，于是下定决心将博客美化进行到底，在此记录一下自己简陋的博客的美化过程，共勉。

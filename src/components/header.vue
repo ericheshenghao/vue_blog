@@ -1,14 +1,16 @@
 <template>
-
   <div class="header">
     <!--Content before waves-->
     <div class="inner-header flex">
       <!--Just the logo.. Don't mind this-->
-      
-      <router-link tag="div" to="/" style="text-decoration-line: none">
-      <h1 style="color:white;">Mosaic</h1>
+      <el-tooltip class="item" effect="dark" content="Take me HOME" placement="bottom">
+        <router-link tag="div" to="/" style="text-decoration-line: none">
+        
+          <h1 style="color:white;padding-left:30px;">Mosaic</h1>
+         
         </router-link>
-    <i class="el-icon-chat-dot-round" style="color:white;"></i>
+     </el-tooltip>
+      <i class="el-icon-chat-dot-round" style="color:white;"></i>
     </div>
 
     <!--Waves Container-->
@@ -41,39 +43,40 @@
 export default {};
 </script>
 <style lang="less" scoped>
-
-
-
 h1 {
   font-family: "Dancing Script", serif;
-  font-weight:300;
+  font-weight: 300;
   letter-spacing: 2px;
-  font-size:70px;
+  font-size: 70px;
 }
-
 
 .header {
-  position:relative;
-  text-align:center;
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
-  color:white;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(
+    60deg,
+    rgba(84, 58, 183, 1) 0%,
+    rgba(0, 172, 193, 1) 100%
+  );
+  color: white;
 }
 .logo {
-  width:50px;
-  fill:white;
-  padding-right:15px;
-  display:inline-block;
+  width: 50px;
+  fill: white;
+  padding-right: 15px;
+  display: inline-block;
   vertical-align: middle;
 }
 
 .inner-header {
-  height:10.2vh;
-  width:100%;
+  height: 10.2vh;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
-.flex { /*Flexbox for containers*/
+.flex {
+  /*Flexbox for containers*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,25 +84,25 @@ h1 {
 }
 
 .waves {
-  position:relative;
+  position: relative;
   width: 100%;
-  height:15vh;
-  margin-bottom:-7px; /*Fix for safari gap*/
-  min-height:100px;
-  max-height:150px;
+  height: 15vh;
+  margin-bottom: -7px; /*Fix for safari gap*/
+  min-height: 100px;
+  max-height: 150px;
 }
 
 .content {
-  position:relative;
-  height:20vh;
-  text-align:center;
+  position: relative;
+  height: 20vh;
+  text-align: center;
   background-color: white;
 }
 
 /* Animation */
 
 .parallax > use {
-  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 }
 .parallax > use:nth-child(1) {
   animation-delay: -2s;
@@ -119,25 +122,23 @@ h1 {
 }
 @keyframes move-forever {
   0% {
-   transform: translate3d(-90px,0,0);
+    transform: translate3d(-90px, 0, 0);
   }
-  100% { 
-    transform: translate3d(85px,0,0);
+  100% {
+    transform: translate3d(85px, 0, 0);
   }
 }
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
   .waves {
-    height:40px;
-    min-height:40px;
+    height: 40px;
+    min-height: 40px;
   }
   .content {
-    height:30vh;
+    height: 30vh;
   }
   h1 {
-    font-size:60px;
+    font-size: 60px;
   }
 }
-
-
 </style>

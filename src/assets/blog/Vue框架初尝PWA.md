@@ -1,4 +1,11 @@
-# Vue框架初尝PWA
+---
+title: Vue框架初尝PWA
+date: '2019-10-21'
+type: tech
+tags: vue
+note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
+---
+
 PWA(Progress Web App)，即<mark>渐进式WEB应用</mark>[^1]。在第一次生成web页面之后，后续用户即可通过加载cache来实现页面的光速渲染，而且有利于提高用户的留存度。因此配置一个PWA应用就灰常重要了，前端小白瞎捣鼓开始👺。
 ## 给已有的应用添加PWA
 首先，在项目根目录输入以下指令。

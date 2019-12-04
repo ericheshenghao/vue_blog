@@ -10,14 +10,19 @@
     <div class="main">
       <!-- <div class="num">{{percentage}}</div> -->
       <article class="main-inner">
-        <mymarkdown :is="root"></mymarkdown>
+        <h1 style="padding-bottom:1em">{{title}}</h1>
+        <component :is="dynamicComponent" />
 
         <div>
           <like-button :path="this.path"></like-button>
         </div>
         <div class="footer" style="display: flex;justify-content: space-between;">
-          <div>#</div>
-
+          <div>
+            <router-link v-for="(item,index) in tag" :key="index" :to="`/bloglist/${item}`">
+              <i class="el-icon-s-promotion"></i> {{item}}
+              
+            </router-link>
+          </div>
           <div>
             <router-link :to="{name:'bloglist',params:{name:'tech'}}">Tech</router-link>|
             <span>
@@ -28,15 +33,14 @@
 
         <div class="post-nav">
           <!-- 左右切换按钮 -->
-          <el-button type="text" icon="el-icon-arrow-left" @click="lastpost">{{lastname}}</el-button>
+          <el-button type="text" icon="el-icon-arrow-left" @click="lastpost">Last</el-button>
 
           <el-button type="text" icon="el-icon-arrow-right" @click="nextpost">
-            <span style="float: left;padding-right: 3px;">{{nextname}}</span>
+            <span style="float: left;padding-right: 3px;">Next</span>
           </el-button>
           <!-- 左右切换按钮 -->
         </div>
       </article>
-
       <div id="vcomments"></div>
       <FootInner></FootInner>
       <!-- <el-backtop type="text"></el-backtop> -->
@@ -46,11 +50,11 @@
     </div>
   </div>
 </template>
-<script>
 
+<script>
 import FootInner from "@/components/FootInner.vue";
 import { bloglist, techlen, lifelist, lifelen } from "@/bloglist";
-import moduleStore from "@/bloglist";
+// import moduleStore from "@/bloglist";
 import mediumZoom from "medium-zoom";
 // window.AV = require("leancloud-storage");
 // import Valine from "valine";
@@ -151,22 +155,26 @@ $(document).ready(function() {
 });
 
 export default {
+  props: ["name"],
+
   // 添加title 写到方法里面
   metaInfo() {
     return {
-      title: this.$route.params.name?this.$route.params.name:"Mosaic",
+      title: this.$route.params.name ? this.$route.params.name : "Mosaic",
       titleTemplate: "%s - Yay!",
-      meta:[{
-        name:"keyWords",
-        content: this.$route.params.name
-      }],
+      meta: [
+        {
+          name: "keyWords",
+          content: this.$route.params.name
+        }
+      ],
       htmlAttrs: {
         lang: "en",
         amp: true
       }
     };
   },
-  components: moduleStore,
+  components: { FootInner },
   watch: {},
 
   mounted() {
@@ -189,86 +197,26 @@ export default {
   },
 
   created() {
+    const markdown = require(`../assets/blog/${this.name}.md`);
+    this.metaData.tags = markdown.attributes.tags;
+    this.tag = markdown.attributes.tags.split("|");
+    this.title = markdown.attributes.title;
+    this.dynamicComponent = markdown.vue.component;
+
+    // Use Async Components for the benefit of code splitting
+    // https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components
+    // this.dynamicComponent = () => import(`~/articles/${this.fileName}.md`).then(({ vue }) => vue.component
 
     this.createValine();
-    if (this.list == "tech") {
-      for (var i in bloglist) {
-        if (bloglist[i].content == this.root) {
-          this.index = i;
-          break;
-        }
-      }
-    } else {
-      for (var j in lifelist) {
-        if (lifelist[j].content == this.root) {
-          this.index = j;
-          break;
-        }
-      }
-    }
-
-    // 保证刷新后也知道在什么类目下
-    for (var k in bloglist) {
-      if (bloglist[k].content == this.root) {
-        this.list = "tech";
-        break;
-      } else {
-        this.list = "life";
-      }
-    }
   },
   methods: {
     btnTop() {
       $("html,body").animate({ scrollTop: "0px" }, 1000);
     },
     // 上一篇文章
-    nextpost() {
-      if (this.list == "tech") {
-        if (this.index < this.techlen - 1) {
-          ++this.index;
-          if (this.index < this.techlen) {
-            this.root = bloglist[this.index].content;
-            this.path = "/post/" + bloglist[this.index].content;
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-          }
-        }
-      }
-
-      if (this.list == "life") {
-        if (this.index < this.lifelen - 1) {
-          ++this.index;
-          if (this.index < this.lifelen) {
-            this.root = lifelist[this.index].content;
-            this.path = "/post/" + lifelist[this.index].content;
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-          }
-        }
-      }
-    },
+    nextpost() {},
     // 下一篇文章
-    lastpost() {
-      if (this.list == "tech") {
-        if (this.index > 0) {
-          --this.index;
-          this.root = bloglist[this.index].content;
-          this.path = "/post/" + bloglist[this.index].content;
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }
-      }
-
-      if (this.list == "life") {
-        if (this.index > 0) {
-          --this.index;
-          this.root = lifelist[this.index].content;
-          this.path = "/post/" + lifelist[this.index].content;
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }
-      }
-    },
+    lastpost() {},
     createValine() {
       new Valine({
         el: "#vcomments",
@@ -287,15 +235,12 @@ export default {
   data() {
     return {
       // 用来切换组件的数据
-      root: this.$route.params.name,
-      list: this.$route.params.list,
-      // 文章的序列号
-      lastname: "Last",
-      nextname: "Next",
+      title: null,
+      dynamicComponent: null,
+      metaData: [],
+
       index: "",
       // 最大文章的序列号
-      bloglist,
-      lifelist,
       lifelen,
       techlen,
       path: "/post/" + this.$route.params.name,
@@ -305,6 +250,7 @@ export default {
   }
 };
 </script>
+
 <style lang="less" scoped>
 .backtop {
   display: none;
@@ -335,6 +281,7 @@ export default {
 .main {
   padding: 2em 1em 0em 1em;
 }
+
 
 .main-inner {
   text-align: justify;

@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name ="Description" content ="作者：Ericheshenghao，职业：研究僧一枚">  
+  <meta name="Description" content="作者：Ericheshenghao，职业：研究僧一枚">
   <meta name="baidu-site-verification" content="NnVu47rF9t" />
-  <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1.0">
+  <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <link
-    href="https://fonts.googleapis.com/css?family=Dancing+Script:700|Cinzel+Decorative:700|EB+Garamond|Noto+Serif+SC&display=swap"
+    href="https://fonts.googleapis.com/css?family=Dancing+Script:700|Source+Code+Pro|Cinzel+Decorative:700|EB+Garamond|Noto+Serif+SC&display=swap"
     rel="stylesheet">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script>
     (function () {
       var bp = document.createElement('script');
@@ -26,23 +26,27 @@
       s.parentNode.insertBefore(bp, s);
     })();
   </script>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?21e5ce98b743cd090190d3f4e3802a22";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    
   <title>Mosaic</title>
   <style lang="less">
-    
     body,
     html {
       margin: 0 !important;
       padding: 0;
       font-family: "EB Garamond", serif;
-      
-    }
-  
-    html {
       overflow-y: auto;
-
       overflow-x: hidden;
+      -webkit-text-size-adjust: none;
     }
-
   </style>
 </head>
 
@@ -51,16 +55,17 @@
   <div id="app"></div>
   <!-- built files will be auto injected -->
 
- 
+
   <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.15.0/dist/av-min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js"></script>
   <script src="https://unpkg.com/vue-meta/dist/vue-meta.min.js"></script>
   <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
   <script src="https://cdn.bootcss.com/vue-router/3.0.3/vue-router.min.js"></script>
   <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+  <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/typescript.min.js"></script>
   <link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">
-  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow-night-eighties.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet">
 </body>
 
 </html>
