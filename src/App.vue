@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app" v-bind:class="{ 'active': theme}">
+  <div id="app" class="app" :class="{ 'active': theme}">
     <myheader :theme="theme"></myheader>
 
     <div id="content" style="display:flow-root;min-height:85.8vh;">
@@ -12,9 +12,9 @@
       <sidebar></sidebar>
 
       <!-- 这部分为路由，切换页面会变化 -->
-      <nav-button></nav-button>
-      <router-view :key="$router.path"/>
-
+      
+      <router-view :key="$router.path" />
+      <stick-bar ></stick-bar>
       <!-- 这部分为路由，切换页面会变化 -->
     </div>
   </div>
@@ -159,6 +159,8 @@ a {
     color: @color-contrast-high;
   }
 
+  
+
   ul li {
     border-bottom-color: @color-contrast-high;
   }
@@ -194,6 +196,10 @@ a {
   }
   .backtop {
     color: white;
+  }
+
+  div span{
+    color:white;
   }
 }
 
@@ -233,6 +239,7 @@ h4,
 h5,
 h6 {
   margin: 1.618em 0 1em;
+  line-height: 1.618;
 }
 
 // 锚点样式
@@ -430,5 +437,16 @@ width: 100%;
   // top:0;
   // left:500;
   // z-index: 10;
+}
+article  .commentBtn{
+  border:none;
+  background-color: transparent;
+  color: black;
+  position: absolute;
+  transform: translate(-195%,45%);
+  @media (max-width: 36em) {
+   display: none;
+  }
+  
 }
 </style>

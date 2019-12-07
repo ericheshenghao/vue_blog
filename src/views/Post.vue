@@ -1,5 +1,6 @@
 <template>
   <div class="contanier" style="padding-top:0.1em;">
+  
     <el-progress
       class="num"
       :show-text="false"
@@ -8,9 +9,10 @@
       :percentage="percentage"
     ></el-progress>
     <div class="main">
-      <!-- <div class="num">{{percentage}}</div> -->
       <article class="main-inner">
         <h1 style="padding-bottom:1em">{{title}}</h1>
+
+          <comment :show="showcomment" :eachparagraph="eachparagraph"></comment>
         <component :is="dynamicComponent" />
 
         <div>
@@ -19,8 +21,8 @@
         <div class="footer" style="display: flex;justify-content: space-between;">
           <div>
             <router-link v-for="(item,index) in tag" :key="index" :to="`/bloglist/${item}`">
-              <i class="el-icon-s-promotion"></i> {{item}}
-              
+              <i class="el-icon-s-promotion"></i>
+              {{item}}
             </router-link>
           </div>
           <div>
@@ -44,9 +46,7 @@
       <div id="vcomments"></div>
       <FootInner></FootInner>
       <!-- <el-backtop type="text"></el-backtop> -->
-      <button id="backbt" class="backtop" v-on:click="btnTop">
-        <i class="fa fa-angle-double-up"></i>
-      </button>
+      <back-top></back-top>
     </div>
   </div>
 </template>
@@ -54,7 +54,9 @@
 <script>
 import FootInner from "@/components/FootInner.vue";
 import { bloglist, techlen, lifelist, lifelen } from "@/bloglist";
+
 // import moduleStore from "@/bloglist";
+
 import mediumZoom from "medium-zoom";
 // window.AV = require("leancloud-storage");
 // import Valine from "valine";
@@ -130,29 +132,8 @@ const anchormove = () => {
   });
 };
 
-// 滚动条监听
-$(document).ready(function() {
-  $(document).scroll(function() {
-    //开始监听滚动条
-    //获取当前滚动条高度
+// 添加段落评论
 
-    var max = $(document).height();
-    var top = $(document).scrollTop();
-    var viewH = $(window).height();
-
-    if (
-      document.body.scrollTop > max - viewH - 400 ||
-      document.documentElement.scrollTop > max - viewH - 400
-    ) {
-      $("#backbt").show();
-    } else {
-      $("#backbt").hide();
-    }
-    //用于调试 弹出当前滚动条高度
-    var percentage = (top / (max - viewH)) * 100 + "%";
-    $(".el-progress-bar__inner").css("width", percentage);
-  });
-});
 
 export default {
   props: ["name"],
@@ -175,8 +156,6 @@ export default {
     };
   },
   components: { FootInner },
-  watch: {},
-
   mounted() {
     highlightCode();
     mediumzoom();
@@ -185,16 +164,16 @@ export default {
     // 试试给图片添加图名
     addname();
     anchormove();
+    this.addcomment();
+    
+    
   },
-
   updated() {
-    highlightCode();
     mediumzoom();
-    preCode();
-
-    addname();
+    // addname();
     anchormove();
   },
+
 
   created() {
     const markdown = require(`../assets/blog/${this.name}.md`);
@@ -202,7 +181,7 @@ export default {
     this.tag = markdown.attributes.tags.split("|");
     this.title = markdown.attributes.title;
     this.dynamicComponent = markdown.vue.component;
-
+    window.upload = this.upload;
     // Use Async Components for the benefit of code splitting
     // https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components
     // this.dynamicComponent = () => import(`~/articles/${this.fileName}.md`).then(({ vue }) => vue.component
@@ -210,10 +189,41 @@ export default {
     this.createValine();
   },
   methods: {
-    btnTop() {
-      $("html,body").animate({ scrollTop: "0px" }, 1000);
+    addcomment() {
+      var paragraph = [];
+      var i = 0;
+      $("blockquote p").each(function() {
+        var container = $(this).html();
+
+        paragraph.push(container);
+
+        $(this).before(
+          `<button class='commentBtn' onclick='upload(${i})'><i class='fa fa-comment-o'></i></button>`
+        );
+        i++;
+      });
+      this.paragraph = paragraph;
     },
     // 上一篇文章
+    upload(e) {
+      this.showcomment = !this.showcomment;
+      this.eachparagraph = this.paragraph[e]
+      
+      // const uploadParagraph = this.paragraph[e];
+      // const uploadUrl = this.$route.path;
+
+      // const Paras = AV.Object.extend("parasComment");
+      // const paras = new Paras();
+      // paras.set("url", uploadUrl);
+      // paras.set("p", uploadParagraph);
+      // paras.set("comment","一条评论")
+      // paras.save();
+      // this.$message({
+      //   message:"评论成功",
+      //   type:"success"
+      // })
+    },
+    
     nextpost() {},
     // 下一篇文章
     lastpost() {},
@@ -235,10 +245,12 @@ export default {
   data() {
     return {
       // 用来切换组件的数据
+      eachparagraph:"",
+      paragraph: [],
+      showcomment: false,
       title: null,
       dynamicComponent: null,
       metaData: [],
-
       index: "",
       // 最大文章的序列号
       lifelen,
@@ -252,42 +264,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.backtop {
-  display: none;
-  position: fixed;
-  width: 42px;
-  height: 42px;
-  top: 92%;
-  right: 4%;
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  border: transparent;
-  transition: all 0.5s ease;
-  background-color: white;
-
-  &:hover {
-    cursor: pointer;
-    color: white;
-    text-shadow: 0 2px 4px #005cbc, 0 0 6px #ff4949;
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
 .main {
   padding: 2em 1em 0em 1em;
 }
-
 
 .main-inner {
   text-align: justify;
   width: 36em;
   margin: 0 auto;
-  line-height: 1.618;
+  line-height: 2.218;
 
   @media (max-width: 38em) {
     width: auto;

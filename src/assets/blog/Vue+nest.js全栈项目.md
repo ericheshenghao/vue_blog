@@ -1,7 +1,7 @@
 ---
 title: Vue+next.js全栈项目
 date: '2019-12-24'
-type: tech
+category: tech
 tags: vue|nest.js
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
@@ -137,7 +137,7 @@ $ npm install --save-dev @types/passport-local
 #### 方法
 现在，我们准备实现身份验证功能。我们将首先概述用于任何`Passport`策略的过程。将Passport本身视为一个小型框架会很有帮助。该框架的优雅之处在于，它会将身份验证过程抽象为您根据要实施的策略自定义的几个基本步骤。这就像一个框架，因为您通过以回调函数的形式提供自定义参数（作为纯JSON对象）和自定义代码进行配置，Passport会在适当的时候对其进行调用。该`@nestjs/passport`模块将此框架包装在Nest样式包中，从而易于集成到Nest应用程序中。我们将`@nestjs/passport`在下面使用。
 
-s首先创建一个`AuthModule`和`AuthService``：
+首先创建一个`AuthModule`和`AuthService``：
 ```
 $ nest g module auth
 $ nest g service auth

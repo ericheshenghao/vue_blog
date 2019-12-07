@@ -1,7 +1,7 @@
 ---
 title: Vue-Router使用教程
 date: '2019-10-29'
-type: tech
+category: tech
 tags: vue|router
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
@@ -84,7 +84,6 @@ this.$route.params.pathMatch // '/non-existing'
 > 注意：在 Vue 实例内部，你可以通过 $router 访问路由实例。因此你可以调用 this.$router.push。
 
 想要导航到不同的 URL，则使用 `router.push` 方法。这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
-
 当你点击 `<router-link>` 时，这个方法会在内部调用，所以说，点击 `<router-link :to="..."> `等同于调用 router.push(...)。
 
 该方法的参数可以是一个字符串路径，或者一个描述地址的对象。例如：

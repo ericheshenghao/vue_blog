@@ -1,7 +1,7 @@
 ---
 title: 科研与 Dream 之间的距离
 date: '2019-9-22'
-type: life
+category: life
 tags: research
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---

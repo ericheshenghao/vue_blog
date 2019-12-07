@@ -33,7 +33,7 @@ export default {
 </script>
 <style lang="less" >
 .item {
-  margin-top: 10px;
+  margin-top: 13px;
 
 }
 .about sup {
@@ -47,4 +47,8 @@ export default {
     width: auto;
   }
 }
+.about .el-button--small, .el-button--small.is-round {
+    padding: 5px 15px!important;
+}
+
 </style>

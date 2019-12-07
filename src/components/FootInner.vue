@@ -6,7 +6,7 @@
     <div style="display:flex;justify-content:center">
     <div>Powered by Vue <i class="el-icon-star-on" id="heart" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.12), 0px 0px 6px rgba(0,0,0,0.04);"></i>
  Theme is</div>
-    <div class="shake" style="padding-left:5px">Mosaic</div>
+    <div class="titleshake" style="padding-left:5px">Mosaic</div>
     </div>
     <div >CC BY-NC-SA 4.0</div>
     </div>

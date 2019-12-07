@@ -6,10 +6,12 @@ import {
     Progress,
     Badge,
     // Image,
+    Input,
     // Notification,
     Avatar,
     Drawer,
     Divider,
+    Message,
   } from 'element-ui';
 
   Vue.use(Button);
@@ -18,9 +20,10 @@ import {
   Vue.use(Icon);
   Vue.use(Progress);
   Vue.use(Badge);
+  Vue.use(Input)
   // Vue.use(Image);
   Vue.use(Avatar);
   Vue.use(Drawer);
   
-  // Vue.prototype.$notify = Notification;
+  Vue.prototype.$message = Message;
 

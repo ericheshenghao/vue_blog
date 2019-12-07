@@ -1,7 +1,7 @@
 ---
 title: Vue的一些使用心得
 date: '2019-10-22'
-type: tech
+category: tech
 tags: vue
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
@@ -9,7 +9,7 @@ note: 基于vuepress的个人博客，实现了博客自动路由、默认主题
 
 ## 父子组件传值
 在这一节我将记录一个通过父子组件传值来控制子组件显示与否的方法。
-1. 首先我在父组件里引入一个子组件`upload-demo`，以及一个按钮来控制子组件的显示。
+> 首先我在父组件里引入一个子组件`upload-demo`，以及一个按钮来控制子组件的显示。
 ```
 <el-button type="primary" size="small" @click="show">上传图片</el-button>
 <upload-demo :message="uploadshow" @show="show"></upload-demo>
@@ -37,7 +37,39 @@ showoff(){
         this.$emit("show")
     }
 ```
-## 对象储存oos
+
+## 混入mixin
+例子：
+``` js
+// 定义一个混入对象
+var myMixin = {
+    created: function () {
+      //调用方法
+        this.getHeight()
+    },
+    methods: {
+        getHeight: function () {
+           ...
+            });
+
+        }
+    }
+}
+//导出混入对象
+export default myMixin
+```
+在`main.js`中引入
+``` js
+new Vue({
+  mixins:[myMixin],
+  router,
+  render: h => h(App),
+  mounted() {
+    document.dispatchEvent(new Event('render-event'))
+  }
+}).$mount('#app')
+
+```
 
 ## fontawsome图标库的引入
 安装一下fontawesome图标库

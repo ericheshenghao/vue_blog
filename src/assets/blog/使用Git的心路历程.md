@@ -1,7 +1,7 @@
 ---
 title: 使用Git的心路历程
 date: '2019-08-05'
-type: tech
+category: tech
 tags: git
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---

@@ -1,7 +1,7 @@
 ---
 title: Vue+Leancloud快速搭建点赞组件
 date: '2019-10-25'
-type: tech
+category: tech
 tags: vue|leancloud
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
@@ -62,33 +62,33 @@ AV.init({
 });
 ```
 下面的代码逐一讲解
-```
+``` js
 // 首先查询Like类
- const query = new AV.Query("Like");
- // 将url这个数据库里的字段与前端自己传入的path路径对比
-        query.equalTo("url", this.path);
+const query = new AV.Query("Like");
+// 将url这个数据库里的字段与前端自己传入的path路径对比
+query.equalTo("url", this.path);
 // 查出这条数据
-        query.find().then(async res => {
+query.find().then(async res => {
 // 如果数据为空的情况         
-          if (res.length == 0) {
+if (res.length == 0) {
 // 新增数据              
-            const Like = AV.Object.extend("Like");
-            const like = new Like();
-            like.set("url", this.path);
-            like.set("count", 1);
-            like.save();
+const Like = AV.Object.extend("Like");
+const like = new Like();
+like.set("url", this.path);
+like.set("count", 1);
+like.save();
 // 直接更新data里面的count数据  
-            this.count =  1;
-          } else {
+this.count =  1;
+} else {
 // 如果是已经有数据的情况
-            const like = AV.Object.createWithoutData("Like", res[0].id);
+const like = AV.Object.createWithoutData("Like", res[0].id);
 // 在服务端加1
-            like.increment("count", 1);
-            await like.save();
+like.increment("count", 1);
+await like.save();
 // 更新数据      
-            this.count = res[0].attributes.count + 1;
-          }
-        });
+this.count = res[0].attributes.count + 1;
+ }
+});
 ```
 ``` js
 // 监听path的变化，然后更新

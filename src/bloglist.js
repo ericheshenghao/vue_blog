@@ -10,18 +10,18 @@ bloglist.keys().forEach(key => {
   var index = key.lastIndexOf(".");
   const fileName = key.substring(0, index).split("/")[1]
   const markdown = require(`@/assets/blog/${fileName}.md`);
-  if (markdown.attributes.type == "tech") {
+  if (markdown.attributes.category == "tech") {
 
-    storetech.push({ title: fileName, date: markdown.attributes.date })
+    storetech.push({ title: fileName, date: markdown.attributes.date ,cat:markdown.attributes.category })
 
 
   } else {
 
-    storelife.push({ title: fileName, date: markdown.attributes.date })
+    storelife.push({ title: fileName, date: markdown.attributes.date,cat:markdown.attributes.category})
   }
   try{
   markdown.attributes.tags.split("|").forEach(element => {
-    tags.push({ type: element, title: fileName, date: markdown.attributes.date })
+    tags.push({ type: element, title: fileName, date: markdown.attributes.date,cat:markdown.attributes.category })
   })}catch{
     return
   }
