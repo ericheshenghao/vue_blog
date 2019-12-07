@@ -1,6 +1,6 @@
 <template>
-  <div id="drag">
-    <div v-drag :class="show?'menu expanded':'menu close'">
+  <div v-drag="`left`" id="drag" style="z-index: 4;">
+    <div  :class="show?'menu expanded':'menu close'">
       <div :class="show?'container expanded':'container close'" @click="showBtn($event)">
         <div :class="show?'toggle close':'toggle expanded'"></div>
       </div>
@@ -69,6 +69,7 @@ body .menu {
   padding: 1px 5px 1px 2.5px;
   border-radius: 0.2 * $width;
   background: #ffffff;
+  
   box-shadow: 0 4px 64px rgba(0, 0, 0, 0.15);
   transition: 1.3s cubic-bezier(0.53, 0, 0.15, 1.3);
   z-index: 2;
@@ -112,6 +113,7 @@ body .menu {
   &.expanded {
     height: $height * 1.2;
     width: 10 * $width;
+    
   }
   a {
     text-decoration: none;
@@ -127,6 +129,7 @@ body .menu {
 }
 
 body .container {
+  
   order: 1;
   width: 20px;
   height: 24px;

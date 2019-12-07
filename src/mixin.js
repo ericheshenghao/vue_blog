@@ -1,10 +1,10 @@
 var myMixin = {
     created: function () {
         this.getHeight()
-        
+
     },
-    mounted(){
-     
+    mounted() {
+
     },
     methods: {
 

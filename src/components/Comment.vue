@@ -1,28 +1,38 @@
 <template>
   <div>
-    <div v-if="show" class="comment" style="padding:20px;">
-      <div style="display:flex;justify-content:space-between">
-      <div v-if="length==0?true:false">暂无评论</div>
-      <div v-else> </div>
-      <el-button type="text" @click="showoff"><i class="el-icon-close" ></i></el-button>
+    <div v-if="show" class="comment animated bounceInUp" :style="`top:${top+5}px`">
+      <div style="padding:0px 15px 0 15px">
+        <div style="display:flex;justify-content:space-between;">
+          <div v-if="length==0?true:false">暂无评论</div>
+          <div v-else></div>
+          <el-button type="text" @click="showoff">
+            <i class="el-icon-close"></i>
+          </el-button>
+        </div>
+        <div class="data">
+          <div v-for="(item,index) in commentData" :key="index">
+            <div style="font-size:12px;color:gray;">{{item.created}}</div>
+            <div style="font-size:14px;line-height:20px;">{{item.comment}}</div>
+          </div>
+        </div>
+      </div>
       
-      </div>
-      <div v-for="(item,index) in commentData" :key="index" style="display:flex;justify-content:space-around">
-        <div>{{item.comment}}</div>
-        <div>{{item.created}}</div>
-      </div>
+      <el-divider></el-divider>
+      <div style="padding:0px 15px">
+        <el-input
+          style="margin-top:10px"
+          type="textarea"
+          :autosize="{ minRows: 2, maxRows: 5}"
+          placeholder="请输入内容"
+          v-model="comment"
+        ></el-input>
 
-      <el-input
-        type="textarea"
-        :autosize="{ minRows: 2, maxRows: 4}"
-        placeholder="请输入内容"
-        v-model="textarea"
-      ></el-input>
-      
-      <div style="text-align:center">
-      <el-button type="primary" @click="submission" style="margin-top:20px;">提交评论</el-button>
+        <div style="text-align:right">
+          <el-button type="text" @click="submission">提交评论</el-button>
+        </div>
       </div>
     </div>
+ 
   </div>
 </template>
 
@@ -31,12 +41,15 @@ import dayjs from "dayjs";
 export default {
   props: {
     show: false,
-    eachparagraph: ""
+    whichpara: ""
   },
   watch: {
     show: function() {
-      this.commentData = [];
+      const res = document.getElementsByClassName("commentBtn");
 
+      this.top = res[this.whichpara[0].index].offsetTop;
+
+      this.commentData = [];
       this.fetch();
     }
   },
@@ -44,56 +57,78 @@ export default {
     return {
       commentData: [],
       length: "",
-      textarea: ""
+      comment: "",
+      top: ""
     };
   },
 
   methods: {
-    showoff(){
-
+    showoff() {
+      this.$emit("showoff");
     },
-    submission(){
-
+    submission() {
+      if (this.comment.length > 0) {
+        const uploadParagraph = this.whichpara[0].para;
+        
+        const uploadUrl = this.$route.path;
+        const Paras = AV.Object.extend("parasComment");
+        const paras = new Paras();
+        paras.set("url", uploadUrl);
+        paras.set("p", uploadParagraph);
+        paras.set("comment", this.comment);
+        paras.save();
+        this.commentData = [];
+        this.fetch();
+        this.comment = "";
+        this.$message("评论成功");
+      } else {
+        this.$message({
+          type: "warning",
+          message: "请输入内容"
+        });
+      }
     },
     fetch() {
-      const uploadParagraph = this.eachparagraph;
+      const uploadParagraph = this.whichpara[0].para;
 
       const uploadUrl = this.$route.path;
 
       const query = new AV.Query("parasComment");
       query.equalTo("p", uploadParagraph);
       query.find().then(async res => {
-        // console.log(res);
-        // if (res.length == 0) {
-        //   const Paras = AV.Object.extend("parasComment");
-        //   const paras = new Paras();
-        //   paras.set("url", uploadUrl);
-        //   paras.set("p", uploadParagraph);
-        //   paras.save();
-        //   this.length = res.length
-        // } else {
-        this.length = res.length;
-
-        this.commentData.push({
-          comment: res[0].attributes.comment,
-          created: dayjs(res[0].createdAt).format("YYYY/MM/DD")
+        res.map((v, id) => {
+          this.commentData.push({
+            comment: res[id].attributes.comment,
+            created: dayjs(res[id].createdAt).format("YYYY-MM-DD HH:mm:ss")
+          });
         });
-        console.log(this.commentData);
-        // }
+        this.length = res.length;
       });
     }
   }
 };
 </script>
 
-<style lang="less" >
+<style lang="scss" scoped>
 .comment {
-  height: auto;
+  max-height: auto;
   min-height: 160px;
   width: 300px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  position: fixed;
+  position: absolute;
   background-color: white;
-  border-radius: 20px;
+  z-index: 7;
+}
+.el-divider--horizontal {
+  margin: 5px 0 5px 0;
+}
+.data{
+  padding-right: 8px;
+  overflow: hidden;
+  max-height: 200px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar{
+    width:0px;
+  }
 }
 </style>

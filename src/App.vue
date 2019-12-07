@@ -198,9 +198,7 @@ a {
     color: white;
   }
 
-  div span{
-    color:white;
-  }
+  
 }
 
 sup {
@@ -401,7 +399,7 @@ p code {
 
   ul {
     margin: 0;
-    padding-left: 38px;
+    padding-left: 40px;
 
     li {
       list-style: decimal;
@@ -409,6 +407,7 @@ p code {
       padding: 5px !important;
 
       line-height: 14px;
+      font-size: 13px;
     }
   }
 }

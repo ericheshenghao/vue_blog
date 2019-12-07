@@ -1,6 +1,5 @@
 <template>
-  <div class="contanier" style="padding-top:0.1em;">
-  
+  <div :class="showcomment?'contanier':'contanier'" style="padding-top:0.1em;">
     <el-progress
       class="num"
       :show-text="false"
@@ -12,7 +11,7 @@
       <article class="main-inner">
         <h1 style="padding-bottom:1em">{{title}}</h1>
 
-          <comment :show="showcomment" :eachparagraph="eachparagraph"></comment>
+        <comment   :show="showcomment" :whichpara="whichpara" @showoff="hide"></comment>
         <component :is="dynamicComponent" />
 
         <div>
@@ -134,7 +133,6 @@ const anchormove = () => {
 
 // 添加段落评论
 
-
 export default {
   props: ["name"],
 
@@ -165,15 +163,13 @@ export default {
     addname();
     anchormove();
     this.addcomment();
-    
-    
   },
   updated() {
+    
     mediumzoom();
     // addname();
     anchormove();
   },
-
 
   created() {
     const markdown = require(`../assets/blog/${this.name}.md`);
@@ -181,7 +177,7 @@ export default {
     this.tag = markdown.attributes.tags.split("|");
     this.title = markdown.attributes.title;
     this.dynamicComponent = markdown.vue.component;
-    window.upload = this.upload;
+    window.commentClick = this.commentClick;
     // Use Async Components for the benefit of code splitting
     // https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components
     // this.dynamicComponent = () => import(`~/articles/${this.fileName}.md`).then(({ vue }) => vue.component
@@ -198,32 +194,22 @@ export default {
         paragraph.push(container);
 
         $(this).before(
-          `<button class='commentBtn' onclick='upload(${i})'><i class='fa fa-comment-o'></i></button>`
+          `<button class='commentBtn' onclick='commentClick(${i})'><i class='fa fa-comment-o'></i></button>`
         );
         i++;
       });
       this.paragraph = paragraph;
     },
     // 上一篇文章
-    upload(e) {
+    hide() {
       this.showcomment = !this.showcomment;
-      this.eachparagraph = this.paragraph[e]
-      
-      // const uploadParagraph = this.paragraph[e];
-      // const uploadUrl = this.$route.path;
-
-      // const Paras = AV.Object.extend("parasComment");
-      // const paras = new Paras();
-      // paras.set("url", uploadUrl);
-      // paras.set("p", uploadParagraph);
-      // paras.set("comment","一条评论")
-      // paras.save();
-      // this.$message({
-      //   message:"评论成功",
-      //   type:"success"
-      // })
     },
-    
+    commentClick(e) {
+      this.whichpara = [];
+      this.showcomment = !this.showcomment;
+      this.whichpara.push({ para: this.paragraph[e], index: e });
+    },
+
     nextpost() {},
     // 下一篇文章
     lastpost() {},
@@ -245,7 +231,7 @@ export default {
   data() {
     return {
       // 用来切换组件的数据
-      eachparagraph:"",
+      whichpara: [],
       paragraph: [],
       showcomment: false,
       title: null,
@@ -263,7 +249,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .main {
   padding: 2em 1em 0em 1em;
 }
@@ -297,5 +283,12 @@ export default {
 .footer a {
   text-decoration: none;
   padding: 0 5px;
+}
+.mask{
+  position: absolute;
+  z-index: 10;
+  width:100vw;
+  height:auto;
+  background-color: rgba($color: #000000, $alpha: 0.2)
 }
 </style>
