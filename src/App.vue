@@ -154,7 +154,17 @@ a {
   background-color: @color-bg!important;
 
   color: rgb(229, 229, 229) !important;
+  .backtop {
+    background-color: transparent;
+  }
+  .comment{
+    background-color: #1a1a1a;
+    box-shadow: 0 2px 12px 0 rgba(255, 255, 255, 0.4);
+  }
 
+  article  .commentBtn{
+    color:white;
+  }
   a {
     color: @color-contrast-high;
   }
@@ -344,6 +354,12 @@ blockquote {
   padding: 0 1em;
   color: #6c6a6a;
   border-left: 3px solid #cccccc;
+  p{
+    padding-left: 5px;
+    @media (max-width: 36em) {
+       padding-left: 15px;
+    }
+  }
 }
 
 mark {
@@ -437,15 +453,5 @@ width: 100%;
   // left:500;
   // z-index: 10;
 }
-article  .commentBtn{
-  border:none;
-  background-color: transparent;
-  color: black;
-  position: absolute;
-  transform: translate(-195%,45%);
-  @media (max-width: 36em) {
-   display: none;
-  }
-  
-}
+
 </style>

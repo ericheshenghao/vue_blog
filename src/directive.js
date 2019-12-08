@@ -37,8 +37,8 @@ Vue.directive(
 ),
 // v-type
     Vue.directive(
-        "typing",
-        function (el, binding) {
+        "typing",{
+        bind:function (el, binding) {
             var n = 0
  
             //   const container = document.querySelector("#target");
@@ -73,5 +73,5 @@ Vue.directive(
                     return Math.floor(Math.random() * 130 + 5);
                 }
             }
-        }
+        }}
     )

@@ -22,6 +22,7 @@
       size="15em"
       style="text-align:center;font-family:Noto Serif SC,serif,Dancing Script, EB Garamond;"
     >
+    
       <span v-on="{mouseover:mouseover,mouseout:mouseout}">
         <el-avatar
           id="avatar"
@@ -37,8 +38,8 @@
       >
         
         <div>何先森</div>
-        <div class="motto" style="padding-bottom:10px">保持清醒，保持愚钝</div>
-        <i class="el-icon-location" style="color:gray"> China</i>
+        
+        
         
       </div>
       <div class="iconlist">
@@ -55,6 +56,7 @@
           <i class="fa fa-weibo"></i>
         </a>
       </div>
+      
     </el-drawer>
   </div>
 </template>
@@ -104,7 +106,7 @@ rgb(241, 227, 243)
   box-shadow: 0 2px 4px #005cbc, 0 0 6px #ff4949;
 }
 .iconlist {
-  padding-top: 0.618em;
+ 
   font-size: 17px;
   > a:hover {
     color: white;

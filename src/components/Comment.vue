@@ -65,7 +65,7 @@ export default {
     showoff() {
       this.$emit("showoff");
     },
-    submission() {
+    async submission() {
       if (this.comment.length > 0) {
         const uploadParagraph = this.whichpara[0].para;
         const uploadUrl = this.$route.path;
@@ -74,7 +74,7 @@ export default {
         paras.set("url", uploadUrl);
         paras.set("p", uploadParagraph);
         paras.set("comment", this.comment);
-        paras.save();
+        await paras.save();
         this.commentData = [];
         this.fetch();
         this.comment = "";
@@ -107,7 +107,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+article  .commentBtn{
+  border:none;
+  background-color: transparent;
+  color: black;
+  position: absolute;
+  transform: translate(-195%,45%);
+  @media (max-width: 36em) {
+   transform: translate(-55%,45%);
+  }
+  
+}
 .comment {
   max-height: auto;
   min-height: 160px;
@@ -115,6 +126,7 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   position: absolute;
   background-color: white;
+
   z-index: 7;
 }
 .el-divider--horizontal {

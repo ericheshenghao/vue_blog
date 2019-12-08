@@ -12,7 +12,7 @@ note: 基于vuepress的个人博客，实现了博客自动路由、默认主题
 4. 将评论写入数据库
 5. 获取数据库内容并展示
 ### 添加html元素
-父组件
+首先我们在父组件中写方法。
 ``` js
 methods:{
 addcomment() {
@@ -24,25 +24,28 @@ addcomment() {
         var container = $(this).html();
         // push数组
         paragraph.push(container);
-        // 添加一个upload方法,传递一个数字i,这样可以知道点击事件属于哪一个p标签
+        // 添加一个upload方法,传递一个数字i,这样可以知道点击事件属于第几个p标签
         $(this).before(
-          `<button class='commentBtn' onclick='upload(${i})'><i class='fa fa-comment-o'></i></button>`
+          `<button class='commentBtn' onclick='commentClick(${i})'><i class='fa fa-comment-o'></i></button>`
         );
         i++;
       });
       this.paragraph = paragraph;
     },
 hide() {
+  //在子组件中调用这个方法，用来关闭评论框
       this.showcomment = !this.showcomment;
     },
 commentClick(e) {
       this.whichpara = [];
       this.showcomment = !this.showcomment;
+      //将这一段内容，以及一个index push给whichpara
       this.whichpara.push({ para: this.paragraph[e], index: e });
     },
 }
 mounted(){
         this.addcomment();
+        // 注册commentClick方法，否则jquery生成的标签调用不了vue的方法
         window.commentClick = this.commentClick;
     },
 data() {
@@ -98,6 +101,7 @@ data() {
 import dayjs from "dayjs";
 export default {
   props: {
+    // 拿到父组件传入的两个属性值，show用来控制弹出框，whichpara传递段落内容
     show: false,
     whichpara: ""
   },
@@ -105,6 +109,7 @@ export default {
     show: function() {
       const res = document.getElementsByClassName("commentBtn");
 
+      // 这个段落距离顶端的距离
       this.top = res[this.whichpara[0].index].offsetTop;
 
       this.commentData = [];
@@ -136,7 +141,9 @@ export default {
         paras.set("comment", this.comment);
         paras.save();
         this.commentData = [];
+        //重新加载评论内容
         this.fetch();
+        // 清空评论框
         this.comment = "";
         this.$message("评论成功");
       } else {

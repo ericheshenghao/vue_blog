@@ -15,15 +15,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .backtop {
-//   display: none;
+  //   display: none;
+  text-align: center;
   position: fixed;
   width: 42px;
   height: 42px;
   top: 92%;
-  right: 4%;
+  right: 2%;
   font-size: 20px;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: white;
   border-radius: 50%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   border: transparent;

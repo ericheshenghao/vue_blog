@@ -9,6 +9,7 @@
     ></el-progress>
     <div class="main">
       <article class="main-inner">
+        <search-button></search-button>
         <h1 style="padding-bottom:1em" v-typing>{{title}}</h1>
 
         <comment :show="showcomment" :whichpara="whichpara" @showoff="hide"></comment>
@@ -81,7 +82,7 @@ const addname = () => {
     var title = $(this).attr("alt");
     $(this).after(
       '<div class="iname">' +
-        '<span class="itag"><i class="fa fa-twitch  "></i></span>' +
+        '<span class="itag"><i class="fa fa-twitch"></i></span>' +
         title +
         "</div>"
     );
