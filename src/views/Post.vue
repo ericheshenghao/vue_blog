@@ -9,9 +9,9 @@
     ></el-progress>
     <div class="main">
       <article class="main-inner">
-        <h1 style="padding-bottom:1em">{{title}}</h1>
+        <h1 style="padding-bottom:1em" v-typing>{{title}}</h1>
 
-        <comment   :show="showcomment" :whichpara="whichpara" @showoff="hide"></comment>
+        <comment :show="showcomment" :whichpara="whichpara" @showoff="hide"></comment>
         <component :is="dynamicComponent" />
 
         <div>
@@ -44,7 +44,8 @@
       </article>
       <div id="vcomments"></div>
       <FootInner></FootInner>
-      <!-- <el-backtop type="text"></el-backtop> -->
+      <!-- <typing></typing> -->
+
       <back-top></back-top>
     </div>
   </div>
@@ -133,6 +134,8 @@ const anchormove = () => {
 
 // 添加段落评论
 
+
+
 export default {
   props: ["name"],
 
@@ -163,9 +166,9 @@ export default {
     addname();
     anchormove();
     this.addcomment();
+    this.text()
   },
   updated() {
-    
     mediumzoom();
     // addname();
     anchormove();
@@ -181,10 +184,15 @@ export default {
     // Use Async Components for the benefit of code splitting
     // https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components
     // this.dynamicComponent = () => import(`~/articles/${this.fileName}.md`).then(({ vue }) => vue.component
-
+    
     this.createValine();
   },
   methods: {
+    text() {
+     
+      
+
+    },
     addcomment() {
       var paragraph = [];
       var i = 0;
@@ -284,11 +292,11 @@ export default {
   text-decoration: none;
   padding: 0 5px;
 }
-.mask{
+.mask {
   position: absolute;
   z-index: 10;
-  width:100vw;
-  height:auto;
-  background-color: rgba($color: #000000, $alpha: 0.2)
+  width: 100vw;
+  height: auto;
+  background-color: rgba($color: #000000, $alpha: 0.2);
 }
 </style>

@@ -34,4 +34,44 @@ Vue.directive(
             }
         }
     },
-)
+),
+// v-type
+    Vue.directive(
+        "typing",
+        function (el, binding) {
+            var n = 0
+ 
+            //   const container = document.querySelector("#target");
+            var message = el.textContent
+            el.textContent = ""
+
+            if (typeof message[n] != "undefined") {
+                el.textContent += message[n];
+            }
+
+            
+            var id = setInterval(() => {
+                setTimeout(() => {
+                    n++;
+                    if (typeof message[n] != "undefined") {
+                        el.textContent += message[n];
+                    }
+                }, interval(message[n ]));
+                if (typeof message[n] == "undefined") {
+                    clearInterval(id);
+                }
+            }, 150);
+
+            function interval(letter) {
+        
+                if (letter == "undefined") {
+                    clearInterval;
+                }
+                if (letter == ";" || letter == "." || letter == ",") {
+                    return Math.floor(Math.random() * 500 + 500);
+                } else {
+                    return Math.floor(Math.random() * 130 + 5);
+                }
+            }
+        }
+    )

@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      
+
       <el-divider></el-divider>
       <div style="padding:0px 15px">
         <el-input
@@ -32,7 +32,6 @@
         </div>
       </div>
     </div>
- 
   </div>
 </template>
 
@@ -69,7 +68,6 @@ export default {
     submission() {
       if (this.comment.length > 0) {
         const uploadParagraph = this.whichpara[0].para;
-        
         const uploadUrl = this.$route.path;
         const Paras = AV.Object.extend("parasComment");
         const paras = new Paras();
@@ -122,13 +120,13 @@ export default {
 .el-divider--horizontal {
   margin: 5px 0 5px 0;
 }
-.data{
+.data {
   padding-right: 8px;
   overflow: hidden;
   max-height: 200px;
   overflow-y: scroll;
-  ::-webkit-scrollbar{
-    width:0px;
+  ::-webkit-scrollbar {
+    width: 0px;
   }
 }
 </style>

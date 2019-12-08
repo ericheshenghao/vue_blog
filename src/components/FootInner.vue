@@ -8,7 +8,7 @@
  Theme is</div>
     <div class="titleshake" style="padding-left:5px">Mosaic</div>
     </div>
-    <div >CC BY-NC-SA 4.0</div>
+    <div v-typing>CC BY-NC-SA 4.0</div>
     </div>
 </template>
 <style lang="less" scoped>
