@@ -14,7 +14,7 @@ export default {};
 <style lang="less" scoped>
 .search__box {
   position: absolute;
-  top: 20%;
+  top: 40%;
   left: 0%;
 //   transform: translate(-50%, -50%);
   background: #2f3640;
