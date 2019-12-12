@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div v-if="show" class="comment animated bounceInUp" :style="`top:${top+5}px`">
+    <transition
+    name="custom-classes-transition"
+    enter-active-class="animated bounceInUp"
+    leave-active-class="animated bounceOutDown"
+  >
+    <div v-if="show" class="comment" :style="`top:${top+5}px`">
       <div style="padding:0px 15px 0 15px">
         <div style="display:flex;justify-content:space-between;">
           <div v-if="length==0?true:false">暂无评论</div>
@@ -32,6 +37,7 @@
         </div>
       </div>
     </div>
+     </transition>
   </div>
 </template>
 

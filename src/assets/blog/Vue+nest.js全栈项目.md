@@ -5,7 +5,7 @@ category: tech
 tags: vue|nest.js
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
-
+[[toc]]
 记录一下vue+next的项目实现过程🦆，最终想要达到的是`leancloud`所展示的后台效果，当然任重而道远(ง •_•)ง
 ![终极目标](https://eric-he.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191124025717.png)
 ## 后端

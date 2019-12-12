@@ -5,7 +5,7 @@
       <!--Just the logo.. Don't mind this-->
       <!-- <el-tooltip class="item" effect="light" content="Take me HOME"  placement="bottom"> -->
       <router-link tag="div" to="/" style="text-decoration-line: none">
-        <h1 style="color:white;padding-left:30px;">Mosaic</h1>
+        <h1  style="color:white;padding-left:30px;">Mosaic</h1>
       </router-link>
       <!-- </el-tooltip> -->
       <i class="el-icon-chat-dot-round" style="color:white;"></i>

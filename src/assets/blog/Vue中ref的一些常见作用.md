@@ -20,14 +20,17 @@ note: ""
 export default {
   methods: {
     getTest() {
-      console.log(this.$refs.testDom)
+      alert(this.$refs.testDom)
     }
   }
 };
 </script>
 ```
-拿到了这个节点的信息
-![节点](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/12/09/7047742-267ea7196ab3015d.png)
+拿到了这个节点的信息，在浏览器控制台也可以看到打印出了节点的信息。
+<iframe height="400" style="width: 100%;" scrolling="no" title="vue-ref" src="https://codepen.io/ericheshenghao/embed/ExaKVEq?height=265&theme-id=dark&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/ericheshenghao/pen/ExaKVEq'>vue-ref</a> by 何先森
+  (<a href='https://codepen.io/ericheshenghao'>@ericheshenghao</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## 获取子组件的data
 > 其实`ref`除了可以获取本页面的`dom`元素，还可以拿到子组件中的`data`和调用子组件中的方法。 
@@ -129,3 +132,4 @@ export default {
 ![打印结果](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/12/09/7047742-e3bfdd2fc4c48d6d.png)
 ## 子组件调用父组件
 > `this.$emit("")`即可。
+

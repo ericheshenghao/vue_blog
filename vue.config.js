@@ -23,7 +23,8 @@ module.exports = {
       .loader('frontmatter-markdown-loader').tap(options => {
        
         return {
-          markdownIt: markdownIt({ html: true }).use(require("markdown-it-anchor"),
+          markdownIt: markdownIt({ html: true, xhtmlOut: true,
+            typographer: true }).use(require("markdown-it-anchor"),
                 {
                   level: 2, // 添加超链接锚点的最小标题级别, 如: #标题 不会添加锚点
                   slugify: slugify, // 自定义slugify, 我们使用的是将中文转为汉语拼音,最终生成为标题id属性
@@ -31,10 +32,11 @@ module.exports = {
                   permalinkBefore: true, // 在标题前创建锚点
                   permalinkSymbol: "#",
                   permalinkSpace: true,
-                }).use(require("markdown-it-table-of-contents"),
+                }).use(require("markdown-it-toc-done-right"),
                     {
-                      includeLevel: [2, 3],
-                      forceFullToc: true,
+                      level: [2, 3],
+                      containerId:"table-of-contents",
+                      // forceFullToc: true,
                       slugify: slugify
                     }).use(require("markdown-it-footnote")),
           mode: [Mode.VUE_COMPONENT]

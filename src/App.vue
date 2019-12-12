@@ -12,9 +12,9 @@
       <sidebar></sidebar>
 
       <!-- 这部分为路由，切换页面会变化 -->
-      
+
       <router-view :key="$router.path" />
-      <stick-bar ></stick-bar>
+      <stick-bar></stick-bar>
       <!-- 这部分为路由，切换页面会变化 -->
     </div>
   </div>
@@ -63,10 +63,10 @@ export default {
 table {
   background-color: snow;
 }
-li>a{
+li > a {
   text-decoration: none;
-  &:hover{
-      color:#409eff;
+  &:hover {
+    color: #409eff;
   }
 }
 
@@ -157,19 +157,17 @@ a {
   .backtop {
     background-color: transparent;
   }
-  .comment{
+  .comment {
     background-color: #1a1a1a;
     box-shadow: 0 2px 12px 0 rgba(255, 255, 255, 0.4);
   }
 
-  article  .commentBtn{
-    color:white;
+  article .commentBtn {
+    color: white;
   }
   a {
     color: @color-contrast-high;
   }
-
-  
 
   ul li {
     border-bottom-color: @color-contrast-high;
@@ -207,8 +205,6 @@ a {
   .backtop {
     color: white;
   }
-
-  
 }
 
 sup {
@@ -284,9 +280,9 @@ h4:hover {
   width: 6px;
 
   height: 5px;
-  @media (max-width:36em) {
-     width: 6px;
-     height: 0px;
+  @media (max-width: 36em) {
+    width: 6px;
+    height: 0px;
   }
 }
 
@@ -307,7 +303,6 @@ p img {
   border: 2px solid #f3f3f3;
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  
 
   @media (max-width: 36em) {
     width: auto;
@@ -355,10 +350,10 @@ blockquote {
   padding: 0 1em;
   color: #6c6a6a;
   border-left: 3px solid #cccccc;
-  p{
+  p {
     padding-left: 5px;
     @media (max-width: 36em) {
-       padding-left: 15px;
+      padding-left: 15px;
     }
   }
 }
@@ -410,7 +405,6 @@ p code {
 
   color: #ffffff !important;
 
-
   padding: 0.5em 0 !important;
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.7);
 
@@ -429,30 +423,65 @@ p code {
   }
 }
 
-
-
-.hljs-comment, .hljs-quote{
-  color:#9ea2aa!important;
+.hljs-comment,
+.hljs-quote {
+  color: #9ea2aa !important;
 }
 
 .hljs ul li:nth-of-type(2n) {
   background-color: rgba(255, 255, 255, 0.015);
 }
 
-table{
-word-break: break-all; 
-word-wrap:break-word;
-width: 100%;
+table {
+  word-break: break-all;
+  word-wrap: break-word;
+  width: 100%;
   @media (max-width: 36em) {
     width: auto;
   }
 }
 
-.table-of-contents{
-  // position:sticky;
-  // top:0;
-  // left:500;
-  // z-index: 10;
+strong {
+  border-bottom: 5px solid #8989ff;
+  border-bottom-style: double;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-weight: normal;
 }
 
+.table-of-contents {
+  position: absolute;
+
+  // right: -103%;
+  right: -53%;
+  width: 250px;
+  font-size: 13px;
+
+  height: 310px;
+  overflow: auto;
+
+  padding: 0.618rem;
+
+  border-radius: 5px;
+  list-style-type: none;
+
+  ol {
+    list-style-type: circle;
+    // margin-block-start: 0em;
+    padding-inline-start: 25px;
+  
+  }
+
+  // background-color: white;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  @media (max-width: 70em) {
+    display: none;
+  }
+}
+.scroll {
+  position: absolute;
+  right: -53%;
+  // right: 0;
+  top: 0%;
+}
 </style>

@@ -7,16 +7,16 @@
       <h2 style="font-family:Cinzel Decorative;padding-left:7px;">2019</h2>
       <i class="fa fa-bath" style="padding: 15px 7px 0 0;"></i>
     </div>
-    <ul class="list-ul">
-      <li style="display:grid" v-for="(item,index) in list" :key="index" class="list-item">
+    <transition-group appear tag="ul" class="list-ul">
+      <li style="display:grid" v-for="(item) in list" :key="item.title" class="list-item">
         <router-link :to="`/post/${item.title}`" class="list-item-title">
           <div style="display:flex;justify-content:space-between;">
-            <div >{{item.title}}</div>
+            <div>{{item.title}}</div>
             <div class="date">{{item.date}}</div>
           </div>
         </router-link>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ export default {
       techlist,
       taglist,
       title: this.$attrs.name,
-      list: ""
+      list: []
     };
   },
   created() {
@@ -45,7 +45,15 @@ export default {
     fetch() {
       // 这里还能优化一下
       if (this.$attrs.name == "tech") {
-        this.list = this.techlist;
+        var i = 0;
+
+        var tic = setInterval(() => {
+          this.list.push(this.techlist[i]);
+          i++;
+          if (i == this.techlist.length) {
+            clearInterval(tic);
+          }
+        }, 100);
       }
       if (this.$attrs.name == "life") {
         this.list = this.lifelist;
@@ -62,6 +70,16 @@ export default {
 </script>
    
 <style lang="less" scoped>
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+  transform: translateX(40px);
+}
+/* 开始动画的时候，动画会移动到原来的位置 执行过度效果*/
+.v-enter-active,
+.v-leave-active {
+  transition: all 1s ease;
+}
 .main {
   text-align: justify;
   width: 36em;
@@ -140,11 +158,10 @@ a:hover {
 .el-divider--horizontal {
   margin: 10px 0;
 }
-.date{
+.date {
   @media (max-width: 36em) {
     padding-left: 20px;
-    font-size: 90%
-    
+    font-size: 90%;
   }
 }
 </style>

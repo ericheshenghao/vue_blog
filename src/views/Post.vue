@@ -13,8 +13,8 @@
         <h1 style="padding-bottom:1em" v-typing>{{title}}</h1>
 
         <comment :show="showcomment" :whichpara="whichpara" @showoff="hide"></comment>
-        <component :is="dynamicComponent" />
-
+        <component :is="dynamicComponent" style="position:relative"/>
+ 
         <div>
           <like-button :path="this.path"></like-button>
         </div>
@@ -54,7 +54,6 @@
 
 <script>
 import FootInner from "@/components/FootInner.vue";
-import { bloglist, techlen, lifelist, lifelen } from "@/bloglist";
 
 // import moduleStore from "@/bloglist";
 
@@ -119,23 +118,19 @@ const preCode = () => {
   $("ul li:last-child").remove();
 };
 
-const anchormove = () => {
-  $("h2>a,h3>a,h4>a").click(function() {
-    //根据a标签的href转换为id选择器，获取id元素所处的位置
-    try {
-      $("html,body").animate(
-        { scrollTop: $($(this).attr("href")).offset().top },
-        1000
-      );
-    } catch (err) {
-      throw err;
-    }
-  });
-};
-
-// 添加段落评论
-
-
+// const anchormove = () => {
+//   $("h2>a,h3>a,h4>a").click(function() {
+//     //根据a标签的href转换为id选择器，获取id元素所处的位置
+//     try {
+//       $("html,body").animate(
+//         { scrollTop: $($(this).attr("href")).offset().top },
+//         1000
+//       );
+//     } catch (err) {
+//       throw err;
+//     }
+//   });
+// };
 
 export default {
   props: ["name"],
@@ -165,14 +160,14 @@ export default {
     this.createValine();
     // 试试给图片添加图名
     addname();
-    anchormove();
+
     this.addcomment();
-    this.text()
+    this.text();
   },
   updated() {
     mediumzoom();
     // addname();
-    anchormove();
+
   },
 
   created() {
@@ -185,15 +180,12 @@ export default {
     // Use Async Components for the benefit of code splitting
     // https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components
     // this.dynamicComponent = () => import(`~/articles/${this.fileName}.md`).then(({ vue }) => vue.component
-    
+
     this.createValine();
   },
   methods: {
-    text() {
-     
-      
-
-    },
+    text() {},
+    // 添加段落评论
     addcomment() {
       var paragraph = [];
       var i = 0;
@@ -209,7 +201,7 @@ export default {
       });
       this.paragraph = paragraph;
     },
-    // 上一篇文章
+
     hide() {
       this.showcomment = !this.showcomment;
     },
@@ -248,8 +240,7 @@ export default {
       metaData: [],
       index: "",
       // 最大文章的序列号
-      lifelen,
-      techlen,
+
       path: "/post/" + this.$route.params.name,
       percentage: 0,
       gray: "#66b1ff"
@@ -261,6 +252,7 @@ export default {
 <style lang="scss" scoped>
 .main {
   padding: 2em 1em 0em 1em;
+ 
 }
 
 .main-inner {
@@ -268,7 +260,7 @@ export default {
   width: 36em;
   margin: 0 auto;
   line-height: 2.218;
-
+   
   @media (max-width: 38em) {
     width: auto;
   }

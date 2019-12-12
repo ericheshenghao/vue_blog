@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" style="margin-top:5em;">
+  <div  id="nav" style="margin-top:5em;">
     <router-link to="/" style="text-decoration: none;">主页</router-link>
     <el-divider direction="vertical"></el-divider>
     <router-link to="/taglist" style="text-decoration: none;">标签</router-link>

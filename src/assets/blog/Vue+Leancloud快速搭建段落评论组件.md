@@ -6,7 +6,7 @@ tags: vue|leancloud
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
 ## 实现流程
-1. 给特定的标签元素添加html元素(包含click事件)
+1. 给特定的标签元素添加**html**元素(包含click事件)
 2. 通过点击事件动态弹出评论框
 3. 新建一个表结构
 4. 将评论写入数据库
@@ -176,6 +176,13 @@ export default {
 
 ```
 ### 最终效果
-> 评论组件
+
+> 👈将两部分组合起来可以得到一个大致的行间评论框架，与数据库的对接部分可以参照leancloud的文档，其中有详细的说明。
+
+<iframe height="400" style="width: 100%;" scrolling="no" title="vue-comment" src="https://codepen.io/ericheshenghao/embed/mdyPeBR?height=265&theme-id=dark&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/ericheshenghao/pen/mdyPeBR'>vue-comment</a> by 何先森
+  (<a href='https://codepen.io/ericheshenghao'>@ericheshenghao</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
 
 

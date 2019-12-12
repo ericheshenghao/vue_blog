@@ -6,9 +6,15 @@ tags: vue
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
 
+## 列表逐一动画渲染
+设置一个定时器，每x秒触发一次，可以生成一个非常简单的动画效果。
+<iframe height="400" style="width: 100%;" scrolling="no" title="transition-group" src="https://codepen.io/ericheshenghao/embed/dyPGEGg?height=265&theme-id=dark&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/ericheshenghao/pen/dyPGEGg'>transition-group</a> by 何先森
+  (<a href='https://codepen.io/ericheshenghao'>@ericheshenghao</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## 父子组件传值
-在这一节我将记录一个通过父子组件传值来控制子组件显示与否的方法。
+在这一节我将记录一个通过父子组件传值来控制子组件显隐的方法。
 > 首先我在父组件里引入一个子组件`upload-demo`，以及一个按钮来控制子组件的显示。
 ```
 <el-button type="primary" size="small" @click="show">上传图片</el-button>
