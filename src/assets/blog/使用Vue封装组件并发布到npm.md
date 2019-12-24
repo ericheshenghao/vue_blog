@@ -5,7 +5,7 @@ category: tech
 tags: js|vue
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
-
+[[toc]]
 ![Photo by Mhmd Sedky from Pexels](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/12/05/palm-tree-near-white-concrete-building-3286817.jpg)
 
 直接引用已有的UI框架固然方便，但是总是感觉缺失了一些灵魂，不了解组件的封装过程具体如何。所以也想自己diy一份发布到npm，不仅可以了解下具体的过程是怎样的，还可以加深自己的对vue框架的认识，这里主要借鉴了一下这篇[博客](https://www.cnblogs.com/max-tlp/p/9338855.html)的实现过程。

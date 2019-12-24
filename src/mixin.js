@@ -15,7 +15,7 @@ var myMixin = {
         },
         data() {
             return {
-                scroll:""
+                scroll: ""
             }
         }
 
@@ -41,7 +41,7 @@ var myMixin = {
 
                         setTimeout(() => {
                             cb();
-                        }, 0);
+                        }, 100);
 
                     };
 
@@ -49,13 +49,34 @@ var myMixin = {
 
                     p = $(this).scrollTop();
                     if (t >= p) {
-                        $("#backbt").removeClass("animated zoomOutUp");
-                        $("#backbt").addClass("animated fadeIn");
+                        try{
+                        if ($("#backbt").attr("class").indexOf("zoomOutUp") != -1) {
+                            $("#backbt").removeClass("animated zoomOutUp");
+                            $("#backbt").addClass("animated fadeIn");
+                            
+                        }}catch{
+                            return
+                        }
+
 
                     } else {
-                        $("#backbt").removeClass("animated fadeIn");
-                        $("#backbt").addClass("animated zoomOutUp");
+                        try{
+                        if ($("#backbt").attr("class").indexOf("zoomOutUp") == -1) {
+                            
+                            $("#backbt").removeClass("animated fadeIn");
+                            $("#backbt").addClass("animated zoomOutUp");
+                        }}catch{
+                            return
+                        }
                     }
+
+
+
+
+
+
+
+                    
                     setTimeout(function () {
                         t = p;
                     }, 0);
@@ -68,13 +89,10 @@ var myMixin = {
 
                     function scrollFunc() {
                         // 滚动中的真正的操作
-                        if (document.documentElement.scrollTop > 450
-                        ) {
-                            $(".table-of-contents").css("top", document.documentElement.scrollTop - 400 + "px");
-                        } else {
-                            $(".table-of-contents").css("top", 0 + "px");
-                        }
+
                     }
+
+                   
 
                     if (
                         document.body.scrollTop > 450 ||
@@ -83,15 +101,56 @@ var myMixin = {
 
                         //   $(".table-of-contents").offset({ top: document.documentElement.scrollTop });
                         // $(".table-of-contents").css("top",document.documentElement.scrollTop-450+"px");
+                        try {
+                            if ($(".table-of-contents").attr("class").indexOf("fadeInDown") == -1) {
+                                $(".table-of-contents").removeClass("animated fadeInUp");
+                                $(".table-of-contents").addClass("scroll animated fadeInDown");
+                            }
+                        } catch{
+                            return
+                        }
 
-
-                        $(".table-of-contents").addClass("scroll");
                         // window.addEventListener('scroll', debounce(scrollFunc, 0));
-
+                        // $(".table-of-contents").removeClass("animated hinge");
                     } else {
-                        $(".table-of-contents").removeClass("scroll");
+                        try {
+                            if ($(".table-of-contents").attr("class").indexOf("fadeInUp") == -1) {
+                                $(".table-of-contents").removeClass("scroll animated fadeInDown");
+                                $(".table-of-contents").addClass("animated fadeInUp");
+                            }
+                        } catch{
+                            return
+                        }
+
                         // window.removeEventListener('scroll', debounce(scrollFunc));
 
+                    }
+
+                    if ((top / (max - viewH)) * 100 > 96) {
+                        $(".table-of-contents").addClass("showoff");
+
+                    } else {
+                        $(".table-of-contents").removeClass("showoff");
+
+                    }
+
+                    if ((top / (max - viewH)) * 100 > 88 || (top / (max - viewH)) * 100 < 18) {
+
+
+                        if ($(".footbar").attr("class").indexOf("fadeInUp") != -1) {
+                            $(".footbar").removeClass("animated fadeInUp")
+                            $(".footbar").addClass("showoff");
+
+
+                        }
+
+                    } else {
+                        if ($(".footbar").attr("class").indexOf("fadeInUp") == -1) {
+                            $(".footbar").removeClass("showoff");
+                            $(".footbar").addClass("animated fadeInUp")
+
+
+                        }
                     }
 
 

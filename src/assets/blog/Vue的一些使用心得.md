@@ -5,6 +5,12 @@ category: tech
 tags: vue
 note: 基于vuepress的个人博客，实现了博客自动路由、默认主题修改、elementUI库集成、mp3背景播放、标签墙、评论功能
 ---
+[[toc]]
+
+## 获取prop中变量的值
+``` js
+this.$props.name
+```
 
 ## 列表逐一动画渲染
 设置一个定时器，每x秒触发一次，可以生成一个非常简单的动画效果。
@@ -78,7 +84,7 @@ new Vue({
 ```
 
 ## fontawsome图标库的引入
-安装一下fontawesome图标库
+先安装一下**fontawesome**图标库
 ```
  vue add vue-cli-plugin-fontawesome
 ```
@@ -139,7 +145,7 @@ library.add(fas,fab)
 
 ## Vue引入CDN优化首页访问速度
 
-### 配置vue config js
+### 配置vue.config.js
 在vue.config.js中添加如下的代码，引入外部的CDN链接[^1]。
 ``` javascript
 configureWebpack: {
@@ -149,7 +155,7 @@ configureWebpack: {
       'highlight':'highlight'
     }
   ```
-### 修改main js
+### 修改main.js
   将引入外部资源的组件都注释掉，否则可能会出错。
   >tips:引用cdn时，如果vue引用的是min.js版本，会导致vue devtool失效，换成vue.js后缀的就可以了。
   ``` javascript
@@ -159,7 +165,6 @@ configureWebpack: {
   // import ElementUI from 'element-ui';
 
   // import 'element-ui/lib/theme-chalk/index.css';
-  import './registerServiceWorker'
   import './plugins/element.js'
 
   Vue.config.productionTip = false
@@ -193,7 +198,7 @@ configureWebpack: {
 用audit测试一下网页的性能，
 ![测试结果](https://eric-sheng-1300164148.cos.ap-guangzhou.myqcloud.com/2019/10/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20191023171640.png)
 
-### router.beforeEach
+### 路由守卫
 简单实现一个页面的重定向
 ```
 //强制到homepage页面

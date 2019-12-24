@@ -8,8 +8,8 @@
       <i class="fa fa-bath" style="padding: 15px 7px 0 0;"></i>
     </div>
     <transition-group appear tag="ul" class="list-ul">
-      <li style="display:grid" v-for="(item) in list" :key="item.title" class="list-item">
-        <router-link :to="`/post/${item.title}`" class="list-item-title">
+      <li style="display:grid" v-for="(item,index) in list" :key="index" class="list-item">
+        <router-link :to="`/post/${item.title}`" :list=list class="list-item-title">
           <div style="display:flex;justify-content:space-between;">
             <div>{{item.title}}</div>
             <div class="date">{{item.date}}</div>
@@ -45,9 +45,9 @@ export default {
     fetch() {
       // 这里还能优化一下
       if (this.$attrs.name == "tech") {
-        var i = 0;
+        let i = 0;
 
-        var tic = setInterval(() => {
+        let tic = setInterval(() => {
           this.list.push(this.techlist[i]);
           i++;
           if (i == this.techlist.length) {
@@ -61,7 +61,15 @@ export default {
 
       this.taglist.map(v => {
         if (v.type == this.title) {
-          this.list = v.title;
+          // this.list = v.title;
+          let i = 0;
+          let tic = setInterval(() => {
+            this.list.push(v.title[i]);
+            i++;
+            if (v.title.length == i) {
+              clearInterval(tic);
+            }
+          }, 100);
         }
       });
     }
@@ -114,7 +122,7 @@ export default {
   top: 0.8em;
   width: 5.33333333px;
   height: 5.33333333px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   border: 1px solid var(--color-bg);
   transition: background 0.5s;
   font-size: 16px;
@@ -126,14 +134,6 @@ export default {
 
 .list-item:hover {
   border-bottom-color: #409eff;
-}
-
-a {
-  text-decoration: none;
-  transition: color 0.5s;
-}
-a:hover {
-  color: #409eff;
 }
 
 .list-item-title {

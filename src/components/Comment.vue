@@ -1,43 +1,43 @@
 <template>
   <div>
     <transition
-    name="custom-classes-transition"
-    enter-active-class="animated bounceInUp"
-    leave-active-class="animated bounceOutDown"
-  >
-    <div v-if="show" class="comment" :style="`top:${top+5}px`">
-      <div style="padding:0px 15px 0 15px">
-        <div style="display:flex;justify-content:space-between;">
-          <div v-if="length==0?true:false">暂无评论</div>
-          <div v-else></div>
-          <el-button type="text" @click="showoff">
-            <i class="el-icon-close"></i>
-          </el-button>
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInUp"
+      leave-active-class="animated bounceOutDown"
+    >
+      <div v-if="show" class="comment" :style="`top:${top+5}px`">
+        <div style="padding:0px 15px 0 15px">
+          <div style="display:flex;justify-content:space-between;">
+            <div v-if="length==0?true:false">暂无评论</div>
+            <div v-else></div>
+            <el-button type="text" @click="showoff">
+              <i class="el-icon-close"></i>
+            </el-button>
+          </div>
+          <div class="data">
+            <div v-for="(item,index) in commentData" :key="index">
+              <div style="font-size:12px;color:gray;">{{item.created}}</div>
+              <div style="font-size:14px;line-height:20px;">{{item.comment}}</div>
+            </div>
+          </div>
         </div>
-        <div class="data">
-          <div v-for="(item,index) in commentData" :key="index">
-            <div style="font-size:12px;color:gray;">{{item.created}}</div>
-            <div style="font-size:14px;line-height:20px;">{{item.comment}}</div>
+
+        <el-divider></el-divider>
+        <div style="padding:0px 15px">
+          <el-input
+            style="margin-top:10px"
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 5}"
+            placeholder="请输入内容"
+            v-model="comment"
+          ></el-input>
+
+          <div style="text-align:right">
+            <el-button type="text" @click="submission">提交评论</el-button>
           </div>
         </div>
       </div>
-
-      <el-divider></el-divider>
-      <div style="padding:0px 15px">
-        <el-input
-          style="margin-top:10px"
-          type="textarea"
-          :autosize="{ minRows: 2, maxRows: 5}"
-          placeholder="请输入内容"
-          v-model="comment"
-        ></el-input>
-
-        <div style="text-align:right">
-          <el-button type="text" @click="submission">提交评论</el-button>
-        </div>
-      </div>
-    </div>
-     </transition>
+    </transition>
   </div>
 </template>
 
@@ -51,8 +51,8 @@ export default {
   watch: {
     show: function() {
       const res = document.getElementsByClassName("commentBtn");
-
-      this.top = res[this.whichpara[0].index].offsetTop;
+      var parents = res[this.whichpara[0].index].offsetParent.offsetTop;
+      this.top = res[this.whichpara[0].index].offsetTop + parents;
 
       this.commentData = [];
       this.fetch();
@@ -93,37 +93,38 @@ export default {
       }
     },
     fetch() {
-      const uploadParagraph = this.whichpara[0].para;
+      if (this.$props.show) {
+        const uploadParagraph = this.whichpara[0].para;
 
-      const uploadUrl = this.$route.path;
+        const uploadUrl = this.$route.path;
 
-      const query = new AV.Query("parasComment");
-      query.equalTo("p", uploadParagraph);
-      query.find().then(async res => {
-        res.map((v, id) => {
-          this.commentData.push({
-            comment: res[id].attributes.comment,
-            created: dayjs(res[id].createdAt).format("YYYY-MM-DD HH:mm:ss")
+        const query = new AV.Query("parasComment");
+        query.equalTo("p", uploadParagraph);
+        query.find().then(async res => {
+          res.map((v, id) => {
+            this.commentData.push({
+              comment: res[id].attributes.comment,
+              created: dayjs(res[id].createdAt).format("YYYY-MM-DD HH:mm:ss")
+            });
           });
+          this.length = res.length;
         });
-        this.length = res.length;
-      });
+      }
     }
   }
 };
 </script>
 
 <style lang="scss" >
-article  .commentBtn{
-  border:none;
+article .commentBtn {
+  border: none;
   background-color: transparent;
   color: black;
   position: absolute;
-  transform: translate(-195%,45%);
+  transform: translate(-195%, 45%);
   @media (max-width: 36em) {
-   transform: translate(-55%,45%);
+    transform: translate(-55%, 45%);
   }
-  
 }
 .comment {
   max-height: auto;

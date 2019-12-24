@@ -35,8 +35,12 @@ module.exports = {
                 }).use(require("markdown-it-toc-done-right"),
                     {
                       level: [2, 3],
-                      containerId:"table-of-contents",
+                      // containerId:"table-of-contents shadow",
                       // forceFullToc: true,
+                      containerClass:"table-of-contents shadow",
+                      listClass:"link-ul",
+                      itemClass:"link-li",
+                      linkClass:"link-a",
                       slugify: slugify
                     }).use(require("markdown-it-footnote")),
           mode: [Mode.VUE_COMPONENT]

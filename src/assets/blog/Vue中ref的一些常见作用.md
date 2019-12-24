@@ -5,6 +5,7 @@ category: tech
 tags: vue
 note: ""
 ---
+[[toc]]
 ![Photo by Rok Romih from Pexels](https://eric-he.oss-cn-beijing.aliyuncs.com/2019/12/09/photo-of-building-on-top-of-rocks-3312671.jpg)
 照例是一张美图镇楼。`ref`的功能很强大，下面介绍一下基本的功能。
 ## 获取页面dom元素

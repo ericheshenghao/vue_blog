@@ -16,7 +16,7 @@
               style="list-style-type: none;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
             >
             <router-link :to="`/post/${item.title}`" @click.native="refresh"># {{ item.title }}</router-link>
-              <!-- <a href="javascript:void(0)" @click="navigate(item.title)"># {{ item.title }}</a> -->
+            
             </li>
           </transition-group>
         </div>

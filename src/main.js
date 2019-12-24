@@ -7,7 +7,7 @@ import LikeButton from "./components/LikeButton"
 import StickBar from "./components/StickBar"
 import Back2Top from "./components/Back2Top"
 import Comment from "./components/Comment"
-import Typing from "./components/Typing"
+
 import SearchButton from "./components/SearchButton"
 // import './registerServiceWorker'
 import './plugins/element.js'
@@ -21,7 +21,7 @@ Vue.component("like-button", LikeButton)
 Vue.component("back-top",Back2Top)
 Vue.component("stick-bar", StickBar)
 Vue.component("comment",Comment)
-Vue.component("typing",Typing)
+
 Vue.component("search-button",SearchButton)
 // Vue.use(ElementUI);\
 

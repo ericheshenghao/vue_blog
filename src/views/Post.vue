@@ -13,10 +13,10 @@
         <h1 style="padding-bottom:1em" v-typing>{{title}}</h1>
 
         <comment :show="showcomment" :whichpara="whichpara" @showoff="hide"></comment>
-        <component :is="dynamicComponent" style="position:relative"/>
- 
+        <component :is="dynamicComponent" style="position:relative" />
+
         <div>
-          <like-button :path="this.path"></like-button>
+          <like-button ref="likeBtn" :path="this.path"></like-button>
         </div>
         <div class="footer" style="display: flex;justify-content: space-between;">
           <div>
@@ -49,6 +49,22 @@
 
       <back-top></back-top>
     </div>
+
+    <!-- <transition  
+    id="footbar"
+       enter-active-class="animated bounceInUp"
+      leave-active-class="animated bounceOutDown"> -->
+    <div  class="footbar showoff">
+      <div style="line-height:50px;">
+        <el-button icon="el-icon-caret-top" type="primary" @click="likeClick">赞同 {{count}}</el-button>
+        <el-button icon="el-icon-caret-bottom" type="primary" @click="clk"></el-button>
+        
+        <el-button style="padding:0 10px;" icon="el-icon-s-opportunity" type="text" @click="clk">评论</el-button>
+        <el-button style="padding:0 10px;" icon="el-icon-share" type="text" @click="clk">分享</el-button>
+        <el-button style="padding:0 10px;" icon="el-icon-more" type="text" @click="clk"></el-button>
+      </div>
+    </div>
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -143,7 +159,7 @@ export default {
       meta: [
         {
           name: "keyWords",
-          content: this.$route.params.name
+          content: this.note
         }
       ],
       htmlAttrs: {
@@ -165,9 +181,8 @@ export default {
     this.text();
   },
   updated() {
-    mediumzoom();
+    // mediumzoom();
     // addname();
-
   },
 
   created() {
@@ -175,6 +190,7 @@ export default {
     this.metaData.tags = markdown.attributes.tags;
     this.tag = markdown.attributes.tags.split("|");
     this.title = markdown.attributes.title;
+    this.note = markdown.attributes.note;
     this.dynamicComponent = markdown.vue.component;
     window.commentClick = this.commentClick;
     // Use Async Components for the benefit of code splitting
@@ -184,7 +200,18 @@ export default {
     this.createValine();
   },
   methods: {
-    text() {},
+    likeClick(){
+     this.$refs.likeBtn.btclick()
+     setTimeout(() => {
+        this.count = this.$refs.likeBtn.count;
+      }, 300);
+    },
+    clk() {},
+    text() {
+      setTimeout(() => {
+        this.count = this.$refs.likeBtn.count;
+      }, 100);
+    },
     // 添加段落评论
     addcomment() {
       var paragraph = [];
@@ -214,6 +241,7 @@ export default {
     nextpost() {},
     // 下一篇文章
     lastpost() {},
+
     createValine() {
       new Valine({
         el: "#vcomments",
@@ -239,6 +267,7 @@ export default {
       dynamicComponent: null,
       metaData: [],
       index: "",
+      count: "",
       // 最大文章的序列号
 
       path: "/post/" + this.$route.params.name,
@@ -250,9 +279,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.footbar {
+  width: 100vw;
+  height: 50px;
+  // background-color: black;
+  box-shadow: 0px 0.5px 4px 0px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  bottom: 0;
+  z-index: 0;
+  background-color: white;
+  
+}
 .main {
   padding: 2em 1em 0em 1em;
- 
 }
 
 .main-inner {
@@ -260,7 +299,7 @@ export default {
   width: 36em;
   margin: 0 auto;
   line-height: 2.218;
-   
+
   @media (max-width: 38em) {
     width: auto;
   }

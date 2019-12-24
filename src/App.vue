@@ -63,16 +63,20 @@ export default {
 table {
   background-color: snow;
 }
-li > a {
-  text-decoration: none;
-  &:hover {
-    color: #409eff;
-  }
-}
 
 @color-bg: #1a1a1a;
 
 @color-contrast-high: rgb(229, 229, 229);
+
+a {
+  color: @color-bg;
+  text-decoration: none;
+  transition: color 0.5s;
+
+  &:hover {
+    color: #409eff;
+  }
+}
 
 .el-progress {
   position: fixed !important;
@@ -141,11 +145,6 @@ input:-internal-autofill-selected {
   }
 }
 
-a {
-  color: @color-bg;
-  text-underline-position: under !important;
-}
-
 @color-hover: #2a6df4;
 
 .app.active {
@@ -167,6 +166,16 @@ a {
   }
   a {
     color: @color-contrast-high;
+    &:hover {
+      color: #d84315;
+    }
+  }
+  .list-item:hover ::before {
+    background: #d84315;
+  }
+
+  .list-item:hover {
+    border-bottom-color: #d84315;
   }
 
   ul li {
@@ -203,6 +212,15 @@ a {
     color: white;
   }
   .backtop {
+    color: white;
+  }
+  .footbar {
+    background-color: #0000008f;
+  }
+  #backbt {
+    box-shadow: none;
+  }
+  div .text span {
     color: white;
   }
 }
@@ -449,11 +467,45 @@ strong {
   font-weight: normal;
 }
 
+.showoff {
+  display: none;
+}
+
+.link-ul {
+  .link-li {
+    // padding: 6px 0;
+    .link-a {
+      position: relative;
+      text-decoration: none;
+      transition: 0.5s;
+      &:hover {
+        // color: #95a5a6;
+        &::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+      }
+      &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 2px;
+        top: 100%;
+        left: 0;
+        background: #3498db;
+        transition: transform 0.5s;
+        transform: scaleX(0);
+        transform-origin: right;
+      }
+    }
+  }
+}
+
 .table-of-contents {
   position: absolute;
+  margin-left: 46em;
+  text-transform: capitalize;
 
-  // right: -103%;
-  right: -53%;
   width: 250px;
   font-size: 13px;
 
@@ -464,24 +516,47 @@ strong {
 
   border-radius: 5px;
   list-style-type: none;
+  z-index: 0;
+
+  &::before {
+    content: "目录";
+    font-weight: bold;
+    font-size: 16px;
+    // position: absolute;
+    z-index: 10;
+    position: relative;
+    // left: 42%;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
 
   ol {
     list-style-type: circle;
-    // margin-block-start: 0em;
+    margin-block-start: 0.2em;
     padding-inline-start: 25px;
-  
   }
 
   // background-color: white;
   // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  @media (max-width: 70em) {
+  @media (max-width: 76em) {
     display: none;
   }
 }
-.scroll {
-  position: absolute;
-  right: -53%;
-  // right: 0;
-  top: 0%;
+
+ol {
+  margin-block-start: 0.2em;
+  padding-inline-start: 16px;
+  // li {
+  //   font-style: italic;
+  // }
 }
+.scroll {
+  position: fixed;
+  margin-left: 46em;
+  margin-top: -24.3em;
+}
+
 </style>
